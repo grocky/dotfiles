@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+# Place this file in ~/.git_template/hooks/post-commit
+# Point git to the template directory to import the hook on a git init
+#   git config --global init.templatedir '~/.git_template'
+
+repo_name=`basename $(git rev-parse --show-toplevel)`
+repo_name.chomp!
+file="~/.gitshots/#{repo_name}_#{Time.now.to_i}.jpg"
+unless File.directory?(File.expand_path("../../rebase-merge", __FILE__))
+  puts "Taking capture into #{file}!"
+  system "imagesnap -q -w 1 #{file} &"
+end
+
+exit 0
+
