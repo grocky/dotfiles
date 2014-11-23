@@ -25,3 +25,14 @@ show_hosts ()
 {
     awk -F',' '/^[[:alpha:]]/ { print $1 }' ~/.ssh/known_hosts;
 }
+
+start_php () 
+{
+    launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php56.plist
+}
+
+stop_php ()
+{
+    launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.php56.plist
+}
+
