@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# The various escape codes that we can use to color our prompt.
+export RED="\[\033[0;31m\]"
+export YELLOW="\[\033[0;33m\]"
+export GREEN="\[\033[0;32m\]"
+export LIGHT_GREEN="\[\033[1;32m\]"
+export BLUE="\[\033[0;34m\]"
+export LIGHT_RED="\[\033[1;31m\]"
+export DARK_RED="\[\033[1;32m\]"
+export WHITE="\[\033[1;37m\]"
+export LIGHT_GRAY="\[\033[0;37m\]"
+export COLOR_NONE="\[\e[0m\]"
+export BLUE_BOLD="\[\033[01;34m\]"
