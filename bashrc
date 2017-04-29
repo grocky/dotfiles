@@ -17,6 +17,11 @@
 # alias cp='cp -i'
 # alias mv='mv -i'
 
+set -o vi
+
+export EDITOR=vim
+export POWERLINE_CONFIG_COMMAND=/usr/local/bin/powerline-config
+
 if [ -f "${HOME}/.bash_aliases" ]; then
   source "${HOME}/.bash_aliases"
 fi
@@ -31,12 +36,3 @@ fi
 
 alias bashrc='vi ~/.bashrc && source ~/.bashrc'
 
-set -o vi
-
-# load resty REST client
-. ~/resty
-
-# load git and svn bash prompt
-. ~/.vcs_bash_prompt
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

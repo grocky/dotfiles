@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+# Place this file in ~/.git_template/hooks/post-commit
+# Point git to the template directory to import the hook on a git init
+#   git config --global init.templatedir '~/.git_template'
+
+# taken from http://stackoverflow.com/a/1320011/818073
+def shellescape(str)
+    # An empty argument will be skipped, so return empty quotes.
+    return "''" if str.empty?
+
+    str = str.dup
+
+    # Process as a single byte sequence because not all shell
+    # implementations are multibyte aware.
+    str.gsub!(/([^A-Za-z0-9_\-.,:\/@\n])/n, "\\\\\\1")
+
+    # A LF cannot be escaped with a backslash because a backslash + LF
+    # combo is regarded as line continuation and simply ignored.
+    str.gsub!(/\n/, "'\n'")
+
+    return str
+end
+
+repo_name=`basename "$(git rev-parse --show-toplevel)"`
+repo_name.chomp!
+home_dir=ENV['HOME']
+git_shots_dir = ENV['GITSHOTS_DIR'] || "#{home_dir}/Google Drive/.gitshots"
+file="#{git_shots_dir}/#{Time.now.to_i}_#{repo_name}.jpg"
+unless File.directory?(File.expand_path("../../rebase-merge", __FILE__))
+  puts "Taking capture into #{file}!"
+  system "imagesnap -q -w 2.5 #{shellescape(file)} &"
+end
