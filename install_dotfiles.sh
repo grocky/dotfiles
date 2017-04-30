@@ -11,7 +11,6 @@ function help() {
 }
 
 function main() {
-
     command='install'
 
     while getopts hu FLAG; do
@@ -30,29 +29,28 @@ function main() {
     done
     
     pushd ${HOME} > /dev/null
-    $command
+    for dotfile in $(find ${DOTFILE_DIR} -maxdepth 1 | grep -v '\.\|dotfiles$'); do
+        $command "${dotfile}"
+    done
     popd > /dev/null
 }
 
 function install() {
-    for dotfile in $(find ${DOTFILE_DIR} -maxdepth 1 | grep -v '\.$\|\.git\|dotfiles/%'); do
-        dotfile_name=".$(basename ${dotfile})"
-        if [ ! -L ${dotfile_name} ]; then
-            [ -e ${dotfile_name} ] && [ ! -e ${dotfile_name}${BACKUP_SUFFIX} ] && mv ${dotfile_name} "${dotfile_name}${BACKUP_SUFFIX}" && echo "Backed up ${dotfile_name} to ${dotfile_name}${BACKUP_SUFFIX}";
-            ln -s ${dotfile} ${dotfile_name} && echo "linked ${dotfile_name}";
-        fi
-    done
-
+    dotfile=${1}
+    dotfile_name=".$(basename ${dotfile})"
+    if [ ! -L ${dotfile_name} ]; then
+        [ -e ${dotfile_name} ] && [ ! -e ${dotfile_name}${BACKUP_SUFFIX} ] && mv ${dotfile_name} "${dotfile_name}${BACKUP_SUFFIX}" && echo "Backed up ${dotfile_name} to ${dotfile_name}${BACKUP_SUFFIX}";
+        ln -s ${dotfile} ${dotfile_name} && echo "linked ${dotfile_name}";
+    fi
 }
 
 function uninstall() {
-    for dotfile in $(find ${DOTFILE_DIR} -maxdepth 1 | grep -v '\.$\|\.git'); do
-        dotfile_name=".$(basename ${dotfile})"
-        if [ -L ${dotfile_name} ]; then
-            [ -e ${dotfile_name} ] && rm ${dotfile_name} && echo "Uninstalled ${dotfile_name}"
-            [ -e "${dotfile_name}${BACKUP_SUFFIX}" ] && mv "${dotfile_name}${BACKUP_SUFFIX}" ${dotfile_name} && echo "Restored ${dotfile_name} from previous version"
-        fi
-    done
+    dotfile=${1}
+    dotfile_name=".$(basename ${dotfile})"
+    if [ -L ${dotfile_name} ]; then
+        [ -e ${dotfile_name} ] && rm ${dotfile_name} && echo "Uninstalled ${dotfile_name}"
+        [ -e "${dotfile_name}${BACKUP_SUFFIX}" ] && mv "${dotfile_name}${BACKUP_SUFFIX}" ${dotfile_name} && echo "Restored ${dotfile_name} from previous version"
+    fi
 }
 
 main "${@}"
