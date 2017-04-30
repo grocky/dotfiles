@@ -29,7 +29,7 @@ function main() {
     done
     
     pushd ${HOME} > /dev/null
-    for dotfile in $(find ${DOTFILE_DIR} -maxdepth 1 | grep -v '\.\|dotfiles$'); do
+    for dotfile in $(find ${DOTFILE_DIR} -maxdepth 1 | grep -v '^\.\|dotfiles$'); do
         $command "${dotfile}"
     done
     popd > /dev/null
