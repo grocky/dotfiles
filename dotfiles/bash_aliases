@@ -66,6 +66,7 @@ alias gcam='git commit -a -m '
 alias gl='git logtree'
 alias glg='git lg'
 alias gs='git status'
+alias gss='git status --porcelain'
 alias gd='git diff'
 
 ### github cli wrapper
