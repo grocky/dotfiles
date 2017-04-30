@@ -1,0 +1,13 @@
+# ~/.tmuxinator/home.yml
+
+name: home
+root: ~/
+
+windows:
+  - main:
+      layout: main-vertical
+      panes:
+        - pwd
+        - date +%m-%d-%Y
+        - ssh mac-mini-1.local
+

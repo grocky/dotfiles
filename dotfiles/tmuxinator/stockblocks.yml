@@ -1,0 +1,23 @@
+# ~/.tmuxinator/stockblocks.yml
+
+name: stockblocks
+root: ~/Projects/StockBlocks
+
+windows:
+  - project:
+      layout: main-vertical
+      panes:
+        - docker-compose up -d web && docker-compose logs --follow --timestamps
+        -  
+  - notes: vim ~/notes/$(date +%Y%m%d).md
+  - watch: 
+      layout: even-vertical
+      panes:
+        - gulp watch
+        - 
+  - system:
+      layout: main-horizontal
+      panes:
+        - irssi
+        - htop
+
