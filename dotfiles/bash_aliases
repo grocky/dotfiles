@@ -72,9 +72,6 @@ alias gs='git status'
 alias gss='git status --porcelain'
 alias gd='git diff'
 
-### github cli wrapper
-alias git='hub '
-
 ### Git-flow
 alias gff='git flow feature'
 alias gffs='gff start'
