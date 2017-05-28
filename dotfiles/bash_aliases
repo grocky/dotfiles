@@ -18,6 +18,9 @@ alias xon="export XDEBUG_CONFIG=\"profiler_enable=1\""
 alias xoff="export XDEBUG_CONFIG=\"profiler_enable=0\""
 
 # tool shortcuts
+## brew install httpie
+command -v http >/dev/null 2>&1 && alias https='http --default-scheme=https'
+
 alias json="python -m json.tool"; 
 ### usage echo '{"foo": "lorem", "bar": "ipsum"}' | json
 alias mux='tmuxinator'
