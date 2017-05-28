@@ -5,11 +5,14 @@ root: ~/Projects/StockBlocks
 
 windows:
   - project:
-      layout: main-vertical
+      layout: 911d,238x50,0,0{140x50,0,0,0,97x50,141,0,4}
+      panes:
+        - 
+        - vim ~/notes/$(date +%Y%m%d).md
+  - logs:
+      layout: even-horizontal
       panes:
         - docker-compose up -d web && docker-compose logs --follow --timestamps
-        -  
-  - notes: vim ~/notes/$(date +%Y%m%d).md
   - watch: 
       layout: even-vertical
       panes:
