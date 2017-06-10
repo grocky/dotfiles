@@ -18,9 +18,4 @@ windows:
       panes:
         - gulp watch
         - 
-  - system:
-      layout: main-horizontal
-      panes:
-        - irssi
-        - htop
 

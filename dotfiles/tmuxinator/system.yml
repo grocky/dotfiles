@@ -1,0 +1,15 @@
+# ~/.tmuxinator/system.yml
+
+name: system
+root: ~/
+
+windows:
+  - system:
+      layout: main-horizontal
+      panes:
+        - irssi
+        - htop
+  - console:
+      panes:
+        - 
+
