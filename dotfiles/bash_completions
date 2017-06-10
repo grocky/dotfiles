@@ -1,5 +1,8 @@
-_complete_ssh_hosts ()
-{
+if [ -f /usr/local/share/bash-completion/bash_completion ]; then
+  . /usr/local/share/bash-completion/bash_completion
+fi
+
+_complete_ssh_hosts () {
         COMPREPLY=()
         cur="${COMP_WORDS[COMP_CWORD]}"
         comp_ssh_hosts=`cat ~/.ssh/known_hosts | \
@@ -19,8 +22,4 @@ _complete_ssh_hosts ()
 complete -F _complete_ssh_hosts ssh
 
 complete -C aws_completer aws
-
-if [ -f ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
-fi
 
