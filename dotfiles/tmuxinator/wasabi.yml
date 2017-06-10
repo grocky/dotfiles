@@ -1,0 +1,12 @@
+# ~/.tmuxinator/wasabi.yml
+
+name: wasabi
+root: ~/Projects/wasabi
+
+windows:
+  - project:
+      layout: tiled
+      panes:
+        - echo "logs"
+        - echo "watch"
+        - echo "console"

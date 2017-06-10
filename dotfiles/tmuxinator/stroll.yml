@@ -1,0 +1,11 @@
+# ~/.tmuxinator/stroll.yml
+
+name: stroll
+root: ~/Projects/flashcrystal/stroll-dashboard
+
+windows:
+  - main:
+      layout: main-vertical
+      panes:
+        - 
+        - 
