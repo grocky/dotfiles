@@ -101,6 +101,7 @@ textconv=pdftohtml -stdout
 
 [rebase]
     autostash = true
+	instructionFormat = %s - (%an)
 
 [pull]
 	rebase = true
@@ -131,10 +132,10 @@ textconv=pdftohtml -stdout
 [mergetool]
 	keepBackup = false
 [filter "lfs"]
-	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+	required = true
 [rerere]
 	enabled = true
 	autoupdate = true
