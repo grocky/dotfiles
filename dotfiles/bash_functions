@@ -131,3 +131,9 @@ function _awsSwitchProfile() {
        aws configure list
    fi
 };
+
+function recruiter_reply() {
+	echo "If a position isn’t offering over 150k, unlimited vacation, full medical and remote, then I’m not interested" | pbcopy
+	echo "recruiter reply copied to clipboard"
+}
+
