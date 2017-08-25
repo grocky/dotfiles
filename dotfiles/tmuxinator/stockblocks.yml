@@ -17,5 +17,5 @@ windows:
       layout: even-vertical
       panes:
         - gulp watch
-        - 
+        - node_modules/.bin/webpack --watch --progress --colors --config webpack.config.js
 

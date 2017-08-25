@@ -5,7 +5,7 @@ root: ~/
 
 windows:
   - main:
-      layout: main-vertical
+      layout: 0c68,208x47,0,0{120x47,0,0,0,87x47,121,0[87x23,121,0,1,87x23,121,24,2]}
       panes:
         - pwd
         - date +%m-%d-%Y
