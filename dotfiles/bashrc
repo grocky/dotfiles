@@ -47,6 +47,7 @@ export EDITOR=vim
 export XDG_CONFIG_HOME=${HOME}/.config
 
 export PATH="${PATH}:/usr/local/bin:${HOME}/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" # use coreutils
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 

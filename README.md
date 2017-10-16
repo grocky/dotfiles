@@ -19,3 +19,5 @@ cd dotfiles && ./install_dotfiles.sh -u
 cd ../ && rm -rf dotfiles/
 ```
 
+For tmux we need to `brew install reattach-to-user-namespace` [See](https://github.com/thoughtbot/dotfiles/issues/75)
+
