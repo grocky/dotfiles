@@ -64,3 +64,4 @@ powerline_sh=/usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powe
 travis_sh=${HOME}/.travis/travis.sh && [ -f ${travis_sh} ] && source ${travis_sh}
 j_sh=/usr/local/etc/profile.d/autojump.sh && [ -f ${j_sh} ] && source ${j_sh}
 
+export SCALA_HOME=/usr/local/opt/scala/idea
