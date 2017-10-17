@@ -46,6 +46,7 @@ imagemagick, [--with-fftw --with-fontconfig --with-libwmf --with-librsvg --with-
 imagesnap
 irssi
 jmeter
+jsonlint
 jq
 mongodb
 mysql
@@ -79,6 +80,6 @@ tig
 tmux
 tmuxinator-completion
 tree
-vim
+vim, [--env-std --override-system-vim]
 wget
 
