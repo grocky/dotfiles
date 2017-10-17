@@ -1,0 +1,8 @@
+#!/bin/bash
+# chmod +x and copy to /usr/local/bin/p4diff
+# then
+# git config --global merge.tool p4merge
+# git config --global mergetool.keepTemporaries false
+# git config --global mergetool.prompt false
+
+[ $# -eq 7 ] && /usr/local/bin/p4merge "$2" "$5"

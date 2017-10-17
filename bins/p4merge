@@ -1,0 +1,10 @@
+#!/bin/bash
+# chmod +x and copy to /usr/local/bin/p4merge
+# then
+# git config --global merge.tool p4merge
+# git config --global mergetool.keepTemporaries false
+# git config --global mergetool.prompt false
+
+for arg; do [[ $arg = /* ]] || arg=$PWD/$arg; absargs+=("$arg"); done;
+/Applications/p4merge.app/Contents/Resources/launchp4merge "${absargs[@]}"
+
