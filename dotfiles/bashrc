@@ -46,7 +46,13 @@ export EDITOR=vim
 
 export XDG_CONFIG_HOME=${HOME}/.config
 
+# brew's sbin
+export PATH="/usr/local/sbin:$PATH"
+
+# ruby's bin
 export PATH="${PATH}:/usr/local/bin:${HOME}/.rvm/bin" # Add RVM to PATH for scripting
+
+# GNU utils
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" # use coreutils
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
