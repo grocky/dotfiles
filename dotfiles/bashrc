@@ -52,6 +52,9 @@ export PATH="/usr/local/sbin:$PATH"
 # ruby's bin
 export PATH="${PATH}:/usr/local/bin:${HOME}/.rvm/bin" # Add RVM to PATH for scripting
 
+# python's bin
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+
 # GNU utils
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" # use coreutils
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
@@ -71,3 +74,4 @@ travis_sh=${HOME}/.travis/travis.sh && [ -f ${travis_sh} ] && source ${travis_sh
 j_sh=/usr/local/etc/profile.d/autojump.sh && [ -f ${j_sh} ] && source ${j_sh}
 
 export SCALA_HOME=/usr/local/opt/scala/idea
+
