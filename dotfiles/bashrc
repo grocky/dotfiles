@@ -38,10 +38,6 @@ if [ -d "${HOME}/bin" ] ; then
   PATH="${HOME}/bin:${PATH}"
 fi
 
-if [ -f "${HOME}/.bash_completions" ]; then
-  source "${HOME}/.bash_completions"
-fi
-
 export EDITOR=vim
 
 export XDG_CONFIG_HOME=${HOME}/.config
@@ -74,4 +70,8 @@ travis_sh=${HOME}/.travis/travis.sh && [ -f ${travis_sh} ] && source ${travis_sh
 j_sh=/usr/local/etc/profile.d/autojump.sh && [ -f ${j_sh} ] && source ${j_sh}
 
 export SCALA_HOME=/usr/local/opt/scala/idea
+
+if [ -f "${HOME}/.bash_completions" ]; then
+  source "${HOME}/.bash_completions"
+fi
 
