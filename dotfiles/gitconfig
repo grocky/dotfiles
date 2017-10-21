@@ -1,6 +1,6 @@
 [user]
 	name = Rocky Gray
-	email = rocky.grayjr@gmail.com
+	email = rocky@videoblocks.com
 
 [diff "pdfconv"]
 textconv=pdftohtml -stdout
@@ -110,7 +110,7 @@ textconv=pdftohtml -stdout
 	tool = p4merge
     keepBackup = false
 [mergetool "p4merge"]
-    cmd = p4merge $BASE $LOCAL $REMOTE $MERGED
+	cmd = p4merge $BASE $LOCAL $REMOTE $MERGED
     keepTemporaries = false
 	prompt = false
     trustExitCode = false
@@ -124,10 +124,10 @@ textconv=pdftohtml -stdout
 [github]
 	user = grocky
 [difftool "sourcetree"]
-	cmd = /opt/homebrew-cask/Caskroom/p4merge/2014.2/p4merge.app/Contents/MacOS/p4merge \"$LOCAL\" \"$REMOTE\"
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /opt/homebrew-cask/Caskroom/p4merge/2014.2/p4merge.app/Contents/MacOS/p4merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [mergetool]
 	keepBackup = false
