@@ -25,7 +25,7 @@ end
 repo_name=`basename "$(git rev-parse --show-toplevel)"`
 repo_name.chomp!
 home_dir=ENV['HOME']
-git_shots_dir = ENV['GITSHOTS_DIR'] || "#{home_dir}/Google Drive/.gitshots"
+git_shots_dir = ENV['GITSHOTS_DIR'] || "#{home_dir}/GoogleDrive/.gitshots"
 file="#{git_shots_dir}/#{Time.now.to_i}_#{repo_name}.jpg"
 unless File.directory?(File.expand_path("../../rebase-merge", __FILE__))
   puts "Taking capture into #{file}!"
