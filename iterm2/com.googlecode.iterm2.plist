@@ -6234,7 +6234,7 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>1100 -537 620 392 570 -1050 1680 1050 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>502 409 918 512 0 0 1680 1050 </string>
+	<string>502 501 796 473 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 28 1680 1022 0 0 1680 1050 </string>
 	<key>NeverWarnAboutMeta</key>
@@ -6795,7 +6795,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>SourceCodeProForPowerline-ExtraLight 14</string>
+			<string>SourceCodeProForPowerline-ExtraLight 16</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
