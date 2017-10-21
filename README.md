@@ -24,3 +24,13 @@ For tmux we need to `brew install reattach-to-user-namespace` [See](https://gith
 ### Change screenshot location
 defaults write com.capple.screencapture location ${HOME}/Desktop/screenshots && killall SystemUIServer && "update successful" || "update failed"
 
+### Git status
+
+```shell
+ln -s ~/dotfiles/config/powerline ~/.config/powerline
+```
+
+```shell
+pip install powerline-gitstatus
+```
+
