@@ -75,3 +75,5 @@ if [ -f "${HOME}/.bash_completions" ]; then
   source "${HOME}/.bash_completions"
 fi
 
+type jenv >/dev/null && eval "$(jenv init -)"
+
