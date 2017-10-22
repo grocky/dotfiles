@@ -10,10 +10,10 @@
 			},
 			{
 				"function": "powerline.segments.common.time.date",
-				"name": "time",
+				"name": "date",
 				"args": {
 					"format": "%a %b %d",
-					"istime": true
+					"istime": false
 				}
 			},
 			{

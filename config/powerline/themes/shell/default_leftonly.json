@@ -4,6 +4,14 @@
       {
         "left": [
           {
+            "function": "powerline.segments.common.time.date",
+            "name": "time",
+            "args": {
+              "format": "%H:%M:%S",
+              "istime": true
+            }
+          },
+          {
             "function": "powerline.segments.common.net.hostname",
             "priority": 10
           },
