@@ -77,3 +77,7 @@ fi
 
 type jenv >/dev/null 2>&1 && eval "$(jenv init -)"
 
+if [ -f "${HOME}/.vb_profile" ]; then
+  source "${HOME}/.vb_profile"
+fi
+
