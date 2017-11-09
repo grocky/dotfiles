@@ -32,5 +32,6 @@ ln -s ~/dotfiles/config/powerline ~/.config/powerline
 
 ```shell
 pip install powerline-gitstatus
+pip install powerline-mem-segment
 ```
 
