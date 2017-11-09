@@ -1,0 +1,20 @@
+# ~/.tmuxinator/ide.yml
+
+name: ide
+
+windows:
+  - project:
+      layout: even-vertical 
+      panes:
+        - 
+  - logs:
+      layout: even-horizontal
+      panes:
+        - 
+  - watch: 
+      layout: even-vertical
+      panes:
+        - 
+        - 
+
+
