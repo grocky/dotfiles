@@ -5,10 +5,9 @@ root: ~/Projects/StockBlocks
 
 windows:
   - project:
-      layout: 911d,238x50,0,0{140x50,0,0,0,97x50,141,0,4}
+      layout: even-vertical 
       panes:
         - 
-        - vim ~/notes/
   - logs:
       layout: even-horizontal
       panes:
