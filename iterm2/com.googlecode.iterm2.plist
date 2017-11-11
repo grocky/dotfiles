@@ -6232,11 +6232,11 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>710 286 660 233 0 0 1920 1080 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>1100 -537 620 392 570 -1050 1680 1050 </string>
+	<string>1100 -556 620 392 570 -1050 1680 1050 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>502 501 796 473 0 0 1680 1050 </string>
+	<string>638 473 918 512 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 28 1680 1022 0 0 1680 1050 </string>
+	<string>226 160 1210 907 0 0 1920 1200 </string>
 	<key>NeverWarnAboutMeta</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_B4DA7DB2-948E-4E55-B014-ACA202338834</key>
@@ -6490,7 +6490,7 @@
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
-			<string></string>
+			<string>mux home</string>
 			<key>Jobs to Ignore</key>
 			<array>
 				<string>rlogin</string>
@@ -10675,15 +10675,19 @@
 	<key>NoSyncInstallationId</key>
 	<string>B7E71222-4624-4E3B-B90C-AD77633222D3</string>
 	<key>NoSyncLastTipTime</key>
-	<real>530291772.85443002</real>
+	<real>530470473.57014602</real>
 	<key>NoSyncPermissionToShowTip</key>
 	<true/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>529880667.545344</real>
+	<key>NoSyncTipsDisabled</key>
+	<true/>
 	<key>NoSyncTipsToNotShow</key>
 	<array>
 		<string>000</string>
 		<string>0000</string>
+		<string>0001</string>
+		<string>0002</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
@@ -10746,6 +10750,8 @@
 	<integer>8</integer>
 	<key>RightOption</key>
 	<integer>3</integer>
+	<key>SUAutomaticallyUpdate</key>
+	<true/>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedAlternateAppNameKey</key>
@@ -10755,10 +10761,12 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-10-21T18:58:39Z</date>
+	<date>2017-11-10T19:21:24Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
+	<false/>
+	<key>Secure Input</key>
 	<false/>
 	<key>ShowBookmarkName</key>
 	<false/>
@@ -10817,7 +10825,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.4.beta.1</string>
+	<string>3.1.5.beta.2</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
