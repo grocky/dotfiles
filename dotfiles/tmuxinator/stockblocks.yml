@@ -9,12 +9,13 @@ windows:
       panes:
         - 
   - logs:
-      layout: even-horizontal
+      layout: even-vertical
       panes:
-        - echo "docker-compose logs --follow --timestamps"
+        - docker-compose logs --follow --timestamps web
+        - docker-compose logs --follow --timestamps accountservice searchservice
   - watch: 
       layout: even-vertical
       panes:
-        - gulp watch
+        - node_modules/.bin/gulp watch
         - node_modules/.bin/webpack --watch --progress --colors --config webpack.config.js
 
