@@ -3,13 +3,15 @@
 name: wasabi
 root: ~/Projects/wasabi
 
+pre_window: awsp storyblocks
 windows:
-  - project:
+  - wasabi:
       layout: tiled
       panes:
-        - echo 'logs'
-        - echo 'watch'
-        - echo 'console'
+        - 
+  - logs:
+        - 
+        - 
   - local-mongo:
       layout: tiled
       panes:

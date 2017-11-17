@@ -3,6 +3,7 @@
 name: stockblocks
 root: ~/Projects/StockBlocks
 
+pre_window: awsp storyblocks
 windows:
   - project:
       layout: even-vertical 
