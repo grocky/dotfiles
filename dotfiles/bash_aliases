@@ -71,6 +71,8 @@ alias glg='git lg'
 alias gs='git status'
 alias gss='git status --porcelain'
 alias gd='git diff'
+alias g-open-status='open $(hub ci-status -v|cut -d: -f2-)'
+alias gos='g-open-status'
 
 ### Git-flow
 alias gff='git flow feature'
