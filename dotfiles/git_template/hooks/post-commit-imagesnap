@@ -19,22 +19,29 @@ def shellescape(str)
     # combo is regarded as line continuation and simply ignored.
     str.gsub!(/\n/, "'\n'")
 
-    return str
+    str
 end
 
-repo_name=`basename "$(git rev-parse --show-toplevel)"`
-repo_name.chomp!
-
-home_dir=ENV['HOME']
-git_shots_dir = ENV['GITSHOTS_DIR'] || "#{home_dir}/.gitshots"
-
-Dir.mkdir(git_shots_dir) unless Dir.exists?(git_shots_dir)
-
-file=shellescape("#{git_shots_dir}/#{Time.now.to_i}_#{repo_name}.jpg")
-
-unless File.directory?(File.expand_path("../../rebase-merge", __FILE__))
+def snap_picture(file)
   puts "Making gitshot #{file}!"
   output = `imagesnap -q -w 2.5 #{file}`
   puts output
+end
+
+def create_file_path
+  repo_name=`basename "$(git rev-parse --show-toplevel)"`
+  repo_name.chomp!
+
+  home_dir=ENV['HOME']
+  git_shots_dir = ENV['GITSHOTS_DIR'] || "#{home_dir}/.gitshots"
+
+  Dir.mkdir(git_shots_dir) unless Dir.exists?(git_shots_dir)
+
+  shellescape("#{git_shots_dir}/#{Time.now.to_i}_#{repo_name}.jpg")
+end
+
+unless File.directory?(File.expand_path("../../rebase-merge", __FILE__))
+  file = create_file_path
+  snap_picture(file)
 end
 
