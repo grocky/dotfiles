@@ -43,11 +43,36 @@ def create_file_path
   shellescape("#{git_shots_dir}/#{Time.now.to_i}_#{repo_name}.jpg")
 end
 
-def update_slack_avatar(token, file)
+def update_slack_avatar(token, file, crop_width = nil, crop_x = nil, crop_y = nil)
   uri = URI.parse('https://slack.com/api/users.setPhoto')
 
   boundary = 'AaB03x'
   post_body = []
+
+  unless crop_width.nil?
+    post_body << "--#{boundary}"
+    post_body << "Content-Disposition: form-data; name=\"crop_w\""
+    post_body << 'Content-Type: text/plain'
+    post_body << ''
+    post_body << "#{crop_width}"
+  end
+
+  unless crop_x.nil?
+    post_body << "--#{boundary}"
+    post_body << "Content-Disposition: form-data; name=\"crop_x\""
+    post_body << 'Content-Type: text/plain'
+    post_body << ''
+    post_body << "#{crop_x}"
+  end
+
+  unless crop_y.nil?
+    post_body << "--#{boundary}"
+    post_body << "Content-Disposition: form-data; name=\"crop_y\""
+    post_body << 'Content-Type: text/plain'
+    post_body << ''
+    post_body << "#{crop_y}"
+  end
+
   post_body << "--#{boundary}"
   post_body << "Content-Disposition: form-data; name=\"token\""
   post_body << 'Content-Type: text/plain'
@@ -77,7 +102,9 @@ unless File.directory?(File.expand_path("../../rebase-merge", __FILE__))
 
   token = ENV['SLACK_USER_API_TOKEN']
   unless token.to_s.empty?
-    update_slack_avatar(token, file)
+    width = 720
+    x_position = 320
+    update_slack_avatar(token, file, width, x_position)
   end
 end
 
