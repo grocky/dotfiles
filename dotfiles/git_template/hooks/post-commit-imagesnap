@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+require "net/https"
+require "uri"
+
 # Place this file in ~/.git_template/hooks/post-commit
 # Point git to the template directory to import the hook on a git init
 #   git config --global init.templatedir '~/.git_template'
@@ -19,22 +22,89 @@ def shellescape(str)
     # combo is regarded as line continuation and simply ignored.
     str.gsub!(/\n/, "'\n'")
 
-    return str
+    str
 end
 
-repo_name=`basename "$(git rev-parse --show-toplevel)"`
-repo_name.chomp!
-
-home_dir=ENV['HOME']
-git_shots_dir = ENV['GITSHOTS_DIR'] || "#{home_dir}/.gitshots"
-
-Dir.mkdir(git_shots_dir) unless Dir.exists?(git_shots_dir)
-
-file=shellescape("#{git_shots_dir}/#{Time.now.to_i}_#{repo_name}.jpg")
-
-unless File.directory?(File.expand_path("../../rebase-merge", __FILE__))
+def snap_picture(file)
   puts "Making gitshot #{file}!"
   output = `imagesnap -q -w 2.5 #{file}`
   puts output
+end
+
+def create_file_path
+  repo_name=`basename "$(git rev-parse --show-toplevel)"`
+  repo_name.chomp!
+
+  home_dir=ENV['HOME']
+  git_shots_dir = ENV['GITSHOTS_DIR'] || "#{home_dir}/.gitshots"
+
+  Dir.mkdir(git_shots_dir) unless Dir.exists?(git_shots_dir)
+
+  shellescape("#{git_shots_dir}/#{Time.now.to_i}_#{repo_name}.jpg")
+end
+
+def update_slack_avatar(token, file, crop_width = nil, crop_x = nil, crop_y = nil)
+  uri = URI.parse('https://slack.com/api/users.setPhoto')
+
+  boundary = 'AaB03x'
+  post_body = []
+
+  unless crop_width.nil?
+    post_body << "--#{boundary}"
+    post_body << "Content-Disposition: form-data; name=\"crop_w\""
+    post_body << 'Content-Type: text/plain'
+    post_body << ''
+    post_body << "#{crop_width}"
+  end
+
+  unless crop_x.nil?
+    post_body << "--#{boundary}"
+    post_body << "Content-Disposition: form-data; name=\"crop_x\""
+    post_body << 'Content-Type: text/plain'
+    post_body << ''
+    post_body << "#{crop_x}"
+  end
+
+  unless crop_y.nil?
+    post_body << "--#{boundary}"
+    post_body << "Content-Disposition: form-data; name=\"crop_y\""
+    post_body << 'Content-Type: text/plain'
+    post_body << ''
+    post_body << "#{crop_y}"
+  end
+
+  post_body << "--#{boundary}"
+  post_body << "Content-Disposition: form-data; name=\"token\""
+  post_body << 'Content-Type: text/plain'
+  post_body << ''
+  post_body << "#{token}"
+  post_body << "--#{boundary}"
+  post_body << "Content-Disposition: form-data; name=\"image\"; filename=\"#{File.basename(file)}\""
+  post_body << 'Content-Type: image/jpeg'
+  post_body << ''
+  post_body << File.read(file)
+  post_body << "--#{boundary}--"
+
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
+  request = Net::HTTP::Post.new(uri.request_uri)
+  request.body = post_body.join("\r\n")
+  request['Content-Type'] = "multipart/form-data, boundary=#{boundary}"
+
+  response = http.request(request)
+
+  puts response.body
+end
+
+unless File.directory?(File.expand_path("../../rebase-merge", __FILE__))
+  file = create_file_path
+  snap_picture(file)
+
+  token = ENV['SLACK_USER_API_TOKEN']
+  unless token.to_s.empty?
+    width = 720
+    x_position = 320
+    update_slack_avatar(token, file, width, x_position)
+  end
 end
 

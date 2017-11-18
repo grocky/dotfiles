@@ -49,11 +49,6 @@ alias hosts='sudo vim /etc/hosts'
 ### copy working directory
 alias cwd='pwd | tr -d "\r\n" | pbcopy'
 
-function find_password() {
-  password_name=$1
-  grep -i ${password_name} ~/.env|cut -d= -f2
-}
-
 alias speedtest='speedtest-cli'
 alias st='speedtest-cli'
 
