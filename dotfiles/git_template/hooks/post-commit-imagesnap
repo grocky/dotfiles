@@ -50,39 +50,30 @@ def update_slack_avatar(token, file, crop_width = nil, crop_x = nil, crop_y = ni
   post_body = []
 
   unless crop_width.nil?
+    crop_width_part = MultipartBodyPart.new('crop_w', crop_width)
     post_body << "--#{boundary}"
-    post_body << "Content-Disposition: form-data; name=\"crop_w\""
-    post_body << 'Content-Type: text/plain'
-    post_body << ''
-    post_body << "#{crop_width}"
+    post_body.concat(crop_width_part.build)
   end
 
   unless crop_x.nil?
+    crop_x_part = MultipartBodyPart.new('crop_x', crop_x)
     post_body << "--#{boundary}"
-    post_body << "Content-Disposition: form-data; name=\"crop_x\""
-    post_body << 'Content-Type: text/plain'
-    post_body << ''
-    post_body << "#{crop_x}"
+    post_body.concat(crop_x_part.build)
   end
 
   unless crop_y.nil?
+    crop_y_part = MultipartBodyPart.new('crop_y', crop_y)
     post_body << "--#{boundary}"
-    post_body << "Content-Disposition: form-data; name=\"crop_y\""
-    post_body << 'Content-Type: text/plain'
-    post_body << ''
-    post_body << "#{crop_y}"
+    post_body.concat(crop_y_part.build)
   end
 
   post_body << "--#{boundary}"
-  post_body << "Content-Disposition: form-data; name=\"token\""
-  post_body << 'Content-Type: text/plain'
-  post_body << ''
-  post_body << "#{token}"
+  token_part = MultipartBodyPart.new('token', token)
+  post_body.concat(token_part.build)
+
   post_body << "--#{boundary}"
-  post_body << "Content-Disposition: form-data; name=\"image\"; filename=\"#{File.basename(file)}\""
-  post_body << 'Content-Type: image/jpeg'
-  post_body << ''
-  post_body << File.read(file)
+  image_part = MultipartBodyPart.new('image', File.new(file, 'r'), 'image/jpeg')
+  post_body.concat(image_part.build)
   post_body << "--#{boundary}--"
 
   http = Net::HTTP.new(uri.host, uri.port)
@@ -96,7 +87,28 @@ def update_slack_avatar(token, file, crop_width = nil, crop_x = nil, crop_y = ni
   puts response.body
 end
 
-unless File.directory?(File.expand_path("../../rebase-merge", __FILE__))
+class MultipartBodyPart
+  def initialize(name, value, content_type = 'text/plain')
+    @name = name
+    @value = value
+    @content_type = content_type
+  end
+
+  def build
+    body_part = []
+    body_part << "Content-Disposition: form-data; name=\"#{@name}\"#{"; filename=\"#{File.basename(@value.path)}\"" if @value.is_a? File}"
+    body_part << "Content-Type: #{@content_type}"
+    body_part << ''
+    body_part <<
+        if @value.is_a? File
+          @value.read
+        else
+          @value
+        end
+  end
+end
+
+unless File.directory?(File.expand_path('../../rebase-merge', __FILE__))
   file = create_file_path
   snap_picture(file)
 
