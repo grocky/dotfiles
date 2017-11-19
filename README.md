@@ -35,3 +35,5 @@ pip install powerline-gitstatus
 pip install powerline-mem-segment
 ```
 
+TODO: extract gitshots into a separate repo
+
