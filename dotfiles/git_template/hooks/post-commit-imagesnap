@@ -3,6 +3,14 @@
 require "net/https"
 require "uri"
 
+# This git hook will use your camera to take a picture of yourself. The image will be stored locally and
+# posted to update your slack avatar.
+#
+# Prerequisites:
+#   - imagesnap: brew install imagesnap
+#   - slack api user token: https://get.slack.help/hc/en-us/articles/215770388-Create-and-regenerate-API-tokens
+#   - export your slack token to SLACK_USER_API_TOKEN environment variable
+#
 # Place this file in ~/.git_template/hooks/post-commit
 # Point git to the template directory to import the hook on a git init
 #   git config --global init.templatedir '~/.git_template'
@@ -130,4 +138,3 @@ unless File.directory?(File.expand_path('../../rebase-merge', __FILE__))
     update_slack_avatar(token, file, width, x_position)
   end
 end
-
