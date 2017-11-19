@@ -47,44 +47,55 @@ def update_slack_avatar(token, file, crop_width = nil, crop_x = nil, crop_y = ni
   uri = URI.parse('https://slack.com/api/users.setPhoto')
 
   boundary = 'AaB03x'
-  post_body = []
+  post_body = MultipartBody.new('AaB03x')
 
   unless crop_width.nil?
-    crop_width_part = MultipartBodyPart.new('crop_w', crop_width)
-    post_body << "--#{boundary}"
-    post_body.concat(crop_width_part.build)
+    post_body.add_part(MultipartBodyPart.new('crop_w', crop_width))
   end
 
   unless crop_x.nil?
-    crop_x_part = MultipartBodyPart.new('crop_x', crop_x)
-    post_body << "--#{boundary}"
-    post_body.concat(crop_x_part.build)
+    post_body.add_part(MultipartBodyPart.new('crop_x', crop_x))
   end
 
   unless crop_y.nil?
-    crop_y_part = MultipartBodyPart.new('crop_y', crop_y)
-    post_body << "--#{boundary}"
-    post_body.concat(crop_y_part.build)
+    post_body.add_part(MultipartBodyPart.new('crop_y', crop_y))
   end
 
-  post_body << "--#{boundary}"
-  token_part = MultipartBodyPart.new('token', token)
-  post_body.concat(token_part.build)
-
-  post_body << "--#{boundary}"
-  image_part = MultipartBodyPart.new('image', File.new(file, 'r'), 'image/jpeg')
-  post_body.concat(image_part.build)
-  post_body << "--#{boundary}--"
+  post_body.add_part(MultipartBodyPart.new('token', token))
+  post_body.add_part(MultipartBodyPart.new('image', File.new(file, 'r'), 'image/jpeg'))
 
   http = Net::HTTP.new(uri.host, uri.port)
   http.use_ssl = true
   request = Net::HTTP::Post.new(uri.request_uri)
-  request.body = post_body.join("\r\n")
+  request.body = post_body.render
   request['Content-Type'] = "multipart/form-data, boundary=#{boundary}"
 
   response = http.request(request)
 
   puts response.body
+end
+
+class MultipartBody
+  def initialize(boundary, parts = [])
+    @parts = parts
+    @boundary = boundary
+  end
+
+  def add_part(part)
+    @parts.push(part)
+  end
+
+  def build
+    body_parts = @parts.reduce([]) do |all, part|
+      enclosed_part = ["--#{@boundary}"].concat(part.build)
+      all.concat(enclosed_part)
+    end
+    body_parts.push("--#{@boundary}--")
+  end
+
+  def render
+    build.join("\n")
+  end
 end
 
 class MultipartBodyPart
