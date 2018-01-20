@@ -38,8 +38,6 @@ if [ -d "${HOME}/bin" ] ; then
   PATH="${HOME}/bin:${PATH}"
 fi
 
-export EDITOR=vim
-
 export XDG_CONFIG_HOME=${HOME}/.config
 
 # brew's sbin
@@ -49,14 +47,15 @@ export PATH="/usr/local/sbin:$PATH"
 export PATH="${PATH}:/usr/local/bin:${HOME}/.rvm/bin" # Add RVM to PATH for scripting
 
 # python's bin
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+export PATH="/usr/local/opt/python/libexec/bin:${PATH}"
 
 # GNU utils
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH" # use coreutils
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:${PATH}" # use coreutils
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}"
 
+export SHELL=/usr/local/bin/bash
 export VISUAL=vim
-export EDITOR="$VISUAL"
+export EDITOR="${VISUAL}"
 
 ## Powerline bash
 export POWERLINE_CONFIG_COMMAND=/usr/local/bin/powerline-config

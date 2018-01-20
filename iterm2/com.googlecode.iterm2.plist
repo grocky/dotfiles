@@ -6234,9 +6234,9 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>1100 -556 620 392 570 -1050 1680 1050 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>638 473 918 512 0 0 1920 1200 </string>
+	<string>502 400 796 473 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>226 160 1210 907 0 0 1920 1200 </string>
+	<string>0 0 1680 1050 0 0 1680 1050 </string>
 	<key>NeverWarnAboutMeta</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_B4DA7DB2-948E-4E55-B014-ACA202338834</key>
@@ -6490,7 +6490,7 @@
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
-			<string>mux home</string>
+			<string>tmux ls &amp;&amp; read tmux_session &amp;&amp; tmux attach -t ${tmux_session:-default} || tmux new -s ${tmux_session:-default}</string>
 			<key>Jobs to Ignore</key>
 			<array>
 				<string>rlogin</string>
@@ -10761,7 +10761,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-11-10T19:21:24Z</date>
+	<date>2018-01-20T18:43:41Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>

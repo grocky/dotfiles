@@ -21,6 +21,10 @@ cd ../ && rm -rf dotfiles/
 
 For tmux we need to `brew install reattach-to-user-namespace` [See](https://github.com/thoughtbot/dotfiles/issues/75)
 
+```shell
+gem install tmuxinator
+```
+
 ### Change screenshot location
 defaults write com.capple.screencapture location ${HOME}/Desktop/screenshots && killall SystemUIServer && "update successful" || "update failed"
 
