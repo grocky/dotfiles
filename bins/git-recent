@@ -3,12 +3,12 @@
 # Source:   https://gist.github.com/fritz-c/c1e528b09bc1c0827a3c
 # Original: https://gist.github.com/jordan-brough/48e2803c0ffa6dc2e0bd
 
-# Download this script as "git-recentco" (no extension), chmod it to be executable and put it in your
-# path somewhere (e.g. /usr/bin). You can then use it via `git recentco` from inside any git repo.
+# Download this script as "git-recent" (no extension), chmod it to be executable and put it in your
+# path somewhere (e.g. /usr/bin). You can then use it via `git recent` from inside any git repo.
 
 # Example:
 #
-# $ git recentco -n 5
+# $ git recent -n 5
 # 1) master
 # 2) stable
 # 3) develop
@@ -19,7 +19,7 @@
 
 usage()
 {
-  echo "usage: git recentco [-n lines]"
+  echo "usage: git recent [-n lines]"
 }
 
 while getopts "hn:" opt; do
