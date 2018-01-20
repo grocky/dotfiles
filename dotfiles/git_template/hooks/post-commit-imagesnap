@@ -35,7 +35,7 @@ end
 
 def snap_picture(file)
   puts "Making gitshot #{file}!"
-  output = `imagesnap -q -w 2.5 #{file}`
+  output = `imagesnap -q -w 4 #{file}`
   puts output
 end
 

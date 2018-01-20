@@ -2,6 +2,13 @@
 
 alias bash_functions='vi ~/.bash_functions && source ~/.bash_functions'
 
+gh_request() {
+  http_method=${1}
+  uri=${2}
+  params=${@:3}
+  http --default-scheme=https --auth grocky:$(find_password github_grocky_token) ${http_method} api.github.com${uri} ${params}
+}
+
 docker_exec () {
   local container_name=${1}
   local command=${@:2}
