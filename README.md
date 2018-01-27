@@ -37,6 +37,10 @@ ln -s ~/dotfiles/config/powerline ~/.config/powerline
 ```shell
 pip install powerline-gitstatus
 pip install powerline-mem-segment
+
+git clone https://github.com/powerline/fonts.git --depth=1
+cd fonts
+./install.sh
 ```
 
 TODO: extract gitshots into a separate repo
