@@ -40,7 +40,12 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundler
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-source /usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim
+let powerlineFile = "/usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim"
+
+if filereadable(powerlineFile)
+	source  powerlineFile
+endif
+
 set laststatus=2
 
 set nocompatible              " be iMproved, required
