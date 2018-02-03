@@ -1,6 +1,5 @@
 alias reload="source ${HOME}/.bash_profile"
-
-alias mux="tmuxinator"
+alias bashrc='vi ~/.bashrc && source ~/.bashrc'
 
 # shell shortcuts
 export LS_OPTIONS='--color=auto'
