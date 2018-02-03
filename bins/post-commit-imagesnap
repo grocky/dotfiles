@@ -135,10 +135,16 @@ unless File.directory?(File.expand_path('../../rebase-merge', __FILE__))
   file = create_file_path
   snap_picture(file)
 
+  should_skip = ENV['GIT_SHOTS_SKIP_POST']
   token = ENV['SLACK_USER_API_TOKEN']
-  unless token.to_s.empty?
-    width = 720
-    x_position = 320
-    update_slack_avatar(token, file, width, x_position)
+
+  if (token.to_s.empty? || should_skip == 'true')
+    puts "Skipping slack image update. missing_token: #{token.to_s.empty?}, should_skip: #{should_skip == 'true'}"
+    exit
   end
+
+  width = 720
+  x_position = 320
+  update_slack_avatar(token, file, width, x_position)
 end
+
