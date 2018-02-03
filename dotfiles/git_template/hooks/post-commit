@@ -8,5 +8,5 @@ logDir=${HOME}/log
 logFile=${logDir}/git-post-commit.log
 [ ! -f ${logFile} ] && touch ${logFile}
 
-${DIR}/post-commit-imagesnap >> ${logFile} &
+post-commit-imagesnap >> ${logFile} 2>&1 &
 
