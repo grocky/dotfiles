@@ -86,7 +86,6 @@ textconv=pdftohtml -stdout
 	sa = stash apply
 	ss = stash save
     logtree = log --graph --oneline --decorate --all
-	update = "!f() { git fetch origin \"$1\":\"$1\"; }; f"
     ancestor = "!f() { git merge-base HEAD..${1}; }; f"
     new-commits = "!f() { git shortlog --no-merges HEAD..${1}; }; f"
 
