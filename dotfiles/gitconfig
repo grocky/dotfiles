@@ -1,6 +1,6 @@
 [user]
 	name = Rocky Gray
-	email = rocky@videoblocks.com
+	email = rocky.grayjr@gmail.com
 
 [diff "pdfconv"]
 textconv=pdftohtml -stdout
