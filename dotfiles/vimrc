@@ -56,7 +56,7 @@ if !filereadable(vundle_readme)
 endif
 
 set nocompatible              " be iMproved, required
-filetype off                  " required
+filetype off                  " Required for Vundle... 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 " Setting up Vundle - the vim plugin bundler end
@@ -75,8 +75,10 @@ if iCanHazVundle == 0
 endif
 
 call vundle#end() 
+
 "must be last
-filetype plugin indent on " load filetype plugins/indent settings
+" load filetype plugins/indent settings
+filetype plugin indent on 
 colorscheme nord
 syntax on                      " enable syntax
  
@@ -100,8 +102,9 @@ set autoread
 set autochdir
 
 " Autowrap git commits to 72 chars
-au FileType gitcommit set tw=72
+autocmd FileType gitcommit set tw=72
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
