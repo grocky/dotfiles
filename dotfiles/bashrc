@@ -73,7 +73,7 @@ powerline_sh=/usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powe
 [ -f ${powerline_sh} ] && source ${powerline_sh}
 
 export SCALA_HOME=/usr/local/opt/scala/idea
-export GOPATH=$HOME/Projects/go
+export GOPATH=$HOME/go
 
 if [ -f "${HOME}/.bash_completions" ]; then
   source "${HOME}/.bash_completions"
@@ -81,10 +81,7 @@ fi
 
 type jenv >/dev/null 2>&1 && eval "$(jenv init -)"
 
-if [ -f "${HOME}/.vb_profile" ]; then
-  source "${HOME}/.vb_profile"
-fi
-
 if [ -n $(find_password slack_user_api_token) ]; then
   export SLACK_USER_API_TOKEN=$(find_password slack_user_api_token)
 fi
+
