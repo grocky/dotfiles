@@ -36,6 +36,8 @@ if [ -d "${HOME}/bin" ] ; then
   PATH="${HOME}/bin:${PATH}"
 fi
 
+export GPG_TTY=$(tty)
+
 export XDG_CONFIG_HOME=${HOME}/.config
 
 # brew's sbin
