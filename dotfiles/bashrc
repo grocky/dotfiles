@@ -62,6 +62,8 @@ fi
 export VISUAL=vim
 export EDITOR="${VISUAL}"
 
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
 ## Powerline bash
 export POWERLINE_CONFIG_COMMAND=/usr/local/bin/powerline-config
 export POWERLINE_BASH_CONTINUATION=1
@@ -69,9 +71,6 @@ export POWERLINE_BASH_SELECT=1
 powerline_sh=/usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 
 [ -f ${powerline_sh} ] && source ${powerline_sh}
-
-travis_sh=${HOME}/.travis/travis.sh && [ -f ${travis_sh} ] && source ${travis_sh}
-j_sh=/usr/local/etc/profile.d/autojump.sh && [ -f ${j_sh} ] && source ${j_sh}
 
 export SCALA_HOME=/usr/local/opt/scala/idea
 export GOPATH=$HOME/Projects/go
