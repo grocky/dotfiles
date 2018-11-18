@@ -2,6 +2,10 @@ if which brew >/dev/null && [ -f $(brew --prefix)/etc/bash_completion ]; then
     source $(brew --prefix)/etc/bash_completion
 fi
 
+if [ -f /usr/local/share/bash-completion/bash_completion ]; then
+  . /usr/local/share/bash-completion/bash_completion
+fi
+
 _complete_ssh_hosts () {
         COMPREPLY=()
         cur="${COMP_WORDS[COMP_CWORD]}"
