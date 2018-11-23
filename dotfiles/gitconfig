@@ -1,6 +1,7 @@
 [user]
 	name = Rocky Gray
 	email = rocky.grayjr@gmail.com
+	signingkey = 425204FA3A123013
 
 [diff "pdfconv"]
 textconv=pdftohtml -stdout
