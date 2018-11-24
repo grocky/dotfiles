@@ -1,8 +1,8 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer: 
 "       Rocky Gray
-"		https://www.rockygray.com
 "
+"		https://www.rockygray.com
 " Awesome_version:
 "       Get this config, nice color schemes and lots of plugins!
 "
@@ -34,11 +34,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundler
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let powerlineFile="/usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim"
-
-if filereadable(powerlineFile)
-	exec 'source ' . fnameescape(powerlineFile)
-endif
 
 set laststatus=2
 
@@ -62,7 +57,9 @@ call vundle#begin()
 " Setting up Vundle - the vim plugin bundler end
 
 Plugin 'VundleVim/Vundle.vim'
+
 "Add your bundles here
+Plugin 'vim-airline/vim-airline'
 Plugin 'Syntastic' "uber awesome syntax and errors highlighter
 Plugin 'rafi/awesome-vim-colorschemes'
 Plugin 'tpope/vim-fugitive' "So awesome, it should be illegal 
@@ -82,13 +79,11 @@ filetype plugin indent on
 colorscheme nord
 syntax on                      " enable syntax
  
-set guifont=Source\ Code\ Pro\ for\ Powerline
-let g:Powerline_symbols = 'fancy'
 set encoding=utf-8
 set t_Co=256
 set fillchars+=stl:\ ,stlnc:\
-set term=xterm-256color
 set termencoding=utf-8
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -96,15 +91,15 @@ set termencoding=utf-8
 set history=700
 
 " Set to auto read when a file is changed from the outside
-set autoread
 
+set autoread
 " Set working directory to current file directory
 set autochdir
 
 " Autowrap git commits to 72 chars
 autocmd FileType gitcommit set tw=72
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
-autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
+autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0 tabstop=4
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
@@ -113,7 +108,6 @@ let g:mapleader = ","
 
 " Fast saving
 nmap <leader>w :w!<cr>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
