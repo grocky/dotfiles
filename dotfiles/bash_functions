@@ -139,18 +139,7 @@ function _awsSwitchProfile() {
    fi
 };
 
-function recruiter_reply() {
-	echo "If a position isn’t offering over 150k, unlimited vacation, full medical and remote, then I’m not interested" | pbcopy
-	echo "recruiter reply copied to clipboard"
-}
-
-function find_password() {
-  password_name=$1
-  grep -i ${password_name} ~/.env|cut -d= -f2
-}
-
 function ip_geo_lookup() {
   ip_address=${1}
   curl ipinfo.io/${ip_address};
 }
-
