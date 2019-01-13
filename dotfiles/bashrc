@@ -74,6 +74,7 @@ powerline_sh=/usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powe
 
 export SCALA_HOME=/usr/local/opt/scala/idea
 export GOPATH=$HOME/go
+export PATH="${GOPATH}/bin:${PATH}"
 
 if [ -f "${HOME}/.bash_completions" ]; then
   source "${HOME}/.bash_completions"
