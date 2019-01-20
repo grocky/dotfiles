@@ -68,7 +68,7 @@ export EDITOR="${VISUAL}"
 export POWERLINE_CONFIG_COMMAND=/usr/local/bin/powerline-config
 export POWERLINE_BASH_CONTINUATION=1
 export POWERLINE_BASH_SELECT=1
-powerline_sh=/usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+powerline_sh=/usr/local/lib/python3.7/site-packages/powerline/bindings/bash/powerline.sh
 
 [ -f ${powerline_sh} ] && source ${powerline_sh}
 

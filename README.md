@@ -10,6 +10,16 @@ git clone https://github.com/grocky/dotfiles.git
 cd dotfiles && ./install_dotfiles.sh
 ```
 
+### OSX defaults 
+
+TODO: mvoe to script...
+
+```shell
+defaults write com.apple.screencapture location -string "${HOME}/Desktop/screenshots"
+defaults write com.apple.screencapture type -string "png"
+defaults write com.apple.screencapture disable-shadow -bool true
+```
+
 The script will idempotently link the dotfiles in `./dotfiles` to your `$HOME` directory. If any conflicting dotfiles exist on the host already they will be backed up first.
 
 In order to clean up the host just run
@@ -35,6 +45,7 @@ ln -s ~/dotfiles/config/powerline ~/.config/powerline
 ```
 
 ```shell
+pip install powerline-status
 pip install powerline-gitstatus
 pip install powerline-mem-segment
 
