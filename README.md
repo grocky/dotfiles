@@ -14,6 +14,8 @@ cd dotfiles && ./install_dotfiles.sh
 
 TODO: mvoe to script...
 
+https://github.com/mathiasbynens/dotfiles/blob/master/.macos
+
 ```shell
 defaults write com.apple.screencapture location -string "${HOME}/Desktop/screenshots"
 defaults write com.apple.screencapture type -string "png"
