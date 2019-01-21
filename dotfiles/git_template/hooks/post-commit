@@ -2,11 +2,15 @@
 
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
+# setup log
 logDir=${HOME}/log
 [ ! -d ${logDir} ] && mkdir -p ${logDir}
 
 logFile=${logDir}/git-post-commit.log
 [ ! -f ${logFile} ] && touch ${logFile}
 
+# say cheese
 post-commit-imagesnap >> ${logFile} 2>&1 &
 
+# Generate ctags
+.git/hooks/ctags >/dev/null 2>&1 &
