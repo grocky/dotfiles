@@ -8,6 +8,7 @@ To load dotfiles on the host run
 git clone https://github.com/grocky/dotfiles.git
 # enter username and (password or personal access token)
 cd dotfiles && ./install_dotfiles.sh
+brew bundle
 ```
 
 ### OSX defaults 
