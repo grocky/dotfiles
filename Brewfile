@@ -18,6 +18,7 @@ brew 'terraform'
 brew 'geoip', args: ['with-geoipupdate']
 brew 'ag'
 brew 'ansible'
+brew 'autojump'
 brew 'awscli'
 brew 'bash'
 brew 'bash-completion@2'
