@@ -1,11 +1,13 @@
 # ~/.tmuxinator/stroll.yml
 
 name: stroll
-root: ~/Projects/flashcrystal/stroll-dashboard
+root: ~/Projects/Blufield-Dashboard
 
 windows:
-  - main:
-      layout: main-vertical
+  - code:
+      layout: main-horizontal
       panes:
+        - vim .
         - 
-        - 
+  - logs:
+  - shell:
