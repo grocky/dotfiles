@@ -54,6 +54,7 @@ brew 'plantuml'
 cask 'goland'
 cask 'intellij-idea'
 cask 'webstorm'
+cask 'phpstorm'
 cask 'visual-studio-code'
 
 # GUI tools
