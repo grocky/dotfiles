@@ -27,6 +27,7 @@ brew 'curl'
 brew 'git'
 brew 'git-lfs'
 brew 'gnupg', link: false
+brew 'highlight'
 brew 'htop'
 brew 'httpie'
 brew 'jq'
