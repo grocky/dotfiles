@@ -66,6 +66,7 @@ cask 'google-chrome'
 cask 'iterm2'
 cask 'licecap'
 cask 'omnigraffle'
+cask 'paw'
 cask 'spectacle'
 
 mas 'Xcode', id: 497799835
