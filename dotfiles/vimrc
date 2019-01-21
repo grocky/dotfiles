@@ -59,11 +59,17 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 "Add your bundles here
+Plugin 'benmills/vimux'
+Plugin 'scrooloose/nerdtree'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+Plugin 'kien/ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'Syntastic' "uber awesome syntax and errors highlighter
 Plugin 'rafi/awesome-vim-colorschemes'
 Plugin 'tpope/vim-fugitive' "So awesome, it should be illegal 
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'moll/vim-node'
 
 if iCanHazVundle == 0
 	echo "Installing Vundles, please ignore key map error messages"
@@ -314,6 +320,23 @@ autocmd BufWrite *.coffee :call DeleteTrailingWS()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vimgrep searching and cope displaying
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" bind \ (backward slash) to grep shortcut
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+nnoremap \ :Ag<SPACE>
+
 " When you press gv you vimgrep after the selected text
 vnoremap <silent> gv :call VisualSelection('gv')<CR>
 
