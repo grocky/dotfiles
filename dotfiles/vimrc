@@ -60,6 +60,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 "Add your bundles here
 Plugin 'scrooloose/nerdtree'
+Plugin 'sheerun/vim-polyglot'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'kien/ctrlp.vim'
@@ -67,9 +68,12 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'Syntastic' "uber awesome syntax and errors highlighter
 Plugin 'rafi/awesome-vim-colorschemes'
 Plugin 'tpope/vim-fugitive' "So awesome, it should be illegal 
-Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-rhubarb' " awesomer Gbrowse
+Plugin 'airblade/vim-gitgutter' " see line changes in the gutter
+Plugin 'tpope/vim-unimpaired' " navigate commits from Glog easier
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'moll/vim-node'
+Plugin 'w0rp/ale'
 
 if iCanHazVundle == 0
 	echo "Installing Vundles, please ignore key map error messages"
@@ -90,6 +94,12 @@ set t_Co=256
 set fillchars+=stl:\ ,stlnc:\
 set termencoding=utf-8
 
+" git gutter
+let g:gitgutter_sign_added = '·'
+let g:gitgutter_sign_modified = '·'
+let g:gitgutter_sign_removed = '·'
+let g:gitgutter_sign_removed_first_line = '·'
+let g:gitgutter_sign_modified_removed = '·'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
