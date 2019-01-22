@@ -59,7 +59,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 "Add your bundles here
-Plugin 'benmills/vimux'
 Plugin 'scrooloose/nerdtree'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
@@ -68,6 +67,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'Syntastic' "uber awesome syntax and errors highlighter
 Plugin 'rafi/awesome-vim-colorschemes'
 Plugin 'tpope/vim-fugitive' "So awesome, it should be illegal 
+Plugin 'tpope/vim-unimpaired'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'moll/vim-node'
 
