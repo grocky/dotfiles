@@ -26,6 +26,7 @@ brew 'cmake'
 brew 'coreutils'
 brew 'ctags'
 brew 'curl'
+brew 'fzf'
 brew 'git'
 brew 'git-lfs'
 brew 'gnupg', link: false
