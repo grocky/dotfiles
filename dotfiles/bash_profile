@@ -1,5 +1,5 @@
 # Default to using tmux
-if [[ "$TERM" != "screen-256color" ]]; then
+if [[ "$TERM" != "screen-256color"  ]] && hash tmux 2>/dev/null; then
   tmux attach-session -t "$USER" || tmux new-session -s "$USER"
   exit
 fi
