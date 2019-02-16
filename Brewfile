@@ -70,5 +70,7 @@ cask 'licecap'
 cask 'omnigraffle'
 cask 'paw'
 cask 'spectacle'
+cask 'authy'
+cask 'evernote'
 
 mas 'Xcode', id: 497799835
