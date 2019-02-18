@@ -95,6 +95,8 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'moll/vim-node'
 Plugin 'w0rp/ale'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'hashivim/vim-terraform'
+Plugin 'fatih/vim-go'
 
 if iCanHazVundle == 0
 	echo "Installing Vundles, please ignore key map error messages"
@@ -126,6 +128,9 @@ set autoread
 
 " Set working directory to current file directory
 set autochdir
+
+" Default to vertical splits for diffs
+set diffopt=vertical
 
 " Autowrap git commits to 72 chars
 autocmd FileType gitcommit set tw=72
