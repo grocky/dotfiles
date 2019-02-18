@@ -60,10 +60,22 @@ Plugin 'VundleVim/Vundle.vim'
 
 "Add your bundles here
 Plugin 'scrooloose/nerdtree'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'junegunn/fzf'
+
+" fzf - fuzzy finder
+set rtp+=/usr/local/opt/fzf
 Plugin 'junegunn/fzf.vim'
-Plugin 'kien/ctrlp.vim'
+let g:fzf_action = {
+      \ 'ctrl-s': 'split',
+      \ 'ctrl-v': 'vsplit'
+      \ }
+nnoremap <c-p> :FZF<cr>
+augroup fzf
+  autocmd!
+  autocmd! FileType fzf
+  autocmd  FileType fzf set laststatus=0 noshowmode noruler
+    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+augroup END
+
 Plugin 'vim-airline/vim-airline'
 Plugin 'Syntastic' "uber awesome syntax and errors highlighter
 Plugin 'rafi/awesome-vim-colorschemes'
