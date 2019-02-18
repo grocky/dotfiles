@@ -81,7 +81,15 @@ Plugin 'Syntastic' "uber awesome syntax and errors highlighter
 Plugin 'rafi/awesome-vim-colorschemes'
 Plugin 'tpope/vim-fugitive' "So awesome, it should be illegal 
 Plugin 'tpope/vim-rhubarb' " awesomer Gbrowse
-Plugin 'airblade/vim-gitgutter' " see line changes in the gutter
+
+" git gutter
+Plugin 'airblade/vim-gitgutter'
+let g:gitgutter_sign_added = '·'
+let g:gitgutter_sign_modified = '·'
+let g:gitgutter_sign_removed = '·'
+let g:gitgutter_sign_removed_first_line = '·'
+let g:gitgutter_sign_modified_removed = '·'
+
 Plugin 'tpope/vim-unimpaired' " navigate commits from Glog easier
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'moll/vim-node'
@@ -107,12 +115,6 @@ set t_Co=256
 set fillchars+=stl:\ ,stlnc:\
 set termencoding=utf-8
 
-" git gutter
-let g:gitgutter_sign_added = '·'
-let g:gitgutter_sign_modified = '·'
-let g:gitgutter_sign_removed = '·'
-let g:gitgutter_sign_removed_first_line = '·'
-let g:gitgutter_sign_modified_removed = '·'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -120,8 +122,8 @@ let g:gitgutter_sign_modified_removed = '·'
 set history=700
 
 " Set to auto read when a file is changed from the outside
-
 set autoread
+
 " Set working directory to current file directory
 set autochdir
 
