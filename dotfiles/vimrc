@@ -10,12 +10,6 @@
 "
 "           https://github.com/amix/vimrc
 "
-" Syntax_highlighted:
-"       http://amix.dk/vim/vimrc.html
-"
-" Raw_version: 
-"       http://amix.dk/vim/vimrc.txt
-"
 " Sections:
 "    -> General
 "    -> VIM user interface
@@ -80,6 +74,13 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'Syntastic' "uber awesome syntax and errors highlighter
 Plugin 'rafi/awesome-vim-colorschemes'
 Plugin 'tpope/vim-fugitive' "So awesome, it should be illegal 
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gr :Gread<CR>
+nnoremap <Leader>gw :Gwrite<CR>
+nnoremap <Leader>gp :Git push<CR>
+
 Plugin 'tpope/vim-rhubarb' " awesomer Gbrowse
 
 " git gutter
