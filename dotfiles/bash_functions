@@ -122,7 +122,7 @@ function _awsListAll() {
     fi
  
     while read line; do
-        if [[ $line == "["* ]]; then echo "$line"; fi;
+      if [[ $line == "["* ]]; then echo "$line" | sed 's/\[\(.*\)\]/\1/g'; fi;
     done < $credentialFileLocation;
 };
  
