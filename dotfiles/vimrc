@@ -97,6 +97,9 @@ Plugin 'moll/vim-node'
 Plugin 'w0rp/ale'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'hashivim/vim-terraform'
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
+
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'SirVer/ultisnips'
 
@@ -159,7 +162,7 @@ set history=700
 set autoread
 
 " Set working directory to current file directory
-set autochdir
+" set autochdir
 
 " Default to vertical splits for diffs
 set diffopt=vertical
@@ -232,7 +235,7 @@ set novisualbell
 set t_vb=
 set tm=500
 
-set nonumber
+set number
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
