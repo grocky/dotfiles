@@ -26,38 +26,24 @@
 "    -> Helper functions
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vundler
+" Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set laststatus=2
-
-" set the runtime path to include Vundle and initialize
-" Setting up Vundle - the vim plugin bundler
-let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
-
-if !filereadable(vundle_readme) 
-	echo "Installing Vundle.."
-	echo ""
-	silent !mkdir -p ~/.vim/bundle
-	silent !git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/vundle
-	let iCanHazVundle=0
+let iCanHazVundle = 1
+" Load vim-plug
+if empty(glob("~/.vim/autoload/plug.vim"))
+    execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+    let iCanHazVundle = 0
 endif
 
-set nocompatible              " be iMproved, required
-filetype off                  " Required for Vundle... 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#begin()
-" Setting up Vundle - the vim plugin bundler end
-
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
 "Add your bundles here
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
 " fzf - fuzzy finder
 set rtp+=/usr/local/opt/fzf
-Plugin 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim'
 let g:fzf_action = {
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit'
@@ -70,11 +56,11 @@ augroup fzf
     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 augroup END
 
-Plugin 'vim-airline/vim-airline'
-Plugin 'godlygeek/tabular'
-Plugin 'gabrielelana/vim-markdown'
-Plugin 'rafi/awesome-vim-colorschemes'
-Plugin 'tpope/vim-fugitive' "So awesome, it should be illegal 
+Plug 'vim-airline/vim-airline'
+Plug 'godlygeek/tabular'
+Plug 'gabrielelana/vim-markdown'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'tpope/vim-fugitive' "So awesome, it should be illegal 
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gb :Gblame<CR>
@@ -82,41 +68,41 @@ nnoremap <Leader>gr :Gread<CR>
 nnoremap <Leader>gw :Gwrite<CR>
 nnoremap <Leader>gp :Git push<CR>
 
-Plugin 'tpope/vim-rhubarb' " awesomer Gbrowse
+Plug 'tpope/vim-rhubarb' " awesomer Gbrowse
 
 " git gutter
-Plugin 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 let g:gitgutter_sign_added = '·'
 let g:gitgutter_sign_modified = '·'
 let g:gitgutter_sign_removed = '·'
 let g:gitgutter_sign_removed_first_line = '·'
 let g:gitgutter_sign_modified_removed = '·'
 
-Plugin 'tpope/vim-unimpaired' " navigate commits from Glog easier
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'moll/vim-node'
-Plugin 'w0rp/ale'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'hashivim/vim-terraform'
+Plug 'tpope/vim-unimpaired' " navigate commits from Glog easier
+Plug 'editorconfig/editorconfig-vim'
+Plug 'moll/vim-node'
+Plug 'w0rp/ale'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'hashivim/vim-terraform'
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
 
-Plugin 'AndrewRadev/splitjoin.vim'
-Plugin 'SirVer/ultisnips'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'SirVer/ultisnips'
 
 if has('nvim')
-  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
-  Plugin 'Shougo/deoplete.nvim'
-  Plugin 'roxma/nvim-yarp'
-  Plugin 'roxma/vim-hug-neovim-rpc'
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
 endif
-Plugin 'deoplete-plugins/deoplete-go', { 'do': 'make'}
+Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 
 let g:deoplete#enable_at_startup = 1
 
-Plugin 'stamblerre/gocode', {'rtp': 'vim/'}
-Plugin 'fatih/vim-go'
+Plug 'stamblerre/gocode', {'rtp': 'vim/'}
+Plug 'fatih/vim-go'
 let g:go_list_type = "quickfix"
 let g:go_fmt_command = "goimports"
 let g:go_metalinter_autosave = 1
@@ -147,12 +133,12 @@ endfunction
 autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 
 if iCanHazVundle == 0
-	echo "Installing Vundles, please ignore key map error messages"
+	echo "Installing Plugins, please ignore key map error messages"
 	echo ""
 	:PluginInstall
 endif
 
-call vundle#end() 
+call plug#end() 
 
 "must be last
 " load filetype plugins/indent settings
