@@ -39,11 +39,11 @@ endif
 call plug#begin('~/.vim/plugged')
 
 "Add your bundles here
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " fzf - fuzzy finder
 set rtp+=/usr/local/opt/fzf
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
 let g:fzf_action = {
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit'
@@ -58,7 +58,7 @@ augroup END
 
 Plug 'vim-airline/vim-airline'
 Plug 'godlygeek/tabular'
-Plug 'gabrielelana/vim-markdown'
+Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'tpope/vim-fugitive' "So awesome, it should be illegal 
 nnoremap <Leader>gs :Gstatus<CR>
@@ -80,7 +80,9 @@ let g:gitgutter_sign_modified_removed = '·'
 
 Plug 'tpope/vim-unimpaired' " navigate commits from Glog easier
 Plug 'editorconfig/editorconfig-vim'
-Plug 'moll/vim-node'
+Plug 'moll/vim-node', { 'for': 'javascript' }
+Plug 'carlitux/deoplete-ternjs', { 'for': 'javascript', 'do': 'npm install -g tern' }
+
 Plug 'w0rp/ale'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'hashivim/vim-terraform'
@@ -101,8 +103,8 @@ Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 
 let g:deoplete#enable_at_startup = 1
 
-Plug 'stamblerre/gocode', {'rtp': 'vim/'}
-Plug 'fatih/vim-go'
+Plug 'stamblerre/gocode', { 'rtp': 'vim/', 'for': 'go' }
+Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 let g:go_list_type = "quickfix"
 let g:go_fmt_command = "goimports"
 let g:go_metalinter_autosave = 1

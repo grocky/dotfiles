@@ -86,3 +86,5 @@ if [ -n $(find_password slack_user_api_token) ]; then
   export SLACK_USER_API_TOKEN=$(find_password slack_user_api_token)
 fi
 
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
