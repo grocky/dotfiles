@@ -71,7 +71,8 @@ augroup fzf
 augroup END
 
 Plugin 'vim-airline/vim-airline'
-Plugin 'Syntastic' "uber awesome syntax and errors highlighter
+Plugin 'godlygeek/tabular'
+Plugin 'gabrielelana/vim-markdown'
 Plugin 'rafi/awesome-vim-colorschemes'
 Plugin 'tpope/vim-fugitive' "So awesome, it should be illegal 
 nnoremap <Leader>gs :Gstatus<CR>
@@ -103,6 +104,18 @@ let g:terraform_fmt_on_save=1
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'SirVer/ultisnips'
 
+if has('nvim')
+  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plugin 'Shougo/deoplete.nvim'
+  Plugin 'roxma/nvim-yarp'
+  Plugin 'roxma/vim-hug-neovim-rpc'
+endif
+Plugin 'deoplete-plugins/deoplete-go', { 'do': 'make'}
+
+let g:deoplete#enable_at_startup = 1
+
+Plugin 'stamblerre/gocode', {'rtp': 'vim/'}
 Plugin 'fatih/vim-go'
 let g:go_list_type = "quickfix"
 let g:go_fmt_command = "goimports"
@@ -171,6 +184,7 @@ set diffopt=vertical
 autocmd FileType gitcommit set tw=72
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0 tabstop=4
+autocmd FileType markdown set expandtab shiftwidth=4 softtabstop=0 tabstop=4
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 
 
 " With a map leader it's possible to do extra key combinations
