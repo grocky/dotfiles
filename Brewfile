@@ -45,8 +45,11 @@ cask 'docker'
 cask 'gpg-suite'
 
 # graphics tools
-brew 'imagemagick', args: ['with-fftw', 'with-fontconfig', 'with-libwmf', 'with-librsvg', 'with-ghostscript', 'with-openjpeg']
+cask 'xquartz'
+brew 'feh'
+brew 'imagemagick'
 brew 'gnuplot', args: ['with-aquaterm', 'with-qt', 'with-pdflib-lite', 'with-cairo' ]
+brew 'r'
 brew 'ffmpeg', args: ['with-freetype', 'with-libvorbis', 'with-theora', 'with-fontconfig', 'with-fdk-aac', 'with-openjpeg', 'with-openh264', 'with-libvpx]brew']
 brew 'graphviz'
 brew 'plantuml'
