@@ -1,4 +1,6 @@
 
+.PHONY: dotfiles bins brew
+
 default: brew bins dotfiles
 
 dotfiles:
