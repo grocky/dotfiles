@@ -107,20 +107,41 @@ Plug 'stamblerre/gocode', { 'rtp': 'vim/', 'for': 'go' }
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 let g:go_list_type = "quickfix"
 let g:go_fmt_command = "goimports"
+let g:go_autodetect_gopath = 1
 let g:go_metalinter_autosave = 1
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_auto_sameids = 1
 
-map <C-n> :cnext<CR>
-map <C-m> :cprevious<CR>
-nnoremap <leader>a :cclose<CR>
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
-autocmd FileType go nmap <leader>t  <Plug>(go-test)
-autocmd FileType go nmap <leader>c <Plug>(go-coverage-toggle)
-autocmd FileType go nmap <Leader>i <Plug>(go-info)
-autocmd FileType go nmap <C-S-r> <Plug>(go-rename)
-autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'vsplit')
+augroup go
+  autocmd!
+  " Show by default 4 spaces for a tab
+  autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+  " :GoBuild and :GoTestCompile
+  autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+  " :GoTest
+  autocmd FileType go nmap <leader>t  <Plug>(go-test)
+  " :GoRun
+  autocmd FileType go nmap <leader>r  <Plug>(go-run)
+  " :GoDoc
+  autocmd FileType go nmap <Leader>d <Plug>(go-doc)
+  " :GoCoverageToggle
+  autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+  " :GoInfo
+  autocmd FileType go nmap <Leader>i <Plug>(go-info)
+  " :GoMetaLinter
+  autocmd FileType go nmap <Leader>l <Plug>(go-metalinter)
+  " :GoDef but opens in a vertical split
+  autocmd FileType go nmap <Leader>v <Plug>(go-def-vertical)
+  " :GoDef but opens in a horizontal split
+  autocmd FileType go nmap <Leader>s <Plug>(go-def-split)
+  " :GoAlternate  commands :A, :AV, :AS and :AT
+  autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+  autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+  autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+  autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+  autocmd FileType go nmap <C-S-r> <Plug>(go-rename)
+augroup END
 
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
@@ -132,8 +153,6 @@ function! s:build_go_files()
   endif
 endfunction
 
-autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
-
 if iCanHazVundle == 0
 	echo "Installing Plugins, please ignore key map error messages"
 	echo ""
@@ -142,16 +161,32 @@ endif
 
 call plug#end() 
 
-"must be last
-" load filetype plugins/indent settings
+" Enable vim specific features
+set nocompatible
+
+" First reset filetype then enable
+filetype off
 filetype plugin indent on 
+
 colorscheme nord
-syntax on                      " enable syntax
+syntax on
+set autoindent
  
 set encoding=utf-8
 set t_Co=256
 set fillchars+=stl:\ ,stlnc:\
 set termencoding=utf-8
+
+" Vertical windows should be split to right
+set splitright                  
+" Horizontal windows should split to bottom
+set splitbelow
+
+" Automatically save before :next, :make, etc.
+set autowrite
+
+" Prefer Unix over Windows over OSX 9 formats
+set fileformats=unix,dos,mac
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -173,7 +208,11 @@ autocmd FileType gitcommit set tw=72
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0 tabstop=4
 autocmd FileType markdown set expandtab shiftwidth=4 softtabstop=0 tabstop=4
-autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 
+
+" navigate quickfix items
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
@@ -202,7 +241,7 @@ set ruler
 set cmdheight=2
 
 " A buffer becomes hidden when it is abandoned
-set hid
+set hidden
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
@@ -220,6 +259,11 @@ set hlsearch
 " Makes search act like search in modern browsers
 set incsearch
 
+" Search mappings: These will make it so that going to the next one in a
+" search will center on the line it's found in.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
 " Don't redraw while executing macros (good performance config)
 set lazyredraw
 
@@ -231,6 +275,9 @@ set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
+" Show me what I'm typing
+set showcmd
+
 " No annoying sound on errors
 set noerrorbells
 set novisualbell
@@ -238,6 +285,12 @@ set t_vb=
 set tm=500
 
 set number
+
+" Show popup menu, even if there is one entry
+set completeopt=menu,menuone
+" Completion window max size
+set pumheight=10
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
