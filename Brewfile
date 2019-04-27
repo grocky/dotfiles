@@ -75,5 +75,6 @@ cask 'paw'
 cask 'spectacle'
 cask 'authy'
 cask 'evernote'
+cask 'slack'
 
 mas 'Xcode', id: 497799835
