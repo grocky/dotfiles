@@ -60,7 +60,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'godlygeek/tabular'
 Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
 Plug 'rafi/awesome-vim-colorschemes'
-Plug 'tpope/vim-fugitive' "So awesome, it should be illegal 
+Plug 'tpope/vim-fugitive'
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gb :Gblame<CR>
@@ -125,6 +125,9 @@ augroup go
   autocmd FileType go nmap <leader>r  <Plug>(go-run)
   " :GoDoc
   autocmd FileType go nmap <Leader>d <Plug>(go-doc)
+  autocmd FileType go map  <leader>db <Plug>(go-doc-browser)
+  " Show documentation for item under courser
+  autocmd FileType go nnoremap <buffer> <silent> K :GoDoc<cr>
   " :GoCoverageToggle
   autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
   " :GoInfo
