@@ -60,6 +60,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'godlygeek/tabular'
 Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
 Plug 'rafi/awesome-vim-colorschemes'
+Plug 'mattn/emmet-vim'
+let g:user_emmet_leader_key=','
+
 Plug 'tpope/vim-fugitive'
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gd :Gdiff<CR>
