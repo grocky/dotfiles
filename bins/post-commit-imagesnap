@@ -35,7 +35,9 @@ end
 
 def snap_picture(file)
   puts "Making gitshot #{file}!"
-  output = `imagesnap -q -w 4 #{file}`
+  snap_command = "ffmpeg -f avfoundation -pixel_format yuyv422 -video_size 1280x720 -framerate 30 -i '0' -t 1 -ss 0.5 -update 1 #{file}"
+  puts "Executing... #{snap_command}"
+  output = `#{snap_command}`
   puts output
 end
 
@@ -138,8 +140,8 @@ unless File.directory?(File.expand_path('../../rebase-merge', __FILE__))
   should_skip = ENV['GIT_SHOTS_SKIP_POST']
   token = ENV['SLACK_USER_API_TOKEN']
 
-  if (token.to_s.empty? || should_skip == 'true')
-    puts "Skipping slack image update. missing_token: #{token.to_s.empty?}, should_skip: #{should_skip == 'true'}"
+  if (token.to_s.empty? || should_skip == 'true' || !File.exists?(file))
+    puts "Skipping slack image update. missing_token: #{token.to_s.empty?}, should_skip: #{should_skip == 'true'}, file_exists: #{File.exists?(file)}"
     exit
   end
 
