@@ -4,8 +4,6 @@ tap 'homebrew/cask'
 tap 'homebrew/core'
 tap 'wallix/awless'
 
-brew 'mas'
-
 # languages
 cask 'java'
 brew 'python'
@@ -38,14 +36,15 @@ brew 'jq'
 brew 'jmeter'
 brew 'ncdu'
 brew 'nmap'
+brew 'platformio'
 brew 'siege'
 brew 'telnet'
 brew 'tmux'
 brew 'tree'
-brew 'vim', args: ['env-std', 'override-system-vim']
+brew 'vim'
 brew 'wallix/awless/awless'
+brew 'wireshark'
 cask 'docker'
-cask 'gpg-suite'
 
 # graphics tools
 cask 'xquartz'
@@ -61,7 +60,7 @@ brew 'plantuml'
 cask 'goland'
 cask 'intellij-idea'
 cask 'webstorm'
-cask 'phpstorm'
+cask 'clion'
 cask 'visual-studio-code'
 
 # GUI tools
@@ -80,5 +79,3 @@ cask 'authy'
 cask 'evernote'
 cask 'slack'
 cask 'spotify'
-
-mas 'Xcode', id: 497799835
