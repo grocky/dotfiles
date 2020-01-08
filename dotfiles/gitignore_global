@@ -88,3 +88,4 @@ atlassian-ide-plugin.xml
 
 # JIRA plugin
 atlassian-ide-plugin.xml
+.vscode

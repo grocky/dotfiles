@@ -95,7 +95,7 @@
 
 [push]
   default = tracking
-  followTags = true
+	followTags = true
 
 [core]
   excludesfile = /Users/grocky/.gitignore_global

@@ -97,12 +97,18 @@ let g:terraform_fmt_on_save=1
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'SirVer/ultisnips'
 
+" -------------------------------------------------------------------------------------------------
+" vim-go
+" -------------------------------------------------------------------------------------------------
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+
+let g:go_fmt_command = "goimports"
 
 " -------------------------------------------------------------------------------------------------
 " coc.nvim default settings
 " -------------------------------------------------------------------------------------------------
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+
 
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -171,38 +177,38 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " this is handled by LanguageClient [LC]
 let g:go_def_mapping_enabled = 0
 
-" augroup go
-"   autocmd!
-"   " Show by default 4 spaces for a tab
-"   autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
-"   " :GoBuild and :GoTestCompile
-"   autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
-"   " :GoTest
-"   autocmd FileType go nmap <leader>t  <Plug>(go-test)
-"   " :GoRun
-"   autocmd FileType go nmap <leader>r  <Plug>(go-run)
-"   " :GoDoc
-"   autocmd FileType go nmap <Leader>d <Plug>(go-doc)
-"   autocmd FileType go map  <leader>db <Plug>(go-doc-browser)
-"   " Show documentation for item under courser
-"   autocmd FileType go nnoremap <buffer> <silent> K :GoDoc<cr>
-"   " :GoCoverageToggle
-"   autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
-"   " :GoInfo
-"   autocmd FileType go nmap <Leader>i <Plug>(go-info)
-"   " :GoMetaLinter
-"   autocmd FileType go nmap <Leader>l <Plug>(go-metalinter)
-"   " :GoDef but opens in a vertical split
-"   autocmd FileType go nmap <Leader>v <Plug>(go-def-vertical)
-"   " :GoDef but opens in a horizontal split
-"   autocmd FileType go nmap <Leader>s <Plug>(go-def-split)
-"   " :GoAlternate  commands :A, :AV, :AS and :AT
-"   autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
-"   autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
-"   autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
-"   autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
-"   autocmd FileType go nmap <C-S-r> <Plug>(go-rename)
-" augroup END
+augroup go
+  autocmd!
+  " Show by default 4 spaces for a tab
+  autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+  " :GoBuild and :GoTestCompile
+  autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+  " :GoTest
+  autocmd FileType go nmap <leader>t  <Plug>(go-test)
+  " :GoRun
+  autocmd FileType go nmap <leader>r  <Plug>(go-run)
+  " :GoDoc
+  autocmd FileType go nmap <Leader>d <Plug>(go-doc)
+  autocmd FileType go map  <leader>db <Plug>(go-doc-browser)
+  " Show documentation for item under courser
+  autocmd FileType go nnoremap <buffer> <silent> K :GoDoc<cr>
+  " :GoCoverageToggle
+  autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+  " :GoInfo
+  autocmd FileType go nmap <Leader>i <Plug>(go-info)
+  " :GoMetaLinter
+  autocmd FileType go nmap <Leader>l <Plug>(go-metalinter)
+  " :GoDef but opens in a vertical split
+  autocmd FileType go nmap <Leader>v <Plug>(go-def-vertical)
+  " :GoDef but opens in a horizontal split
+  autocmd FileType go nmap <Leader>s <Plug>(go-def-split)
+  " :GoAlternate  commands :A, :AV, :AS and :AT
+  autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+  autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+  autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+  autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+  autocmd FileType go nmap <C-S-r> <Plug>(go-rename)
+augroup END
 
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
@@ -229,8 +235,9 @@ set nocompatible
 filetype off
 filetype plugin indent on 
 
-colorscheme nord
+colorscheme focuspoint
 syntax on
+
 set autoindent
  
 set encoding=utf-8
