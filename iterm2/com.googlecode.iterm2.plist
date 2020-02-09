@@ -6145,6 +6145,8 @@
 	<false/>
 	<key>FsTabDelay</key>
 	<real>1</real>
+	<key>HapticFeedbackForEsc</key>
+	<false/>
 	<key>HiddenAFRStrokeThickness</key>
 	<real>0.0</real>
 	<key>HiddenAdvancedFontRendering</key>
@@ -6201,6 +6203,11 @@
 	<false/>
 	<key>NSScrollViewShouldScrollUnderTitlebar</key>
 	<false/>
+	<key>NSSplitView Subview Frames NSColorPanelSplitView</key>
+	<array>
+		<string>0.000000, 0.000000, 224.000000, 258.000000, NO, NO</string>
+		<string>0.000000, 259.000000, 224.000000, 48.000000, NO, NO</string>
+	</array>
 	<key>NSTableView Columns v2 KeyBingingTable</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGNjdYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
@@ -6236,7 +6243,7 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>81 400 1018 447 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1440 877 0 0 1440 877 </string>
+	<string>0 0 1680 1027 0 0 1680 1027 </string>
 	<key>NeverWarnAboutMeta</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_B4DA7DB2-948E-4E55-B014-ACA202338834</key>
@@ -6261,12 +6268,16 @@
 			</dict>
 			<key>Ansi 1 Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.25098040699958801</real>
+				<real>0.12549019607843137</real>
+				<key>Color Space</key>
+				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.28235295414924622</real>
+				<real>0.2196078431372549</real>
 				<key>Red Component</key>
-				<real>0.94901961088180542</real>
+				<real>0.76470588235294112</real>
 			</dict>
 			<key>Ansi 10 Color</key>
 			<dict>
@@ -6412,7 +6423,7 @@
 			<key>Background Image Location</key>
 			<string>/Users/grocky/Pictures/Graphics/broken-death-star_no-stars.png</string>
 			<key>Blend</key>
-			<real>0.57559720721000296</real>
+			<real>0.44860280482598225</real>
 			<key>Blink Allowed</key>
 			<true/>
 			<key>Blinking Cursor</key>
@@ -6438,6 +6449,8 @@
 			<integer>120</integer>
 			<key>Command</key>
 			<string>/usr/local/bin/bash</string>
+			<key>Cursor Boost</key>
+			<real>0.0</real>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -6785,17 +6798,17 @@
 			<key>Log Directory</key>
 			<string></string>
 			<key>Minimum Contrast</key>
-			<real>0.098287474025379531</real>
+			<real>0.0</real>
 			<key>Mouse Reporting</key>
 			<true/>
 			<key>Name</key>
 			<string>starwars</string>
 			<key>Non Ascii Font</key>
-			<string>SauceCodePowerline-Light 12</string>
+			<string>Menlo-Regular 11</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>SourceCodeProForPowerline-ExtraLight 12</string>
+			<string>SourceCodeProForPowerline-Regular 13</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -6947,7 +6960,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.01608984656821048</real>
+			<real>0.0</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unlimited Scrollback</key>
@@ -6958,12 +6971,14 @@
 			<true/>
 			<key>Use Canonical Parser</key>
 			<true/>
+			<key>Use Cursor Guide</key>
+			<false/>
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
 			<false/>
 			<key>Vertical Spacing</key>
-			<real>1.0070470571517944</real>
+			<real>1.01</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -10675,6 +10690,17 @@
 		<string>3.3.4</string>
 		<string>3.2.7beta4</string>
 	</array>
+	<key>NoSyncBFPRecents</key>
+	<array>
+		<string>Source Code Pro for Powerline</string>
+	</array>
+	<key>NoSyncFrame_SharedPreferences</key>
+	<dict>
+		<key>screenFrame</key>
+		<string>{{0, 0}, {1680, 1050}}</string>
+		<key>topLeft</key>
+		<string>{403, 756}</string>
+	</dict>
 	<key>NoSyncHaveRequestedFullDiskAccess</key>
 	<true/>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
@@ -10682,7 +10708,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>AF4A8795-C78A-4823-B1C9-8EA341226B98</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>1</integer>
+	<integer>3</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
 	<real>592167652.96660399</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
@@ -11178,7 +11204,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentSession</string>
+				<string>currentSession.pid</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -11219,6 +11245,14 @@
 				<true/>
 				<key>name</key>
 				<string>iterm2.localhostName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentSession.jobPid</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -11352,19 +11386,19 @@
 			</dict>
 			<dict>
 				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentSession</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
 				<false/>
 				<key>name</key>
 				<string>currentSession</string>
 				<key>nonterminalContext</key>
 				<integer>1</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
-				<string>currentSession.pid</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
 			</dict>
 		</array>
 		<key>4</key>
@@ -11469,7 +11503,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-11-25T21:04:24Z</date>
+	<date>2020-01-04T16:42:56Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -11480,8 +11514,10 @@
 	<true/>
 	<key>SmartPlacement</key>
 	<true/>
+	<key>SoundForEsc</key>
+	<false/>
 	<key>SplitPaneDimmingAmount</key>
-	<real>0.27303934097290039</real>
+	<real>0.40331615691489364</real>
 	<key>SwitchTabModifier</key>
 	<integer>4</integer>
 	<key>SwitchWindowModifier</key>
@@ -11516,6 +11552,8 @@
 	<true/>
 	<key>UseLionStyleFullscreen</key>
 	<true/>
+	<key>VisualIndicatorForEsc</key>
+	<false/>
 	<key>WebKitDefaultFontSize</key>
 	<integer>11</integer>
 	<key>WebKitStandardFont</key>
