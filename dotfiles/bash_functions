@@ -33,7 +33,16 @@ urlencode () {
         echo "usage: urlencode <string>";
         return 1;
     fi
-    python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])" "$1";
+
+    python_version=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:3])))')
+
+    if [ $(echo "${python_version:0:3} >= 3.0" | bc) = 1 ]; then
+      # python 3
+      python -c "import sys; from urllib.parse import quote; print(quote(sys.argv[1]))" "${1}"
+    else
+      # python 2
+      python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])" "$1";
+    fi
 }
 
 urldecode () {
@@ -41,7 +50,16 @@ urldecode () {
         echo "usage: urldecode <string>";
         return 1;
     fi
-    python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])" "$1";
+
+    python_version=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:3])))')
+
+    if [ $(echo "${python_version:0:3} >= 3.0" | bc) = 1 ]; then
+      # python 3
+      python -c "import sys; from urllib.parse import unquote_plus; print(unquote_plus(sys.argv[1]))" "${1}"
+    else
+      # python 2
+      python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])" "$1";
+    fi
 }
 
 show_hosts () {

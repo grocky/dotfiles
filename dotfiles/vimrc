@@ -83,6 +83,7 @@ let g:gitgutter_sign_modified_removed = '·'
 
 Plug 'tpope/vim-unimpaired' " navigate commits from Glog easier
 Plug 'tpope/vim-commentary'
+Plug 'ledger/ledger'
 
 Plug 'editorconfig/editorconfig-vim'
 Plug 'moll/vim-node', { 'for': 'javascript' }
