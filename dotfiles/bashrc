@@ -54,9 +54,9 @@ export PATH="/usr/local/opt/coreutils/libexec/gnubin:${PATH}" # use coreutils
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}"
 
 if [ -f /usr/local/bin/bash ]; then
-	export SHELL=/usr/local/bin/bash
+  export SHELL=/usr/local/bin/bash
 else
-	export SHELL=/bin/bash
+  export SHELL=/bin/bash
 fi
 
 export VISUAL=vim
