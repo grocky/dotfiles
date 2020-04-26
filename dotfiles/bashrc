@@ -48,6 +48,10 @@ export PATH="${PATH}:/usr/local/bin:${HOME}/.rvm/bin" # Add RVM to PATH for scri
 
 # python's bin
 export PATH="/usr/local/opt/python/libexec/bin:${PATH}"
+export PATH=${PATH}:/Users/${USER}/Library/Python/3.7/bin
+
+# PHP's bin
+export PATH=${PATH}:/Users/${USER}/.config/composer/vendor/bin
 
 # GNU utils
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:${PATH}" # use coreutils
