@@ -1,0 +1,6 @@
+{
+  "go.enable": true,
+  "go.goplsOptions": {
+    "completeUnimported": true
+  }
+}

@@ -3,12 +3,6 @@
 "       Rocky Gray
 "
 "		https://www.rockygray.com
-" Awesome_version:
-"       Get this config, nice color schemes and lots of plugins!
-"
-"       Install the awesome version from:
-"
-"           https://github.com/amix/vimrc
 "
 " Sections:
 "    -> General
@@ -29,7 +23,12 @@
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+let g:mapleader = ","
 let iCanHazVundle = 1
+
 " Load vim-plug
 if empty(glob("~/.vim/autoload/plug.vim"))
     execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
@@ -40,6 +39,7 @@ call plug#begin('~/.vim/plugged')
 
 "Add your bundles here
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+nnoremap <leader>1 :NERDTreeToggle<CR>
 
 " fzf - fuzzy finder
 set rtp+=/usr/local/opt/fzf
@@ -56,12 +56,12 @@ augroup fzf
     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 augroup END
 
+Plug 'rafi/awesome-vim-colorschemes' " color schemes
+
 Plug 'vim-airline/vim-airline'
 Plug 'godlygeek/tabular'
 Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
-Plug 'rafi/awesome-vim-colorschemes'
 Plug 'mattn/emmet-vim'
-let g:user_emmet_leader_key=','
 
 Plug 'tpope/vim-fugitive'
 nnoremap <Leader>gs :Gstatus<CR>
@@ -98,7 +98,15 @@ let g:terraform_align=1
 let g:terraform_fmt_on_save=1
 
 Plug 'AndrewRadev/splitjoin.vim'
+
+" -------------------------------------------------------------------------------------------------
+" snippets
+" -------------------------------------------------------------------------------------------------
 Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+let g:UltiSnipsExpandTrigger="<c-s>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " -------------------------------------------------------------------------------------------------
 " vim-go
@@ -107,11 +115,14 @@ Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 
 let g:go_fmt_command = "goimports"
 
+" disable vim-go :GoDef short cut (gd)
+" this is handled by LanguageClient [LC]
+let g:go_def_mapping_enabled = 0
+
 " -------------------------------------------------------------------------------------------------
 " coc.nvim default settings
 " -------------------------------------------------------------------------------------------------
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-
+Plug 'neoclide/coc.nvim', {'branch': 'release'} 
 
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -140,9 +151,33 @@ endfunction
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
 " Use `[c` and `]c` to navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> U :call <SID>show_documentation()<CR>
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -150,15 +185,13 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use U to show documentation in preview window
-nnoremap <silent> U :call <SID>show_documentation()<CR>
-
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
 
 " Remap for format selected region
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions
@@ -176,10 +209,6 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-" disable vim-go :GoDef short cut (gd)
-" this is handled by LanguageClient [LC]
-let g:go_def_mapping_enabled = 0
-
 augroup go
   autocmd!
   " Show by default 4 spaces for a tab
@@ -194,11 +223,19 @@ augroup go
   autocmd FileType go nmap <Leader>d <Plug>(go-doc)
   autocmd FileType go map  <leader>db <Plug>(go-doc-browser)
   " Show documentation for item under courser
-  autocmd FileType go nnoremap <buffer> <silent> K :GoDoc<cr>
+  " autocmd FileType go nnoremap <buffer> <silent> K :GoDoc<cr>
+  " Use U to show documentation in preview window
+  " autocmd FileType go nnoremap <silent> U :GoDoc<CR>
+  autocmd FileType go nnoremap <silent> U :call <SID>show_documentation()<CR>
+
   " :GoCoverageToggle
   autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
   " :GoInfo
   autocmd FileType go nmap <Leader>i <Plug>(go-info)
+  " automatically show info after some ms
+  " let g:go_auto_type_info = 1
+  " set updatetime=100
+
   " :GoMetaLinter
   autocmd FileType go nmap <Leader>l <Plug>(go-metalinter)
   " :GoDef but opens in a vertical split
@@ -238,7 +275,6 @@ set nocompatible
 filetype off
 filetype plugin indent on 
 
-colorscheme focuspoint
 syntax on
 
 set autoindent
@@ -284,11 +320,6 @@ autocmd FileType markdown set expandtab shiftwidth=4 softtabstop=0 tabstop=4
 map <C-n> :cnext<CR>
 map <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
-
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
 
 " Fast saving
 nmap <leader>w :w!<cr>
@@ -366,6 +397,8 @@ set pumheight=10
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+colorscheme one
+
 " Enable syntax highlighting
 syntax enable
 
@@ -385,15 +418,13 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
-set nowb
+set nowritebackup
 set noswapfile
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -478,6 +509,7 @@ set laststatus=2
 " Format the status line
 
 "set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
