@@ -48,12 +48,10 @@ alias hosts='sudo vim /etc/hosts'
 ### copy working directory
 alias cwd='pwd | tr -d "\r\n" | pbcopy'
 
-alias speedtest='speedtest-cli'
-alias st='speedtest-cli'
+alias st='speedtest'
 
 alias openssl-b='/usr/local/Cellar/openssl/1.0.2h_1/bin/openssl'
 alias ssl='openssl-b'
-
 
 # Git
 ### top level shortcuts
