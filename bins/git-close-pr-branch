@@ -1,0 +1,4 @@
+current_branch=$(git rev-parse --abbrev-ref HEAD);
+git fetch origin master:master;
+git checkout master;
+git branch -d ${current_branch}
