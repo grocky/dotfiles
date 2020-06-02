@@ -132,6 +132,20 @@ let g:go_def_mapping_enabled = 0
 " -------------------------------------------------------------------------------------------------
 " coc.nvim default settings
 " -------------------------------------------------------------------------------------------------
+let g:coc_global_extensions = [
+\ 'coc-marketplace',
+\ 'coc-snippets',
+\ 'coc-sh',
+\ 'coc-json',
+\ 'coc-yaml',
+\ 'coc-docker',
+\ 'coc-go',
+\ 'coc-emmet',
+\ 'coc-highlight',
+\ 'coc-html',
+\ 'coc-css'
+\]
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " if hidden is not set, TextEdit might fail.
