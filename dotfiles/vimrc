@@ -1,8 +1,8 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Maintainer: 
+" Maintainer:
 "       Rocky Gray
 "
-"		https://www.rockygray.com
+"    https://www.rockygray.com
 "
 " Sections:
 "    -> General
@@ -61,6 +61,15 @@ Plug 'rafi/awesome-vim-colorschemes' " color schemes
 Plug 'vim-airline/vim-airline'
 Plug 'godlygeek/tabular'
 Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
+
+Plug 'janko-m/vim-test'
+let test#strategy = "vimterminal"
+nmap <silent> <Leader>tn :TestNearest<CR>
+nmap <silent> <Leader>tf :TestFile<CR>
+nmap <silent> <Leader>ts :TestSuite<CR>
+nmap <silent> <Leader>tl :TestLast<CR>
+nmap <silent> <Leader> tf :TestVisit<CR>
+
 Plug 'mattn/emmet-vim'
 
 Plug 'tpope/vim-fugitive'
@@ -122,7 +131,7 @@ let g:go_def_mapping_enabled = 0
 " -------------------------------------------------------------------------------------------------
 " coc.nvim default settings
 " -------------------------------------------------------------------------------------------------
-Plug 'neoclide/coc.nvim', {'branch': 'release'} 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -261,31 +270,31 @@ function! s:build_go_files()
 endfunction
 
 if iCanHazVundle == 0
-	echo "Installing Plugins, please ignore key map error messages"
-	echo ""
-	:PluginInstall
+  echo "Installing Plugins, please ignore key map error messages"
+  echo ""
+  :PluginInstall
 endif
 
-call plug#end() 
+call plug#end()
 
 " Enable vim specific features
 set nocompatible
 
 " First reset filetype then enable
 filetype off
-filetype plugin indent on 
+filetype plugin indent on
 
 syntax on
 
 set autoindent
- 
+
 set encoding=utf-8
 set t_Co=256
 set fillchars+=stl:\ ,stlnc:\
 set termencoding=utf-8
 
 " Vertical windows should be split to right
-set splitright                  
+set splitright
 " Horizontal windows should split to bottom
 set splitbelow
 
@@ -352,7 +361,7 @@ set whichwrap+=<,>,h,l
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
@@ -496,7 +505,7 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" Specify the behavior when switching between buffers 
+" Specify the behavior when switching between buffers
 try
   set switchbuf=useopen,usetab,newtab
   set stal=2
@@ -508,12 +517,6 @@ endtry
 """"""""""""""""""""""""""""""
 " Always show the status line
 set laststatus=2
-
-" Format the status line
-
-"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
@@ -540,9 +543,7 @@ func! DeleteTrailingWS()
   %s/\s\+$//ge
   exe "normal `z"
 endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
-
+autocmd BufWritePre * :call DeleteTrailingWS()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vimgrep searching and cope displaying
