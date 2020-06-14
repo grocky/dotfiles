@@ -101,7 +101,3 @@ alias de='docker_exec'
 
 # https://github.com/justone/dockviz
 alias dockviz="docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock nate/dockviz"
-
-alias awsall="_awsListAll"
-alias awsp="_awsSwitchProfile"
-alias awswho="aws configure list"

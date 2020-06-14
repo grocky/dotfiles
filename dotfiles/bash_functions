@@ -20,7 +20,7 @@ docker_exec () {
 # docker_compose_exec () {
 #   local service_name=${1}
 #   local command=${@:2}
-# 
+#
 #   docker_exec $(docker-compose ps | grep ${service_name} | awk '{print $1}') ${command}
 # }
 
@@ -72,13 +72,13 @@ dash() {
 
 list_merged_remotes() {
     for branch in $(git branch -r --merged | grep -Ev 'HEAD|develop'); do
-        echo -e $(git show --format="%ci %cr %an" $branch | head -n 1) \\t$branch; 
+        echo -e $(git show --format="%ci %cr %an" $branch | head -n 1) \\t$branch;
     done | sort -r
 }
 
 list_unmerged_remotes() {
-    for branch in $(git branch -r --no-merged | grep -Ev 'HEAD|master|develop'); do 
-        echo -e `git show --format="%ci %cr %an" $branch | head -n 1` \\t$branch; 
+    for branch in $(git branch -r --no-merged | grep -Ev 'HEAD|master|develop'); do
+        echo -e `git show --format="%ci %cr %an" $branch | head -n 1` \\t$branch;
     done | sort -r
 }
 
@@ -91,9 +91,9 @@ function notify_when_cloudfront_is_deployed() {
 		echo "you must provide a distribution id";
 		return 1;
 	fi
-   
+
 	echo "Checking on ${distribution_id} using profile: ${profile}"
- 
+
     status=$(aws cloudfront get-distribution --id ${distribution_id} --profile ${profile} | jq '.Distribution.Status');
     while [ ${status} = '"InProgress"' ]; do
         echo "$(date) - ${status}";
@@ -131,31 +131,6 @@ function close_all_notifications() {
 if [ -f ~/.vb_functions ]; then
     source ~/.vb_functions
 fi
-
-function _awsListAll() {
- 
-    credentialFileLocation=${AWS_SHARED_CREDENTIALS_FILE};
-    if [ -z $credentialFileLocation ]; then
-        credentialFileLocation=~/.aws/credentials
-    fi
- 
-    while read line; do
-      if [[ $line == "["* ]]; then echo "$line" | sed 's/\[\(.*\)\]/\1/g'; fi;
-    done < $credentialFileLocation;
-};
- 
-function _awsSwitchProfile() {
-   if [ -z $1 ]; then  echo "Usage: awsp profilename"; return; fi
-   
-   exists="$(aws configure get aws_access_key_id --profile $1)"
-   if [[ -n $exists ]]; then
-       export AWS_DEFAULT_PROFILE=$1;
-       export AWS_PROFILE=$1;
-       export AWS_REGION=$(aws configure get region --profile $1);
-       echo "Switched to AWS Profile: $1";
-       aws configure list
-   fi
-};
 
 function ip_geo_lookup() {
   ip_address=${1}
