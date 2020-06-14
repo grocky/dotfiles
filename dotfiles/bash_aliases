@@ -20,9 +20,10 @@ alias xoff="export XDEBUG_CONFIG=\"profiler_enable=0\""
 ## brew install httpie
 command -v http >/dev/null 2>&1 && alias https='http --default-scheme=https'
 
-alias json="python -m json.tool"; 
+alias json="python -m json.tool";
 ### usage echo '{"foo": "lorem", "bar": "ipsum"}' | json
 alias mux='tmuxinator'
+alias tf='terraform'
 
 ### IP addresses
 alias pubip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -104,7 +105,3 @@ alias dockviz="docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock 
 alias awsall="_awsListAll"
 alias awsp="_awsSwitchProfile"
 alias awswho="aws configure list"
-
-if [ -f ~/.vb_aliases ]; then
-    source ~/.vb_aliases
-fi
