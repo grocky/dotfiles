@@ -28,34 +28,15 @@ function main() {
       esac
     done
 
-    if [ ! -d "${HOME}/bin" ]; then
-        mkdir ${HOME}/bin
-    fi
-    
-    pushd ${HOME}/bin > /dev/null
-
-    for bin in $(find ${BIN_DIR} -maxdepth 1 | grep -v '^\.\|bins$'); do
-        $command "${bin}"
-    done
-    popd > /dev/null
+  ${command}
 }
 
 function install() {
-    bin=${1}
-    bin_name="$(basename ${bin})"
-    if [ ! -L ${bin_name} ]; then
-        [ -e ${bin_name} ] && [ ! -e ${bin_name}${BACKUP_SUFFIX} ] && mv ${bin_name} "${bin_name}${BACKUP_SUFFIX}" && echo "Backed up ${bin_name} to ${bin_name}${BACKUP_SUFFIX}";
-        ln -s ${bin} ${bin_name} && echo "linked ${bin_name}";
-    fi
+  ln -s ${BIN_DIR} ${HOME}/bin
 }
 
 function uninstall() {
-    bin=${1}
-    bin_name="$(basename ${bin})"
-    if [ -L ${bin_name} ]; then
-        [ -e ${bin_name} ] && rm ${bin_name} && echo "Uninstalled ${bin_name}"
-        [ -e "${bin_name}${BACKUP_SUFFIX}" ] && mv "${bin_name}${BACKUP_SUFFIX}" ${bin_name} && echo "Restored ${bin_name} from previous version"
-    fi
+  rm ${HOME}/bin
 }
 
 main "${@}"
