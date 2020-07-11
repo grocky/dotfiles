@@ -57,7 +57,8 @@ augroup fzf
     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 augroup END
 
-Plug 'rafi/awesome-vim-colorschemes' " color schemes
+" Plug 'rafi/awesome-vim-colorschemes' " color schemes
+Plug 'zefei/simple-dark'
 
 Plug 'vim-airline/vim-airline'
 Plug 'godlygeek/tabular'
@@ -99,7 +100,6 @@ Plug 'nathangrigg/vim-beancount'
 
 Plug 'editorconfig/editorconfig-vim'
 Plug 'moll/vim-node', { 'for': 'javascript' }
-"Plug 'carlitux/deoplete-ternjs', { 'for': 'javascript', 'do': 'npm install -g tern' }
 
 Plug 'w0rp/ale'
 Plug 'christoomey/vim-tmux-navigator'
@@ -422,7 +422,7 @@ set pumheight=10
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme one
+colorscheme simple-dark
 
 " Enable syntax highlighting
 syntax enable
