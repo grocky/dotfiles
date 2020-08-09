@@ -1,7 +1,7 @@
 [user]
   name = Rocky Gray
   email = rocky.grayjr@gmail.com
-  signingkey = 425204FA3A123013
+	signingkey = 8A4E406955134A097AF43EA674EDFA8E8DEF7C52
 
 [diff "pdfconv"]
   textconv=pdftohtml -stdout
@@ -144,3 +144,5 @@
   autoupdate = true
 [difftool "p4mergetool"]
   cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $LOCAL $REMOTE
+[commit]
+	gpgsign = true
