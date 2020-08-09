@@ -1,8 +1,4 @@
 {
-  "go.enable": true,
-  "go.goplsOptions": {
-    "completeUnimported": true
-  },
   "yaml.schemas": {
     "kubernetes": "/*.yaml",
     "https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json": "/cloudformation/*.yaml"

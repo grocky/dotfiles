@@ -1,2 +1,2 @@
-dotfiles/vim
+dotfiles/vim/
 !dotfiles/vim/coc-settings.json
