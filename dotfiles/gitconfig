@@ -1,148 +1,148 @@
 [user]
-  name = Rocky Gray
-  email = rocky.grayjr@gmail.com
+	name = Rocky Gray
+	email = rocky.grayjr@gmail.com
 	signingkey = 8A4E406955134A097AF43EA674EDFA8E8DEF7C52
 
 [diff "pdfconv"]
-  textconv=pdftohtml -stdout
+	textconv=pdftohtml -stdout
 
 [color]
-  ui = true
-  branch = auto
-  diff = auto
-  interactive = auto
-  status = auto
+	ui = true
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
 [alias]
-  ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
-  # Pretty graph with times: http://stackoverflow.com/a/9074343/818073
-  lg-relTime = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-  lg-time = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(white)%s%C(reset) %C(bold yellow)%d%C(reset)'
-  lg-time2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-  lg-message = log --graph --abbrev-commit --decorate --date=relative --all
-  lg = "!f() { git lg-relTime; }; f"
-  lgt = "!f() { git lg-time; }; f"
-  lg2 = "!f() { git lg-time2; }; f"
-  lgm = "!f() { git lg-message; }; f"
-  lgp = "!f() { git lg-relTime -p; }; f"
-  # List commits in short form, with colors and branch/tag annotations
-  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-  # List commits showing changed files 
-  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-  # List with no colors if you need to chain the out put with Unix pipes
-  lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
-  # List oneline commits showing dates:
-  lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
-  # List oneline commits showing relative dates
-  ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
-  lol = log --graph --decorate --pretty=oneline --abbrev-commit
-  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-  # short git log
-  le = log --oneline --decorate
-  lauthor = "!f() { git log --author="$1"; }; f"
-  # file log
-  filelog = log -u 
-  fl = log -u
-  # Show modified files in last commit:
-  dl = "!git ll -1"
-  # Show a diff last commit:
-  dlc = diff --cached HEAD^
-  # list your aliases
-  la = "!git config -l | grep alias | cut -c 7-"
-  # Show content (full diff) of a commit given a revision:
-  dr  = "!f() { git diff "$1"^.."$1"; }; f"
-  lc  = "!f() { git ll "$1"^.."$1"; }; f"
-  diffr  = "!f() { git diff "$1"^.."$1"; }; f"
-  # Find a file path in codebase
-  f = "!git ls-files | grep -i"
-  # Search/grep your entire codebase for a string
-  grep = grep -Ii
-  gr = grep -Ii
-  # Grep from root folder
-  gra = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
-  # Rename [branch] to done-[branch]
-  done = "!f() { git branch | grep "$1" | cut -c 3- | grep -v done | xargs -I{} git branch -m {} done-{}; }; f"
-  # Essentials
-  cp = cherry-pick
-  st = status -s
-  cl = clone
-  ci = commit
-  co = checkout
-  br = branch 
-  diff = diff --word-diff
-  wdiff = diff --color-words
-  dc = diff --cached
-  # Reset
-  r = reset
-  r1 = reset HEAD^
-  r2 = reset HEAD^^
-  rh = reset --hard
-  rh1 = reset HEAD^ --hard
-  rh2 = reset HEAD^^ --hard
-  # Clean
-  c = clean -df
-  ## clean prestine 
-  cc = clean -dfx
-  # Stash
-  sl = stash list
-  sa = stash apply
-  ss = stash save
-  logtree = log --graph --oneline --decorate --all
-  ancestor = "!f() { git merge-base HEAD..${1}; }; f"
-  new-commits = "!f() { git shortlog --no-merges HEAD..${1}; }; f"
+	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
+	# Pretty graph with times: http://stackoverflow.com/a/9074343/818073
+	lg-relTime = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	lg-time = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(white)%s%C(reset) %C(bold yellow)%d%C(reset)'
+	lg-time2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+	lg-message = log --graph --abbrev-commit --decorate --date=relative --all
+	lg = "!f() { git lg-relTime; }; f"
+	lgt = "!f() { git lg-time; }; f"
+	lg2 = "!f() { git lg-time2; }; f"
+	lgm = "!f() { git lg-message; }; f"
+	lgp = "!f() { git lg-relTime -p; }; f"
+	# List commits in short form, with colors and branch/tag annotations
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+	# List commits showing changed files
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	# List with no colors if you need to chain the out put with Unix pipes
+	lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+	# List oneline commits showing dates:
+	lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+	# List oneline commits showing relative dates
+	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	# short git log
+	le = log --oneline --decorate
+	lauthor = "!f() { git log --author="$1"; }; f"
+	# file log
+	filelog = log -u
+	fl = log -u
+	# Show modified files in last commit:
+	dl = "!git ll -1"
+	# Show a diff last commit:
+	dlc = diff --cached HEAD^
+	# list your aliases
+	la = "!git config -l | grep alias | cut -c 7-"
+	# Show content (full diff) of a commit given a revision:
+	dr  = "!f() { git diff "$1"^.."$1"; }; f"
+	lc  = "!f() { git ll "$1"^.."$1"; }; f"
+	diffr  = "!f() { git diff "$1"^.."$1"; }; f"
+	# Find a file path in codebase
+	f = "!git ls-files | grep -i"
+	# Search/grep your entire codebase for a string
+	grep = grep -Ii
+	gr = grep -Ii
+	# Grep from root folder
+	gra = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
+	# Rename [branch] to done-[branch]
+	done = "!f() { git branch | grep "$1" | cut -c 3- | grep -v done | xargs -I{} git branch -m {} done-{}; }; f"
+	# Essentials
+	cp = cherry-pick
+	st = status -s
+	cl = clone
+	ci = commit
+	co = checkout
+	br = branch
+	diff = diff --word-diff
+	wdiff = diff --color-words
+	dc = diff --cached
+	# Reset
+	r = reset
+	r1 = reset HEAD^
+	r2 = reset HEAD^^
+	rh = reset --hard
+	rh1 = reset HEAD^ --hard
+	rh2 = reset HEAD^^ --hard
+	# Clean
+	c = clean -df
+	## clean prestine
+	cc = clean -dfx
+	# Stash
+	sl = stash list
+	sa = stash apply
+	ss = stash save
+	logtree = log --graph --oneline --decorate --all
+	ancestor = "!f() { git merge-base HEAD..${1}; }; f"
+	new-commits = "!f() { git shortlog --no-merges HEAD..${1}; }; f"
 
 [init]
-  templatedir = ~/.git_template
+	templatedir = ~/.git_template
 
 [push]
-  default = tracking
+	default = tracking
 	followTags = true
 
 [core]
-  excludesfile = /Users/grocky/.gitignore_global
-  ignorecase = false
-  editor = vim
+	excludesfile = /Users/grocky/.gitignore_global
+	ignorecase = false
+	editor = vim
 
 [rebase]
-    autostash = true
-  instructionFormat = %s - (%an)
+	autostash = true
+	instructionFormat = %s - (%an)
 
 [pull]
-  rebase = true
+	rebase = true
 
 [merge]
-  tool = p4merge
-  keepBackup = false
+	tool = p4merge
+	keepBackup = false
 [mergetool "p4merge"]
-  cmd = p4merge $BASE $LOCAL $REMOTE $MERGED
-  keepTemporaries = false
-  prompt = false
-  trustExitCode = false
-  keepBackup = false
+	cmd = p4merge $BASE $LOCAL $REMOTE $MERGED
+	keepTemporaries = false
+	prompt = false
+	trustExitCode = false
+	keepBackup = false
 [diff]
-  tool = p4merge
+	tool = p4merge
 [difftool "p4merge"]
-  external = /usr/local/bin/p4diff
-  prompt = false
-  trustExitCode = false
+	external = /usr/local/bin/p4diff
+	prompt = false
+	trustExitCode = false
 [github]
-  user = grocky
+	user = grocky
 [difftool "sourcetree"]
-  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-  path = 
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
 [mergetool "sourcetree"]
-  cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-  trustExitCode = true
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
 [mergetool]
-  keepBackup = false
+	keepBackup = false
 [filter "lfs"]
-  clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
-  required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
 [rerere]
-  enabled = true
-  autoupdate = true
+	enabled = true
+	autoupdate = true
 [difftool "p4mergetool"]
-  cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $LOCAL $REMOTE
+	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $LOCAL $REMOTE
 [commit]
 	gpgsign = true
