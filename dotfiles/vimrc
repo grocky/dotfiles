@@ -109,14 +109,18 @@ let g:terraform_fmt_on_save=1
 
 Plug 'AndrewRadev/splitjoin.vim'
 
+Plug 'lervag/vimtex'
+let g:tex_flavor='latex'
+let g:vimtex_view_method='skim'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+
 " -------------------------------------------------------------------------------------------------
 " snippets
 " -------------------------------------------------------------------------------------------------
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-let g:UltiSnipsExpandTrigger="<c-s>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " -------------------------------------------------------------------------------------------------
 " vim-go
@@ -136,6 +140,7 @@ let g:coc_global_extensions = [
 \ 'coc-marketplace',
 \ 'coc-snippets',
 \ 'coc-sh',
+\ 'coc-texlab',
 \ 'coc-json',
 \ 'coc-yaml',
 \ 'coc-docker',
@@ -162,11 +167,14 @@ set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" updated from: https://github.com/neoclide/coc-snippets
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -563,12 +571,6 @@ autocmd BufWritePre * :call DeleteTrailingWS()
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
 endif
 
 " bind \ (backward slash) to grep shortcut
@@ -626,8 +628,6 @@ map <leader>q :e ~/buffer<cr>
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -657,7 +657,6 @@ function! VisualSelection(direction) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
-
 
 " Returns true if paste mode is enabled
 function! HasPaste()

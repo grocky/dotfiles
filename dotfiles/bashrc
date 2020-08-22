@@ -40,7 +40,7 @@ export PATH="${PATH}:/usr/local/bin:${HOME}/.rvm/bin" # Add RVM to PATH for scri
 
 # python's bin
 export PATH="/usr/local/opt/python/libexec/bin:${PATH}"
-export PATH=${PATH}:/Users/${USER}/Library/Python/3.7/bin
+export PATH=${PATH}:/Users/${USER}/Library/Python/3.8/bin
 
 # PHP's bin
 export PATH=${PATH}:/Users/${USER}/.config/composer/vendor/bin
@@ -64,7 +64,7 @@ export EDITOR="${VISUAL}"
 export POWERLINE_CONFIG_COMMAND=/usr/local/bin/powerline-config
 export POWERLINE_BASH_CONTINUATION=1
 export POWERLINE_BASH_SELECT=1
-powerline_sh=/usr/local/lib/python3.7/site-packages/powerline/bindings/bash/powerline.sh
+powerline_sh=/usr/local/lib/python3.8/site-packages/powerline/bindings/bash/powerline.sh
 
 [ -f ${powerline_sh} ] && source ${powerline_sh}
 
@@ -82,5 +82,7 @@ type jenv >/dev/null 2>&1 && eval "$(jenv init -)"
 if [ -n $(find_password slack_user_api_token) ]; then
   export SLACK_USER_API_TOKEN=$(find_password slack_user_api_token)
 fi
+
+[ -f "${HOME}/.bash_secrets" ] && source "${HOME}/.bash_secrets"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
