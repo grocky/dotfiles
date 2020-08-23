@@ -1,4 +1,12 @@
 current_branch=$(git rev-parse --abbrev-ref HEAD);
-git fetch origin master:master;
-git checkout master;
+
+main_branch=main
+main_sha=$(git rev-parse --verify $main_branch 2>/dev/null)
+
+if [ -z $main_sha ]; then
+  main_branch=master
+fi
+
+git fetch origin $main_branch:$main_branch;
+git checkout $main_branch;
 git branch -d ${current_branch}
