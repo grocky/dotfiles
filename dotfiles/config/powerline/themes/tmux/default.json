@@ -11,7 +11,7 @@
                 "function": "powerline.segments.common.time.date",
                 "name": "date",
                 "args": {
-                    "format": "%a %b %d",
+                    "format": "%b.%d.%a",
                     "istime": false
                 }
             },

@@ -27,6 +27,12 @@
 " like <leader>w saves the current file
 let mapleader = ","
 let g:mapleader = ","
+
+" Powerline setup
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
+
 let iCanHazVundle = 1
 
 " Load vim-plug
@@ -60,7 +66,6 @@ augroup END
 " Plug 'rafi/awesome-vim-colorschemes' " color schemes
 Plug 'zefei/simple-dark'
 
-Plug 'vim-airline/vim-airline'
 Plug 'godlygeek/tabular'
 Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
 
@@ -574,7 +579,7 @@ if executable('ag')
 endif
 
 " bind \ (backward slash) to grep shortcut
-command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
 
 " When you press gv you vimgrep after the selected text
