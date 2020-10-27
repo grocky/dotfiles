@@ -32,11 +32,12 @@ export EDITOR="${VISUAL} -u NONE"
 
 if [ -n "${BASH}" ]; then
   [ -f "${HOME}/.bash_completions" ] && source "${HOME}/.bash_completions"
-#elif [ -n "${ZSH_NAME}" ]; then
-  #zstyle ':completion:*' completer _expand _complete _ignored _approximate
-  #zstyle :compinstall filename '/Users/grocky/.zshrc'
+elif [ -n "${ZSH_NAME}" ]; then
+  zstyle ':completion:*' completer _expand _complete _ignored _approximate
+  zstyle ':completion:*:*:make:*' tag-order 'targets'
 
-  #autoload -Uz compinit && compinit -i
+  export ZSH_DISABLE_COMPFIX="true"
+  autoload -U compinit && compinit
 fi
 
 ## GPG

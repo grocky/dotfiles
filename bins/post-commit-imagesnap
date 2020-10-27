@@ -35,7 +35,7 @@ end
 
 def snap_picture(file)
   puts "Making gitshot #{file}!"
-  snap_command = "ffmpeg -f avfoundation -pixel_format yuyv422 -video_size 1280x720 -framerate 30 -i '0' -t 1 -ss 0.5 -update 1 #{file}"
+  snap_command = "ffmpeg -f avfoundation -pixel_format yuyv422 -video_size '1280x720' -framerate 30 -i '0' -t 2 -ss 1 -update 1 #{file}"
   puts "Executing... #{snap_command}"
   output = `#{snap_command}`
   puts output

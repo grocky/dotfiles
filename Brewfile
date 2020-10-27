@@ -37,6 +37,7 @@ brew 'git-lfs'
 brew 'gnupg'
 brew 'pinentry-mac'
 
+cask 'ngrok'
 brew 'highlight'
 brew 'htop'
 brew 'httpie'
