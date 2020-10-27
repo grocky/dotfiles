@@ -4,7 +4,6 @@ export GPG_TTY=$(tty)
 
 export XDG_CONFIG_HOME=${HOME}/.config
 
-
 export SCALA_HOME=/usr/local/opt/scala/idea
 export GOPATH=$HOME/go
 export GOBIN=${GOPATH}/bin

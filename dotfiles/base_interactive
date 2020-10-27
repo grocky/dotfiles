@@ -10,7 +10,6 @@ else
     shell=$(echo ${SHELL} | awk -F/ '{ print $NF }')
 fi
 
-
 ## Setup vim mode
 if [ -n "${BASH}" ]; then
   set -o vi
@@ -19,6 +18,7 @@ elif [ -n "${ZSH_NAME}" ]; then
 fi
 
 ## Use vim as editor, but don't load entire configuration
+export PAGER=less
 export VISUAL=vim
 export EDITOR="${VISUAL} -u NONE"
 
