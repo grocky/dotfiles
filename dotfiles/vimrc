@@ -80,7 +80,7 @@ nmap <silent> <Leader>tg :TestVisit<CR>
 Plug 'mattn/emmet-vim'
 
 Plug 'tpope/vim-fugitive'
-nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gs :Gstatus<CR>:15wincmd_<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gr :Gread<CR>
