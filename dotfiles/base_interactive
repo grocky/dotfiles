@@ -1,5 +1,5 @@
 # vim: set ft=sh
-#
+
 if [ -n "${BASH}" ]; then
     shell="bash"
     shell_extension="sh"
@@ -59,4 +59,4 @@ powerline_sh=${brew_prefix}/lib/python3.9/site-packages/powerline/bindings/${she
 [ -f ${powerline_sh} ] && source ${powerline_sh} || echo "powerline script not found: ${powerline_sh}"
 
 ## FZF
-[ -f ~/.fzf.${shel} ] && source ~/.fzf.${shell}
+[ -f ~/.fzf.${shell} ] && source ~/.fzf.${shell}
