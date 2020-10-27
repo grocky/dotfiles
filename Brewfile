@@ -32,7 +32,11 @@ brew 'fzf'
 brew 'git'
 brew 'gh'
 brew 'git-lfs'
+
+## gpg utilities
 brew 'gnupg'
+brew 'pinentry-mac'
+
 brew 'highlight'
 brew 'htop'
 brew 'httpie'

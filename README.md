@@ -1,26 +1,15 @@
-## Personal Dotfiles
+# Personal Dotfiles
 
 Storing personal settings and configurations stored in dotfiles to make it easy to distribute to other hosts.
+
+## Setup
 
 To load dotfiles on the host run
 
 ```shell
 git clone https://github.com/grocky/dotfiles.git
 # enter username and (password or personal access token)
-cd dotfiles && ./install_dotfiles.sh
-brew bundle
-```
-
-### OSX defaults 
-
-TODO: mvoe to script...
-
-https://github.com/mathiasbynens/dotfiles/blob/master/.macos
-
-```shell
-defaults write com.apple.screencapture location -string "${HOME}/Desktop/screenshots"
-defaults write com.apple.screencapture type -string "png"
-defaults write com.apple.screencapture disable-shadow -bool true
+cd dotfiles && make init
 ```
 
 The script will idempotently link the dotfiles in `./dotfiles` to your `$HOME` directory. If any conflicting dotfiles exist on the host already they will be backed up first.
@@ -32,20 +21,15 @@ cd dotfiles && ./install_dotfiles.sh -u
 cd ../ && rm -rf dotfiles/
 ```
 
-For tmux we need to `brew install reattach-to-user-namespace` [See](https://github.com/thoughtbot/dotfiles/issues/75)
+> **NOTE**: On older versions of tmux we need to `brew install reattach-to-user-namespace` [See](https://github.com/thoughtbot/dotfiles/issues/75)
 
 ```shell
 gem install tmuxinator
 ```
 
-### Change screenshot location
-defaults write com.capple.screencapture location ${HOME}/Desktop/screenshots && killall SystemUIServer && "update successful" || "update failed"
+## Powerline install
 
-### Git status
-
-```shell
-ln -s ~/dotfiles/config/powerline ~/.config/powerline
-```
+You may need to replace the below with `pip3` or `$(brew --prefix)/bin/pip3.X`
 
 ```shell
 pip install powerline-status
@@ -57,5 +41,17 @@ cd fonts
 ./install.sh
 ```
 
-TODO: extract gitshots into a separate repo
+## GPG
 
+To load the gpg key passphrase into the macos keychain without installing the entire GPG Suite add the following to
+`~/.gnupg/gpg-agent.conf`:
+
+```shell
+pinentry-program /usr/local/bin/pinentry-mac
+```
+
+Then sign a test message to have pinentry-mac store your password in the keychain.
+
+```shell
+echo "test" | gpg --clearsign
+```
