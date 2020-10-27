@@ -5,6 +5,9 @@ default: help
 
 init: macos brew bins dotfiles ## Initialize a new machine
 
+macos: ## Initialize macos settings
+	./initialize_macos.sh
+
 dotfiles: ## Install dotfiles
 	./install_dotfiles.sh
 
