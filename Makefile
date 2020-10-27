@@ -1,11 +1,21 @@
 
-.PHONY: dotfiles bins brew
+.PHONY: dotfiles bins brew help
 
-default: brew bins dotfiles
+default: help
 
-dotfiles:
+init: macos brew bins dotfiles ## Initialize a new machine
+
+dotfiles: ## Install dotfiles
 	./install_dotfiles.sh
-bins:
+
+bins: ## Install bins
 	./install_bins.sh
-brew:
+
+brew: ## Install brew bundle
 	brew bundle
+
+GREEN  := $(shell tput -Txterm setaf 2)
+RESET  := $(shell tput -Txterm sgr0)
+
+help: ## print this help message
+	@awk -F ':|##' '/^[^\t].+?:.*?##/ { printf "${GREEN}%-20s${RESET}%s\n", $$1, $$NF }' $(MAKEFILE_LIST)
