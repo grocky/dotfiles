@@ -1,4 +1,15 @@
 # vim: set ft=sh
+#
+if [ -n "${BASH}" ]; then
+    shell="bash"
+    shell_extension="sh"
+elif [ -n "${ZSH_NAME}" ]; then
+    shell="zsh"
+    shell_extension="zsh"
+else
+    shell=$(echo ${SHELL} | awk -F/ '{ print $NF }')
+fi
+
 
 ## Setup vim mode
 if [ -n "${BASH}" ]; then
@@ -43,16 +54,9 @@ if [ -n "${BASH}" ]; then
   export POWERLINE_BASH_CONTINUATION=1
   export POWERLINE_BASH_SELECT=1
 fi
-powerline_sh=${brew_prefix}/lib/python3.9/site-packages/powerline/bindings/bash/powerline.sh
-[ -f ${powerline_sh} ] && source ${powerline_sh}
+
+powerline_sh=${brew_prefix}/lib/python3.9/site-packages/powerline/bindings/${shell}/powerline.${shell_extension}
+[ -f ${powerline_sh} ] && source ${powerline_sh} || echo "powerline script not found: ${powerline_sh}"
 
 ## FZF
-if [ -n "${BASH}" ]; then
-    shell="bash"
-elif [ -n "${ZSH_NAME}" ]; then
-    shell="zsh"
-else
-    shell=$(echo ${SHELL} | awk -F/ '{ print $NF }')
-fi
-
 [ -f ~/.fzf.${shel} ] && source ~/.fzf.${shell}
