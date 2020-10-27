@@ -1,0 +1,58 @@
+# vim: set ft=sh
+
+## Setup vim mode
+if [ -n "${BASH}" ]; then
+  set -o vi
+elif [ -n "${ZSH_NAME}" ]; then
+  bindkey -v
+fi
+
+## Use vim as editor, but don't load entire configuration
+export VISUAL=vim
+export EDITOR="${VISUAL} -u NONE"
+
+[ -f "${HOME}/.bash_aliases" ] && source "${HOME}/.bash_aliases"
+
+[ -f "${HOME}/.bash_functions" ] && source "${HOME}/.bash_functions"
+
+[ -f "${HOME}/.dirs" ] && source "${HOME}/.dirs"
+
+[ -f "${HOME}/.aws_helpers" ] && source "${HOME}/.aws_helpers"
+
+if [ -n "${BASH}" ]; then
+  [ -f "${HOME}/.bash_completions" ] && source "${HOME}/.bash_completions"
+#elif [ -n "${ZSH_NAME}" ]; then
+  #zstyle ':completion:*' completer _expand _complete _ignored _approximate
+  #zstyle :compinstall filename '/Users/grocky/.zshrc'
+
+  #autoload -Uz compinit && compinit -i
+fi
+
+## GPG
+export GPG_TTY=$(tty)
+
+brew_prefix=$(brew --prefix)
+
+## j
+[ -f ${brew_prefix}/etc/profile.d/autojump.sh ] && . ${brew_prefix}/etc/profile.d/autojump.sh
+
+## Powerline
+export POWERLINE_CONFIG_COMMAND=${brew_prefix}/bin/powerline-config
+
+if [ -n "${BASH}" ]; then
+  export POWERLINE_BASH_CONTINUATION=1
+  export POWERLINE_BASH_SELECT=1
+fi
+powerline_sh=${brew_prefix}/lib/python3.9/site-packages/powerline/bindings/bash/powerline.sh
+[ -f ${powerline_sh} ] && source ${powerline_sh}
+
+## FZF
+if [ -n "${BASH}" ]; then
+    shell="bash"
+elif [ -n "${ZSH_NAME}" ]; then
+    shell="zsh"
+else
+    shell=$(echo ${SHELL} | awk -F/ '{ print $NF }')
+fi
+
+[ -f ~/.fzf.${shel} ] && source ~/.fzf.${shell}

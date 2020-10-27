@@ -2,12 +2,11 @@ alias reload="source ${HOME}/.bash_profile"
 alias bashrc='vi ~/.bashrc && source ~/.bashrc'
 
 # shell shortcuts
-export LS_OPTIONS='--color=auto'
+#export LS_OPTIONS='--color=auto'
 alias lsl='ls ${LS_OPTIONS} -lrth'
 alias lsa='ls ${LS_OPTIONS} -lrtha'
 
 # directory shortcuts
-alias ws='cd ~/Workspace'
 alias dl='cd ~/Downloads'
 alias gws="cd ~/GoogleDrive/Projects"
 alias gdrive="cd /Users/grocky/GoogleDrive"
