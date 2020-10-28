@@ -1,0 +1,10 @@
+# Usage: git lfs-untrack-file-pattern '<pattern>'
+
+pattern=$1
+
+for f in $(ag -g "${pattern}"); do
+  echo "Ungracking ${f}";
+  git lfs untrack $f;
+  git rm --cached $f;
+  git add $f;
+done
