@@ -1,5 +1,10 @@
-alias reload="source ${HOME}/.bash_profile"
-alias bashrc='vi ~/.bashrc && source ~/.bashrc'
+if [ -n "${BASH}" ]; then
+  alias reload="source ${HOME}/.bash_profile"
+  alias bashrc='vi ~/.bashrc && source ~/.bashrc'
+elif [ -n "${ZSH_NAME}" ]; then
+  alias reload="source ${HOME}/.zshrc"
+  alias zshrc='vi ~/.zshrc && source ~/.zshrc'
+fi
 
 # shell shortcuts
 #export LS_OPTIONS='--color=auto'
