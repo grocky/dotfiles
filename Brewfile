@@ -58,6 +58,12 @@ brew 'wallix/awless/awless'
 brew 'wireshark'
 cask 'docker'
 
+# document authoring
+brew 'pdftohtml'
+cask 'mactex-no-gui'
+brew 'hugo'
+cask 'skim'
+
 # graphics tools
 cask 'xquartz'
 brew 'feh'
