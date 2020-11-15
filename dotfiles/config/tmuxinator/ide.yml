@@ -4,17 +4,15 @@ name: ide
 
 windows:
   - project:
-      layout: even-vertical 
+      layout: even-vertical
       panes:
-        - 
+        -
   - logs:
       layout: even-horizontal
       panes:
-        - 
-  - watch: 
+        -
+  - watch:
       layout: even-vertical
       panes:
-        - 
-        - 
-
-
+        -
+        -

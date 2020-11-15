@@ -1,9 +1,0 @@
-# ~/.tmuxinator/storyblocks.yml
-
-name: storyblocks
-root: ~/
-
-pre_window: awsp storyblocks
-windows:
-  - main:
-
