@@ -58,6 +58,9 @@ brew 'wallix/awless/awless'
 brew 'wireshark'
 cask 'docker'
 
+brew 'tmuxinator'
+brew 'tmux'
+
 # document authoring
 brew 'pdftohtml'
 cask 'mactex-no-gui'
