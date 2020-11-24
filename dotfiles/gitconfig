@@ -101,6 +101,10 @@
 	excludesfile = /Users/grocky/.gitignore_global
 	ignorecase = false
 	editor = vim
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
 
 [rebase]
 	autostash = true
@@ -146,3 +150,7 @@
 	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $LOCAL $REMOTE
 [commit]
 	gpgsign = true
+
+[delta]
+	features = side-by-side line-numbers decorations
+	whitespace-error-style = 22 reverse

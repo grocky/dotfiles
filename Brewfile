@@ -34,6 +34,7 @@ brew 'fzf'
 brew 'git'
 brew 'gh'
 brew 'git-lfs'
+brew 'git-delta'
 
 ## gpg utilities
 brew 'gnupg'
