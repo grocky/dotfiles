@@ -1,15 +1,15 @@
 # ~/.tmuxinator/project.yml
 
 name: project
-root: <%= @settings["dir"] %>
+root: ~/Projects/grocky/blogs
 
 windows:
   - development:
       layout: 57a1,190x54,0,0[190x37,0,0,0,190x16,0,38,2]
       panes:
-        - vim .
+        - vim
         -
-  - logs:
+  - hugo:
       layout: even-horizontal
       panes:
         -

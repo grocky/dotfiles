@@ -67,7 +67,7 @@ augroup END
 Plug 'zefei/simple-dark'
 
 Plug 'godlygeek/tabular'
-Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
+Plug 'plasticboy/vim-markdown'
 
 Plug 'janko-m/vim-test'
 let test#strategy = "vimterminal"
@@ -142,6 +142,7 @@ let g:go_def_mapping_enabled = 0
 " coc.nvim default settings
 " -------------------------------------------------------------------------------------------------
 let g:coc_global_extensions = [
+\ 'coc-homeassistant',
 \ 'coc-marketplace',
 \ 'coc-snippets',
 \ 'coc-sh',
