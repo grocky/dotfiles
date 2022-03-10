@@ -7,7 +7,7 @@ windows:
   - development:
       layout: 57a1,190x54,0,0[190x37,0,0,0,190x16,0,38,2]
       panes:
-        - vim .
+        - vim
         -
   - logs:
       layout: even-horizontal

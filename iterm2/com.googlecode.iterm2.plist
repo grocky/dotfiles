@@ -18,6 +18,8 @@
 	<true/>
 	<key>ClosingHotkeySwitchesSpaces</key>
 	<true/>
+	<key>Command</key>
+	<string>/usr/local/bin/bash</string>
 	<key>CommandSelection</key>
 	<true/>
 	<key>Control</key>
@@ -6132,7 +6134,7 @@
 	<key>DisableFullscreenTransparency</key>
 	<false/>
 	<key>EnableRendezvous</key>
-	<false/>
+	<true/>
 	<key>FocusFollowsMouse</key>
 	<false/>
 	<key>FsTabDelay</key>

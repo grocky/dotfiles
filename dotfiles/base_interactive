@@ -61,3 +61,4 @@ powerline_sh=${brew_prefix}/lib/python3.9/site-packages/powerline/bindings/${she
 
 command -v ag > /dev/null 2>&1 && export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 [ -f ~/.fzf.${shell} ] && source ~/.fzf.${shell}
+export PATH="/usr/local/opt/mysql-client/bin:$PATH"

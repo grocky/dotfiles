@@ -1,0 +1,12 @@
+# ~/.tmuxinator/flashcrystal.yml
+
+name: flashcrystal 
+root: ~/Projects/flashcrystal/fc_website
+
+windows:
+  - code:
+      layout: main-horizontal
+      panes:
+        - vim .
+        - 
+  - logs: docker-compose up

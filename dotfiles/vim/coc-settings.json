@@ -3,6 +3,11 @@
     "kubernetes": "/*.yaml",
     "https://raw.githubusercontent.com/awslabs/goformation/master/schema/cloudformation.schema.json": "/cloudformation/*.yaml"
   },
+  "homeassistant": {
+    "enable": true,
+    "hostUrl": "http://hassio.local:8123",
+    "longLivedAccessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIzZDg2NDI0OThlYzM0M2FlYTYwMjg3M2FmMzU3MjUzOCIsImlhdCI6MTYwNTM2NTk4NywiZXhwIjoxOTIwNzI1OTg3fQ.QyKqVc7_kSQ9VLEZz3KS_XkY42N-7q61pSJnJY3DjtQ"
+  },
   "languageserver": {
     "terraform": {
       "command": "terraform-ls",
