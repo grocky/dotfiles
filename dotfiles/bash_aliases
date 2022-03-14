@@ -1,9 +1,11 @@
+alias vim='nvim'
+
 if [ -n "${BASH}" ]; then
   alias reload="source ${HOME}/.bash_profile"
-  alias bashrc='vi ~/.bashrc && source ~/.bashrc'
+  alias bashrc='vim ~/.bashrc && source ~/.bashrc'
 elif [ -n "${ZSH_NAME}" ]; then
   alias reload="source ${HOME}/.zshrc"
-  alias zshrc='vi ~/.zshrc && source ~/.zshrc'
+  alias zshrc='vim ~/.zshrc && source ~/.zshrc'
 fi
 
 # shell shortcuts

@@ -1,3 +1,5 @@
 # .zshrc is executed for all interactive shells
 
 [ -f "${HOME}/.base_interactive" ] && source "${HOME}/.base_interactive"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
