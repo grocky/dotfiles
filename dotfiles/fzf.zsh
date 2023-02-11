@@ -1,7 +1,7 @@
 # Setup fzf
 # ---------
 if [[ ! "$PATH" == */Users/grocky/dotfiles/dotfiles/vim/plugged/fzf/bin* ]]; then
-  export PATH="${PATH:+${PATH}:}/Users/grocky/dotfiles/dotfiles/vim/plugged/fzf/bin"
+  PATH="${PATH:+${PATH}:}/Users/grocky/dotfiles/dotfiles/vim/plugged/fzf/bin"
 fi
 
 # Auto-completion
