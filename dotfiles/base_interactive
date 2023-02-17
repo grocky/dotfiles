@@ -54,7 +54,7 @@ if [ -n "${BASH}" ]; then
   export POWERLINE_BASH_SELECT=1
 fi
 
-powerline_sh=${brew_prefix}/lib/python3.10/site-packages/powerline/bindings/${shell}/powerline.${shell_extension}
+powerline_sh=${brew_prefix}/lib/python3.11/site-packages/powerline/bindings/${shell}/powerline.${shell_extension}
 [ -f ${powerline_sh} ] && source ${powerline_sh} || echo "powerline script not found: ${powerline_sh}"
 
 ## FZF
