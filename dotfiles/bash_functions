@@ -28,6 +28,13 @@ now () {
   date +%I:%M:%S;
 }
 
+date_diff () {
+  d1=${1}
+  d2=${2}
+
+  echo $(( ($(date -d "${d1}" +%s) - $(date -d "${d2}" +%s)) / (60*60*24)))
+}
+
 urlencode () {
     if [ $# -eq 0 ]; then
         echo "usage: urlencode <string>";
