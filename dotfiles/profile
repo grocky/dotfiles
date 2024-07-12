@@ -45,3 +45,4 @@ function autoCompleteHostname() {
 }
 complete -F autoCompleteHostname ssh
 
+. "$HOME/.cargo/env"

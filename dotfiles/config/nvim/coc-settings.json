@@ -27,9 +27,7 @@
         "terraform": {
           "logFilePath": "/tmp/tf-exec-{{lsPid}}-{{method}}-{{timestamp}}.log"
         },
-        "experimentalFeatures": {
-          "prefillRequiredFileds": true
-        }
+        "experimentalFeatures": { }
       },
       "settings": {}
     }

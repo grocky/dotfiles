@@ -1,3 +1,4 @@
 # .zshenv is executed for all shells
 
 [ -f "${HOME}/.path_environment" ] && source "${HOME}/.path_environment"
+. "$HOME/.cargo/env"

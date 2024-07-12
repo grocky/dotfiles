@@ -4,7 +4,7 @@ if [ -n "${BASH}" ]; then
   alias reload="source ${HOME}/.bash_profile"
   alias bashrc='vim ~/.bashrc && source ~/.bashrc'
 elif [ -n "${ZSH_NAME}" ]; then
-  alias reload="source ${HOME}/.zshrc"
+  alias reload="source ${HOME}/.zshrc && source ${HOME}/.zshenv"
   alias zshrc='vim ~/.zshrc && source ~/.zshrc'
 fi
 

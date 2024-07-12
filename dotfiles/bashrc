@@ -3,3 +3,4 @@
 [ -f "${HOME}/.base_interactive" ] && source "${HOME}/.base_interactive"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+. "$HOME/.cargo/env"
