@@ -46,17 +46,6 @@ brew_prefix=$(brew --prefix)
 ## j
 [ -f ${brew_prefix}/etc/profile.d/autojump.sh ] && . ${brew_prefix}/etc/profile.d/autojump.sh
 
-## Powerline
-export POWERLINE_CONFIG_COMMAND=${brew_prefix}/bin/powerline-config
-
-if [ -n "${BASH}" ]; then
-  export POWERLINE_BASH_CONTINUATION=1
-  export POWERLINE_BASH_SELECT=1
-fi
-
-powerline_sh=${brew_prefix}/lib/python3.11/site-packages/powerline/bindings/${shell}/powerline.${shell_extension}
-[ -f ${powerline_sh} ] && source ${powerline_sh} || echo "powerline script not found: ${powerline_sh}"
-
 ## FZF
 
 command -v ag > /dev/null 2>&1 && export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
