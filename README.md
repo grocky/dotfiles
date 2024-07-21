@@ -29,12 +29,8 @@ gem install tmuxinator
 
 ## Powerline install
 
-You may need to replace the below with `pip3` or `$(brew --prefix)/bin/pip3.X`
-
 ```shell
-pip install powerline-status
-pip install powerline-gitstatus
-pip install powerline-mem-segment
+go install github.com/justjanne/powerline-go@latest
 
 git clone https://github.com/powerline/fonts.git --depth=1
 cd fonts
