@@ -18,6 +18,11 @@ alias dl='cd ~/Downloads'
 alias gws="cd ~/GoogleDrive/Projects"
 alias gdrive="cd /Users/grocky/GoogleDrive"
 
+function gen_rand() {
+  length=${1:-13}
+  tr -dc A-Za-z0-9 </dev/urandom | head -c ${length}; echo
+}
+
 # php shortcuts
 alias xon="export XDEBUG_CONFIG=\"profiler_enable=1\""
 alias xoff="export XDEBUG_CONFIG=\"profiler_enable=0\""
