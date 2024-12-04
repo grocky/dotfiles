@@ -9,8 +9,10 @@ fi
 
 export XDG_CONFIG_HOME=${HOME}/.config
 
+export PATH="${PATH}:$HOME/.docker/bin"
+
 # brew's sbin
-export PATH="/usr/local/sbin:$PATH"
+#export PATH="/usr/local/sbin:$PATH"
 
 # ruby's bin
 export PATH="${PATH}:/usr/local/bin:${HOME}/.rvm/bin" # Add RVM to PATH for scripting

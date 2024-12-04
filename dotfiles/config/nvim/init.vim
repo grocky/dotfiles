@@ -39,6 +39,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 nnoremap <leader>1 :NERDTreeToggle<CR>
+nnoremap <leader>, :NERDTreeFind<CR>
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
