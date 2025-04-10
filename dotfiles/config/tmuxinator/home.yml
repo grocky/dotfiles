@@ -1,9 +1,10 @@
+---
 # ~/.tmuxinator/home.yml
 
 name: home
 root: ~/
 
-pre_window: awsp personal
+pre_window: awsp grocky_personal
 windows:
   - main:
       panes:
