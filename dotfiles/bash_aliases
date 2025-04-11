@@ -16,7 +16,7 @@ alias lsa='ls ${LS_OPTIONS} -lrtha'
 # directory shortcuts
 alias dl='cd ~/Downloads'
 alias gws="cd ~/GoogleDrive/Projects"
-alias gdrive="cd /Users/grocky/GoogleDrive"
+#alias gdrive="cd /Users/grocky/GoogleDrive"
 
 function gen_rand() {
   length=${1:-13}
@@ -62,8 +62,8 @@ alias cwd='pwd | tr -d "\r\n" | pbcopy'
 
 alias st='speedtest'
 
-alias openssl-b='/usr/local/Cellar/openssl/1.0.2h_1/bin/openssl'
-alias ssl='openssl-b'
+#alias openssl-b='/usr/local/Cellar/openssl/1.0.2h_1/bin/openssl'
+#alias ssl='openssl-b'
 
 # Git
 ### top level shortcuts
