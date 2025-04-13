@@ -15,23 +15,3 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("grocky.lazy-plugins")
---[[
-require("lazy").setup({
-  spec = {
-    {
-        "nvim-treesitter/nvim-treesitter",
-	config = function()
-		build = ":TSUpdate",
-		local ts_update = require("nvim-treesitter.install").update({ auto_update = true })
-		ts_update()
-	end,
-    },
-    { import = "plugins" },
-  },
-  -- Configure any other settings here. See the documentation for more details.
-  -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { "habamax" } },
-  -- automatically check for plugin updates
-  checker = { enabled = true },
-})
-]]--
