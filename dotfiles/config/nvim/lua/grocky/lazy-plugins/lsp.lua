@@ -30,18 +30,19 @@ return {
                 "rust_analyzer",
                 "ts_ls",
                 "gopls",
+                "css_variables",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
 
-                    require("lspconfig")[server_name].setup {
+                    require("lspconfig")[server_name].setup({
                         capabilities = capabilities
-                    }
+                    })
                 end,
 
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
-                    lspconfig.lua_ls.setup {
+                    lspconfig.lua_ls.setup ({
                         capabilities = capabilities,
                         settings = {
                             Lua = {
@@ -50,7 +51,14 @@ return {
                                 }
                             }
                         }
-                    }
+                    })
+                end,
+                ["css_variables"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.css_variables.setup ({
+                        capabilities = capabilities,
+                        filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "css", "scss", "less" },
+                    })
                 end,
             }
         })
@@ -66,11 +74,13 @@ return {
             mapping = cmp.mapping.preset.insert({
                 ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
                 ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-                ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-                ["<C-Space>"] = cmp.mapping.complete(),
+                ['('] = cmp.mapping.select_prev_item(cmp_select),
+                [')'] = cmp.mapping.select_next_item(cmp_select),
+                ['<CR>'] = cmp.mapping.confirm({ select = true }),
+                ['<C-t>'] = cmp.mapping.complete(),
             }),
             sources = cmp.config.sources({
-                { name = 'nvim_lsp' },
+                { name = 'nvim_lsp', trigger_characters = { '-' } },
                 { name = 'luasnip' }, -- For luasnip users.
             }, {
                 { name = 'buffer' },
