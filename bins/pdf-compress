@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+for file in *.pdf ; do
+  echo "found file ${file}"
+  filename=$(basename -a -s .pdf "${file}")
+  ps2pdf -dNumRenderingThreads=4 "${file}" - | \
+  gs -dSAFER -dBATCH -dNOPAUSE -sDEVICE=pdfwrite -dPreserveAnnots=false -sOutputFile="${filename}_compressed_flatten.pdf" -
+done

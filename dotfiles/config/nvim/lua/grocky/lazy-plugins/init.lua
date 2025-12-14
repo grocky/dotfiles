@@ -4,6 +4,14 @@ return {
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     'nvim-tree/nvim-web-devicons',
     {
+        'fatih/vim-go',
+        ft = 'go', -- Load the plugin only for Go filetypes
+        config = function()
+        vim.g.go_fmt_autosave = 1
+        vim.g.go_def_mode = 'gopls'
+      end
+    },
+    {
         'lewis6991/gitsigns.nvim',
         event = "BufReadPre",
         config = function ()
@@ -28,5 +36,6 @@ return {
             },
         },
     },
+    { "mfussenegger/nvim-jdtls", ft = "java" },
     { 'echasnovski/mini.nvim', version = false },
 }

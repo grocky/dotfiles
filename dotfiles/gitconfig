@@ -3,6 +3,9 @@
 	email = rocky.grayjr@gmail.com
 	signingkey = 8A4E406955134A097AF43EA674EDFA8E8DEF7C52
 
+[url "git@github.com:equityquotient/wondercli"]
+    insteadOf = https://github.com/equityquotient/wondercli
+
 [diff "pdfconv"]
 	textconv=pdftohtml -stdout
 
@@ -115,30 +118,25 @@
 	rebase = true
 
 [merge]
-	tool = p4merge
-	keepBackup = false
-[mergetool "p4merge"]
-	cmd = p4merge $BASE $LOCAL $REMOTE $MERGED
-	keepTemporaries = false
-	prompt = false
-	trustExitCode = false
-	keepBackup = false
+    tool = meld
+[mergetool]
+    prompt = false
+    keepBackup = false
+[mergetool "meld"]
+    path = '/Applications/Meld.app/Contents/MacOS/Meld'
+    trustExitCode = true
+    cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output="$MERGED"
+    keepBackup = false
 [diff]
-	tool = p4merge
-[difftool "p4merge"]
-	external = /usr/local/bin/p4diff
-	prompt = false
-	trustExitCode = false
+    tool = meld
+[difftool]
+    prompt = false
+[difftool "meld"]
+    trustExitCode = true
+    path = '/Applications/Meld.app/Contents/MacOS/Meld'
+    cmd = meld "$LOCAL" "$REMOTE"
 [github]
 	user = grocky
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
-[mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-[mergetool]
-	keepBackup = false
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -147,11 +145,11 @@
 [rerere]
 	enabled = true
 	autoupdate = true
-[difftool "p4mergetool"]
-	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $LOCAL $REMOTE
 [commit]
 	gpgsign = true
 
 [delta]
 	features = line-numbers decorations
 	whitespace-error-style = 22 reverse
+[url "git@github.com:"]
+	insteadOf = https://github.com/

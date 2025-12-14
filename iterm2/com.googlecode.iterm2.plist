@@ -6143,6 +6143,8 @@ The script should do this: \(ai.prompt)</string>
 	<false/>
 	<key>DisableFullscreenTransparency</key>
 	<false/>
+	<key>EnableAPIServer</key>
+	<true/>
 	<key>EnableRendezvous</key>
 	<true/>
 	<key>FocusFollowsMouse</key>
