@@ -31,7 +31,7 @@ return {
                 "ts_ls",
                 "gopls",
                 "css_variables",
-                "python-lsp-server",
+                "pylsp",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
