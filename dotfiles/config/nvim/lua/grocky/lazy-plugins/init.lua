@@ -2,14 +2,18 @@ return {
     { "nvim-lua/plenary.nvim",                    name = "plenary", },
     "github/copilot.vim",
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    {
+      'nvim-telescope/telescope-file-browser.nvim',
+      dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' }
+    },
     'nvim-tree/nvim-web-devicons',
     {
         'fatih/vim-go',
         ft = 'go', -- Load the plugin only for Go filetypes
         config = function()
-        vim.g.go_fmt_autosave = 1
-        vim.g.go_def_mode = 'gopls'
-      end
+            vim.g.go_fmt_autosave = 1
+            vim.g.go_def_mode = 'gopls'
+        end
     },
     {
         'lewis6991/gitsigns.nvim',

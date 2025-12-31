@@ -7,7 +7,7 @@ return {
     config = function()
         require('telescope').setup({
             extensions = {
-                fsf = {
+                fzf = {
                     fuzzy = true,
                     override_generic_sorter = true,
                     override_file_sorter = true,
