@@ -61,7 +61,14 @@ export NVM_DIR="$HOME/.nvm"
 
 ## powerline-go
 function powerline_precmd() {
-    PS1="$($GOPATH/bin/powerline-go -error $? -jobs ${${(%):%j}:-0})"
+    powerline_opts=(
+      "-jobs" "${${(%):%j}:-0}"
+      "-colorize-hostname"
+      "-hostname-only-if-ssh"
+      "-cwd-max-depth" "3"
+    )
+
+    PS1="$($GOPATH/bin/powerline-go -error $? ${powerline_opts[@]})"
 
     # Uncomment the following line to automatically clear errors after showing
     # them once. This not only clears the error for powerline-go, but also for
