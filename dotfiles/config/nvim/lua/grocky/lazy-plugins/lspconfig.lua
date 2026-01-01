@@ -49,7 +49,7 @@ return {
                 ['<C-t>'] = cmp.mapping.complete(),
             }),
             sources = cmp.config.sources({
-                { name = 'nvim_lsp', trigger_characters = { '-' } },
+                { name = 'nvim_lsp', trigger_characters = { '.' } },
             }, {
                 { name = 'buffer' },
             })
