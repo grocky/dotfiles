@@ -23,7 +23,8 @@ return {
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
         "hrsh7th/nvim-cmp",
-        "j-hui/fidget.nvim"
+        "j-hui/fidget.nvim",
+        "onsails/lspkind.nvim",
     },
 
     config = function()
@@ -48,11 +49,18 @@ return {
                 ['<CR>'] = cmp.mapping.confirm({ select = true }),
                 ['<C-t>'] = cmp.mapping.complete(),
             }),
-            sources = cmp.config.sources({
-                { name = 'nvim_lsp', trigger_characters = { '.' } },
-            }, {
+            sources = {
+                { name = 'nvim_lsp' },
                 { name = 'buffer' },
-            })
+            },
+            formatting = {
+                fields = {'abbr', 'kind', 'menu'},
+                format = require('lspkind').cmp_format({
+                    mode = 'symbol',
+                    maxwidth = 50,
+                    ellipsis_char = '...',
+                })
+            },
         })
 
         vim.diagnostic.config({
