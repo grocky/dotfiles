@@ -15,6 +15,33 @@ vim.lsp.config('css_variables', {
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "css", "scss", "less" },
 })
 
+vim.lsp.config('intelephense', {
+    filetypes = { 'php', 'blade' },
+    settings = {
+        intelephense = {
+            files = {
+                maxSize = 1000000,
+            },
+        },
+        files = {
+            exclude = {
+                "**/.git/**",
+                "**/node_modules/**",
+                "**/vendor/**",
+                "**/data/**",
+            },
+        },
+        search = {
+            exclude = {
+                "**/.git/**",
+                "**/node_modules/**",
+                "**/vendor/**",
+                "**/data/**",
+            },
+        },
+    }
+})
+
 return {
     "nvim/nvim-lspconfig",
     dependencies = {
