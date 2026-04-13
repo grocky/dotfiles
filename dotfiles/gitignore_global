@@ -90,3 +90,4 @@ atlassian-ide-plugin.xml
 atlassian-ide-plugin.xml
 .vscode
 .claude
+.task/
