@@ -1,6 +1,5 @@
 require("grocky.remap")
 require("grocky.set")
-
 require("grocky.lazy")
 
 local augroup = vim.api.nvim_create_augroup
@@ -35,12 +34,14 @@ autocmd('LspAttach', {
     callback = function(e)
         Map("n", "gd", vim.lsp.buf.definition, lsp_keymap_opts(e, "go to definition"))
         Map("n", "gi", vim.lsp.buf.implementation, lsp_keymap_opts(e, "go to implementation"))
+        Map("n", "gt", vim.lsp.buf.type_definition, lsp_keymap_opts(e, "go to type definition"))
+        Map("n", "gD", vim.lsp.buf.declaration, lsp_keymap_opts(e, "go to declaration"))
+        Map("n", "grr", require('telescope.builtin').lsp_references, lsp_keymap_opts(e, "find references with telescope"))
+        Map("n", "gRR", vim.lsp.buf.references, lsp_keymap_opts(e, "find references"))
         Map("n", "K", vim.lsp.buf.hover, lsp_keymap_opts(e, "show documentation"))
         Map("n", "<leader>vf", require("telescope.builtin").lsp_dynamic_workspace_symbols, lsp_keymap_opts(e, "workspace symbol"))
         Map("n", "<leader>vd", vim.diagnostic.open_float, lsp_keymap_opts(e, "open diagnostic"))
         Map("n", "<leader>vca", vim.lsp.buf.code_action, lsp_keymap_opts(e, "code action"))
-        Map("n", "<leader>vrr", vim.lsp.buf.references, lsp_keymap_opts(e, "find references"))
-        Map("n", "<leader>vrn", vim.lsp.buf.rename, lsp_keymap_opts(e, "rename"))
         Map("i", "<C-h>", vim.lsp.buf.signature_help, lsp_keymap_opts(e, "signature help"))
         Map("n", "[d", vim.diagnostic.goto_prev, lsp_keymap_opts(e, "previous diagnostic"))
         Map("n", "]d", vim.diagnostic.goto_next, lsp_keymap_opts(e, "next diagnostic"))
