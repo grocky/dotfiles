@@ -77,6 +77,7 @@ alias gss='git status --porcelain'
 alias gd='git diff'
 alias g-open-status='open $(hub ci-status -v|cut -d: -f2-)'
 alias gos='g-open-status'
+alias gco='git branch --all --format="%(refname:short)" | sed "s#^origin/##" | awk "!seen[\$0]++" | grep -v "^HEAD$" | fzf --height=40% --reverse | xargs git checkout'
 
 ### Git-flow
 alias gff='git flow feature'
