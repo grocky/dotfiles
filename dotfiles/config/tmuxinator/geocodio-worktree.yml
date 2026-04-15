@@ -1,5 +1,11 @@
-name: geocodio 
-root: /Users/grocky/Projects/geocodio/geocodio 
+<% if @args[0] %>
+<% WDIR=@args[0] %> 
+<% else %>
+<% WDIR=ENV["PWD"] %>
+<% end %>
+
+name: <%= WDIR.split('/').last  %>
+root: <%= WDIR %>
 
 # Get layout with: tmux list-windows -t <session-name> -F "#{window_index}: #{window_layout}"
 windows:
@@ -11,4 +17,4 @@ windows:
         - shell: zsh
   - local-logs:
       panes:
-        - dc logs -f geocodio
+        - docker-compose --env-file .env.worktree logs -f geocodio
