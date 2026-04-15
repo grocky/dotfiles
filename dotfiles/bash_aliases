@@ -79,23 +79,6 @@ alias g-open-status='open $(hub ci-status -v|cut -d: -f2-)'
 alias gos='g-open-status'
 alias gco='git branch --all --format="%(refname:short)" | sed "s#^origin/##" | awk "!seen[\$0]++" | grep -v "^HEAD$" | fzf --height=40% --reverse | xargs git checkout'
 
-### Git-flow
-alias gff='git flow feature'
-alias gffs='gff start'
-alias gfff='gff finish --no-ff --keepremote'
-alias gffp='gff publish'
-alias gffr='gff rebase'
-alias gfb='git flow bugfix'
-alias gfbs='gfb start'
-alias gfbf='gfb finish'
-alias gfh='git flow hotfix'
-alias gfhs='gfh start'
-alias gfhp='gfh publish'
-alias gfhf='gfh finish -np'
-alias gfr='git flow release'
-alias gfrf='gfr finish'
-alias grfs='gfr start $(date +"%Y%m%d-%H%M") "$@"'
-
 # Docker
 alias dm='docker-machine'
 alias dml='docker-machine ls'
