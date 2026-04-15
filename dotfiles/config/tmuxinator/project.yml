@@ -11,7 +11,7 @@ root: <%= WDIR %>
 # Get layout with: tmux list-windows -t <session-name> -F "#{window_index}: #{window_layout}"
 windows:
   - main:
-      layout: 950b,214x56,0,0{107x56,0,0,0,106x56,108,0[106x38,108,0,2,106x17,108,39,12]}
+      layout: 3fed,319x80,0,0{180x80,0,0,2,138x80,181,0[138x50,181,0,4,138x29,181,51,5]}
       panes:
         - editor: vim
         - claude: claude-personal
