@@ -17,26 +17,28 @@ vim.lsp.config('css_variables', {
 
 vim.lsp.config('intelephense', {
     filetypes = { 'php', 'blade' },
+    capabilities = {
+        workspace = {
+            didChangeWatchedFiles = { dynamicRegistration = false },
+        },
+    },
     settings = {
         intelephense = {
             files = {
                 maxSize = 1000000,
-            },
-        },
-        files = {
-            exclude = {
-                "**/.git/**",
-                "**/node_modules/**",
-                "**/vendor/**",
-                "**/data/**",
-            },
-        },
-        search = {
-            exclude = {
-                "**/.git/**",
-                "**/node_modules/**",
-                "**/vendor/**",
-                "**/data/**",
+                exclude = {
+                    "**/.git/**",
+                    "**/.svn/**",
+                    "**/.hg/**",
+                    "**/CVS/**",
+                    "**/.DS_Store/**",
+                    "**/node_modules/**",
+                    "**/bower_components/**",
+                    "**/vendor/**/{Tests,tests}/**",
+                    "**/.history/**",
+                    "**/vendor/**/vendor/**",
+                    "**/data/**",
+                },
             },
         },
     }
