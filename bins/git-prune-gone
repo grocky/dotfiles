@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# Delete local branches whose upstream has been deleted from the remote.
+# These are the branches shown as "[gone]" by `git branch -vv`, typically
+# left behind after a PR is merged and the remote branch is deleted.
+
+set -euo pipefail
+
+force=false
+dry_run=false
+fetch=true
+
+usage() {
+  cat <<EOF
+usage: git prune-gone [-f] [-n] [-F]
+
+Delete local branches whose upstream is gone from the remote.
+
+  -f    force delete (uses 'git branch -D' instead of '-d').
+        Needed when the branch was squash- or rebase-merged, since git
+        cannot trace those as merges into the current HEAD.
+  -n    dry run; print branches that would be deleted and exit.
+  -F    skip the 'git fetch --prune' that runs first.
+  -h    show this help.
+EOF
+}
+
+while getopts "fnFh" opt; do
+  case $opt in
+    f) force=true ;;
+    n) dry_run=true ;;
+    F) fetch=false ;;
+    h) usage; exit 0 ;;
+    \?) usage; exit 1 ;;
+  esac
+done
+
+if $fetch; then
+  git fetch --prune
+fi
+
+gone=$(git for-each-ref --format='%(refname:short) %(upstream:track)' refs/heads \
+  | awk '$2 == "[gone]" {print $1}')
+
+if [ -z "$gone" ]; then
+  echo "No gone branches to clean up."
+  exit 0
+fi
+
+if $dry_run; then
+  echo "Would delete:"
+  echo "$gone" | sed 's/^/  /'
+  exit 0
+fi
+
+flag="-d"
+$force && flag="-D"
+
+echo "$gone" | xargs git branch "$flag"
