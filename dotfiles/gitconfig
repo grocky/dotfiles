@@ -153,3 +153,5 @@
 	whitespace-error-style = 22 reverse
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[fetch]
+	prune = true
