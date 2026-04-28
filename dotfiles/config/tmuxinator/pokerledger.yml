@@ -1,0 +1,11 @@
+name: pokerledger
+root: ~/Projects/grocky/poker-ledger
+
+# Get layout with: tmux list-windows -t <session-name> -F "#{window_index}: #{window_layout}"
+windows:
+  - main:
+      layout: 3fed,319x80,0,0{180x80,0,0,2,138x80,181,0[138x50,181,0,4,138x29,181,51,5]}
+      panes:
+        - editor: vim README.md
+        - claude: claude-personal
+        - shell: zsh
