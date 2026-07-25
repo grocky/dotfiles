@@ -18,10 +18,10 @@
 [alias]
 	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
 	# Pretty graph with times: http://stackoverflow.com/a/9074343/818073
-	lg-relTime = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	lg-relTime = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
 	lg-time = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(white)%s%C(reset) %C(bold yellow)%d%C(reset)'
-	lg-time2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-	lg-message = log --graph --abbrev-commit --decorate --date=relative --all
+	lg-time2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+	lg-message = log --graph --abbrev-commit --decorate --date=relative
 	lg = "!f() { git lg-relTime; }; f"
 	lgt = "!f() { git lg-time; }; f"
 	lg2 = "!f() { git lg-time2; }; f"
@@ -113,24 +113,33 @@
 [rebase]
 	autostash = true
 	instructionFormat = %s - (%an)
+	updateRefs = true
 
 [pull]
 	rebase = true
 
 [merge]
-    tool = meld
+    tool = goland
 [mergetool]
     prompt = false
     keepBackup = false
+[mergetool "goland"]
+    cmd = goland merge "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
+    trustExitCode = true
+
 [mergetool "meld"]
     path = '/Applications/Meld.app/Contents/MacOS/Meld'
     trustExitCode = true
     cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output="$MERGED"
     keepBackup = false
 [diff]
-    tool = meld
+    tool = goland
 [difftool]
     prompt = false
+
+[difftool "goland"]
+    trustExitCode = true
+    cmd = goland diff "$LOCAL" "$REMOTE"
 [difftool "meld"]
     trustExitCode = true
     path = '/Applications/Meld.app/Contents/MacOS/Meld'

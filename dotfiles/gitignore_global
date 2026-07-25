@@ -91,3 +91,7 @@ atlassian-ide-plugin.xml
 .vscode
 .claude
 .task/
+
+# CocoIndex Code (ccc)
+.cocoindex_code/
+/.cocoindex_code/

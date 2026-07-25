@@ -30,6 +30,8 @@ export GOPATH=$HOME/go
 export GOBIN=${GOPATH}/bin
 export PATH="${GOBIN}:${PATH}"
 
+export PATH="/Applications/GoLand.app/Contents/MacOS:${PATH}"
+
 if [ -f "${HOME}/.bash_completions" ]; then
   source "${HOME}/.bash_completions"
 fi

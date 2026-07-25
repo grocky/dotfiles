@@ -66,6 +66,9 @@ alias st='speedtest'
 #alias ssl='openssl-b'
 
 # Git
+### Git stack (https://abhinav.github.io/git-spice)
+alias gst='git-spice'
+
 ### top level shortcuts
 alias ga='git add '
 alias gcm='git commit -m '
