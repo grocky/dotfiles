@@ -54,6 +54,7 @@ brew 'speedtest'
 brew 'telnet'
 brew 'tree'
 brew 'neovim'
+brew 'tree-sitter-cli' # required by nvim-treesitter (main branch) to build parsers
 #brew 'wallix/awless/awless'
 # brew 'wireshark'
 cask 'docker'
