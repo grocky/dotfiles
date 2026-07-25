@@ -8,8 +8,11 @@ return {
             "arduino",
             "bash",
             "blade",
+            "cpp",
             "css",
+            "dockerfile",
             "go",
+            "hcl",
             "html",
             "javascript",
             "jsdoc",
@@ -19,6 +22,7 @@ return {
             "typescript",
             "vim",
             "vimdoc",
+            "yaml",
         })
 
         vim.api.nvim_create_autocmd("FileType", {
