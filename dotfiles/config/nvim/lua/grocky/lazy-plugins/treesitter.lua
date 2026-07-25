@@ -5,19 +5,20 @@ return {
     build = ":TSUpdate",
     config = function()
         require("nvim-treesitter").install({
-            "vimdoc",
-            "javascript",
-            "typescript",
-            "go",
-            "vim",
-            "lua",
+            "arduino",
             "bash",
-            "jsdoc",
             "blade",
-            "html",
             "css",
+            "go",
+            "html",
+            "javascript",
+            "jsdoc",
+            "lua",
             "php",
             "templ",
+            "typescript",
+            "vim",
+            "vimdoc",
         })
 
         vim.api.nvim_create_autocmd("FileType", {
