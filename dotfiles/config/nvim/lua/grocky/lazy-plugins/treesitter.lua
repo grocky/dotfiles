@@ -2,9 +2,8 @@ return {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
     lazy = false,
-    build = ":TSUpdate",
     config = function()
-        require("nvim-treesitter").install({
+        local parsers = {
             "arduino",
             "bash",
             "blade",
@@ -23,7 +22,18 @@ return {
             "vim",
             "vimdoc",
             "yaml",
-        })
+        }
+
+        if vim.fn.executable("tree-sitter") == 1 then
+            require("nvim-treesitter").install(parsers)
+        else 
+            vim.schedule(function()
+                vim.notify(
+                    "nvim-treesitter: parser install skipped because 'tree-sitter' CLI is missing.\nInstall it with `npm i -g tree-sitter-cli` (or your package manager), then run :TSUpdate.",
+                    vim.log.levels.WARN
+                )
+            end)
+        end
 
         vim.api.nvim_create_autocmd("FileType", {
             group = vim.api.nvim_create_augroup("grocky.treesitter", {}),
