@@ -26,7 +26,7 @@ return {
 
         if vim.fn.executable("tree-sitter") == 1 then
             require("nvim-treesitter").install(parsers)
-        else 
+        else
             vim.schedule(function()
                 vim.notify(
                     "nvim-treesitter: parser install skipped because 'tree-sitter' CLI is missing.\nInstall it with `npm i -g tree-sitter-cli` (or your package manager), then run :TSUpdate.",
