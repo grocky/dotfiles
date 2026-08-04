@@ -76,7 +76,7 @@ local function find_goroot()
         return vim.env.GOROOT
     end
 
-    for dir in vim.gslpit(vim.env.PATH or "", ":", {trimempty = true }) do
+    for dir in vim.gsplit(vim.env.PATH or "", ":", {trimempty = true }) do
         local candidate = dir .. "/go"
         if vim.uv.fs_stat(candidate) then
             local real = vim.uv.fs_realpath(candidate)
