@@ -1,34 +1,4 @@
-local function get_package_name()
-    local bufnr = vim.api.nvim_get_current_buf()
-    local filetype = vim.bo[bufnr].filetype
-
-    if filetype == "go" then
-        local ok, parser = pcall(vim.treesitter.get_parser, bufnr, "go")
-        if not ok or not parser then
-            return ""
-        end
-        local tree = parser:parse()[1]
-        if tree then
-            local root = tree:root()
-            -- Navigate directly: package_clause is a top-level child
-            for child in root:iter_children() do
-                if child:type() == "package_clause" then
-                    local pkg_id = child:named_child(0)
-                    if pkg_id and pkg_id:type() == "package_identifier" then
-                        return "pkg " .. vim.treesitter.get_node_text(pkg_id, bufnr)
-                    end
-                end
-            end
-        end
-    end
-
-    -- Fallback: determine from directory name if not found in file
-    local filename = vim.api.nvim_buf_get_name(bufnr)
-    if filename ~= "" then
-        return vim.fn.fnamemodify(vim.fn.expand(filename), ":p:h:t")
-    end
-    return ""
-end
+local breadcrumb = require('grocky.breadcrumb')
 
 return {
     'nvim-lualine/lualine.nvim',
@@ -58,7 +28,8 @@ return {
                 lualine_a = { 'mode' },
                 lualine_b = { 'branch', 'diff', 'diagnostics' },
                 lualine_c = {
-                    get_package_name,
+                    breadcrumb.repo_section,
+                    breadcrumb.package_section,
                     'filename',
                 },
                 lualine_x = { 'encoding', 'fileformat', 'filetype' },
@@ -69,7 +40,8 @@ return {
                 lualine_a = {},
                 lualine_b = {},
                 lualine_c = {
-                    get_package_name,
+                    breadcrumb.repo_section,
+                    breadcrumb.package_section,
                     'filename',
                 },
                 lualine_x = { 'location' },
