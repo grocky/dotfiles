@@ -1,3 +1,5 @@
 dotfiles/vim/
 !dotfiles/vim/coc-settings.json
 fonts/
+dotfiles/cargo/*
+!dotfiles/cargo
