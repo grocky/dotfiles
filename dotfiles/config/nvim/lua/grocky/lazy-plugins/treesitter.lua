@@ -16,6 +16,8 @@ return {
             "javascript",
             "jsdoc",
             "lua",
+            "markdown",
+            "markdown_inline",
             "make",
             "php",
             "templ",
