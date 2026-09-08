@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+# Check a pull request out into its own worktree and open a tmux session rooted
+# there to review it. The worktree is created as a sibling of the repo's main
+# worktree, so this behaves the same run from the repo root, a subdirectory, or
+# another worktree.
+#
+# A script rather than a shell function on purpose: nothing here moves the
+# calling shell. tmuxinator switches the client to the review session (or
+# attaches to it, from outside tmux), so the session the review was kicked off
+# from keeps its own directory.
+
+set -euo pipefail
+
+usage() {
+  cat <<EOF
+usage: ghpr <pr-number> [remote]
+
+Create a worktree for a PR's head branch and start the 'pr-review' tmuxinator
+session in it. Re-running for the same PR reuses both the worktree and the
+session.
+
+  <pr-number>  with or without a leading '#'. Quote it if you include the '#',
+               otherwise the shell reads the rest of the line as a comment.
+  [remote]     remote to fetch the head branch from; defaults to 'origin'.
+  -h           show this help.
+EOF
+}
+
+while getopts "h" opt; do
+  case $opt in
+    h) usage; exit 0 ;;
+    \?) usage >&2; exit 1 ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+pr="${1:-}"
+pr="${pr#\#}" # accept either 123 or #123
+remote="${2:-origin}"
+
+if [ -z "$pr" ]; then
+  usage >&2
+  exit 1
+fi
+
+branch=$(gh pr view "$pr" --json headRefName -q .headRefName)
+
+# Anchor on the main worktree so review worktrees stay siblings of the repo
+# rather than nesting inside whichever worktree this was run from.
+mainWorktree=$(cd "$(git rev-parse --git-common-dir)/.." && pwd)
+projectName=$(basename "$mainWorktree")
+
+# The tmux session name comes from the worktree's basename, and tmux won't take
+# '/', '.' or ':' in one, so flatten the branch before building the path.
+worktreeName="$projectName-${branch//[^[:alnum:]_-]/-}"
+worktreeDir="$(dirname "$mainWorktree")/$worktreeName"
+
+git fetch "$remote" "$branch"
+
+if [ -d "$worktreeDir" ]; then
+  printf '\033[97mreusing worktree for PR #%s: \033[1m%s\033[0m\n' "$pr" "$worktreeName"
+else
+  git worktree add "$worktreeDir" "$branch"
+  printf '\033[97mnew worktree for PR #%s: \033[1m%s\033[0m\n' "$pr" "$worktreeName"
+fi
+
+tmuxinator start pr-review "$worktreeDir" "$pr"

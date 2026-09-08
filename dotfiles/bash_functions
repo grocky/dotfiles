@@ -9,23 +9,7 @@ gh_request() {
   http --default-scheme=https --auth grocky:$(find_password github_grocky_token) ${http_method} api.github.com${uri} ${params}
 }
 
-ghpr() {
-    local pr="${1#\#}"
-    local remote="${2:-origin}"
-    local branch
-    local worktreeName
-    local worktreeDir
-    local projectName=$(basename ${PWD})
-
-    branch=$(gh pr view "$pr" --json headRefName -q .headRefName)
-    worktreeName="$projectName-$branch"
-    worktreeDir="../$worktreeName"
-
-    git fetch "$remote" "$branch"
-    git worktree add "$worktreeDir" "$branch"
-    cd "$worktreeDir" || return
-    printf '\033[97mswitched to new worktree for PR #%s: \033[1m%s\033[0m\n' "$pr" "$worktreeName"
-}
+# ghpr now lives in bins/ghpr
 
 docker_exec () {
   local container_name=${1}
