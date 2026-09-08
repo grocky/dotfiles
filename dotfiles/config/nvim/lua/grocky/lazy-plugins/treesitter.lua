@@ -16,6 +16,7 @@ return {
             "javascript",
             "jsdoc",
             "lua",
+            "make",
             "php",
             "templ",
             "typescript",
