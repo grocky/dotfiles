@@ -1,67 +1,185 @@
 #!/usr/bin/env bash
-# Check a pull request out into its own worktree and open a tmux session rooted
-# there to review it. The worktree is created as a sibling of the repo's main
-# worktree, so this behaves the same run from the repo root, a subdirectory, or
-# another worktree.
+# Open and close local pull request reviews.
+#
+# A review is two things: a git worktree holding the PR's head branch, created as
+# a sibling of the repo's main worktree, and a tmux session rooted in it. `open`
+# creates both, `close` tears both down. Anchoring on the main worktree means
+# either half behaves the same run from the repo root, a subdirectory, or another
+# worktree.
 #
 # A script rather than a shell function on purpose: nothing here moves the
 # calling shell. tmuxinator switches the client to the review session (or
 # attaches to it, from outside tmux), so the session the review was kicked off
 # from keeps its own directory.
+#
+# `close` is local cleanup only. A review started in Octo lives on GitHub as a
+# pending review until you `:Octo review submit` or `:Octo review discard`, and
+# killing the session does not touch it.
 
 set -euo pipefail
 
 usage() {
   cat <<EOF
-usage: ghpr <pr-number> [remote]
+usage: ghpr <pr-number> [remote]         open a review (default subcommand)
+       ghpr open <pr-number> [remote]
+       ghpr close [pr-number] [-f]       remove the worktree, kill the session
 
-Create a worktree for a PR's head branch and start the 'pr-review' tmuxinator
-session in it. Re-running for the same PR reuses both the worktree and the
-session.
+open: create a worktree for the PR's head branch and start the 'pr-review'
+tmuxinator session in it. Re-running for the same PR reuses both.
+
+close: undo that. With no pr number it closes the review you are standing in, so
+'ghpr close' from inside the review worktree or session is the usual way to end
+one. Missing halves are ignored, so it is safe to re-run.
 
   <pr-number>  with or without a leading '#'. Quote it if you include the '#',
                otherwise the shell reads the rest of the line as a comment.
   [remote]     remote to fetch the head branch from; defaults to 'origin'.
+  -f           (close) discard uncommitted and untracked files in the worktree.
   -h           show this help.
+
+Branches are left alone: once the PR merges and its remote branch goes away,
+'git prune-gone' cleans them up.
 EOF
 }
 
-while getopts "h" opt; do
-  case $opt in
-    h) usage; exit 0 ;;
-    \?) usage >&2; exit 1 ;;
-  esac
-done
-shift $((OPTIND - 1))
+# Root of the repo's main worktree, whichever worktree we happen to be in.
+main_worktree() {
+  local common
+  common=$(git rev-parse --git-common-dir)
+  (cd "$common/.." && pwd)
+}
 
-pr="${1:-}"
-pr="${pr#\#}" # accept either 123 or #123
-remote="${2:-origin}"
+# A review's worktree basename doubles as its tmux session name, and tmux won't
+# take '/', '.' or ':' in one, so flatten anything that isn't safe in both.
+review_name() {
+  local project=$1 branch=$2
+  printf '%s-%s\n' "$project" "${branch//[^[:alnum:]_-]/-}"
+}
 
-if [ -z "$pr" ]; then
-  usage >&2
-  exit 1
-fi
+open_review() {
+  local pr="${1:-}"
+  pr="${pr#\#}" # accept either 123 or #123
+  local remote="${2:-origin}"
 
-branch=$(gh pr view "$pr" --json headRefName -q .headRefName)
+  if [ -z "$pr" ]; then
+    usage >&2
+    return 1
+  fi
 
-# Anchor on the main worktree so review worktrees stay siblings of the repo
-# rather than nesting inside whichever worktree this was run from.
-mainWorktree=$(cd "$(git rev-parse --git-common-dir)/.." && pwd)
-projectName=$(basename "$mainWorktree")
+  local branch mainWorktree worktreeName worktreeDir
+  branch=$(gh pr view "$pr" --json headRefName -q .headRefName)
+  mainWorktree=$(main_worktree)
+  worktreeName=$(review_name "$(basename "$mainWorktree")" "$branch")
+  worktreeDir="$(dirname "$mainWorktree")/$worktreeName"
 
-# The tmux session name comes from the worktree's basename, and tmux won't take
-# '/', '.' or ':' in one, so flatten the branch before building the path.
-worktreeName="$projectName-${branch//[^[:alnum:]_-]/-}"
-worktreeDir="$(dirname "$mainWorktree")/$worktreeName"
+  git fetch "$remote" "$branch"
 
-git fetch "$remote" "$branch"
+  if [ -d "$worktreeDir" ]; then
+    printf '\033[97mreusing worktree for PR #%s: \033[1m%s\033[0m\n' "$pr" "$worktreeName"
+  else
+    git worktree add "$worktreeDir" "$branch"
+    printf '\033[97mnew worktree for PR #%s: \033[1m%s\033[0m\n' "$pr" "$worktreeName"
+  fi
 
-if [ -d "$worktreeDir" ]; then
-  printf '\033[97mreusing worktree for PR #%s: \033[1m%s\033[0m\n' "$pr" "$worktreeName"
-else
-  git worktree add "$worktreeDir" "$branch"
-  printf '\033[97mnew worktree for PR #%s: \033[1m%s\033[0m\n' "$pr" "$worktreeName"
-fi
+  tmuxinator start pr-review "$worktreeDir" "$pr"
+}
 
-tmuxinator start pr-review "$worktreeDir" "$pr"
+close_review() {
+  # Hand-rolled rather than getopts so '-f' works on either side of the pr
+  # number: getopts stops at the first non-option and would silently drop it.
+  local force=false pr=""
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      -f) force=true ;;
+      -h | --help)
+        usage
+        return 0
+        ;;
+      -*)
+        echo "ghpr close: unknown option $1" >&2
+        usage >&2
+        return 1
+        ;;
+      *) pr="$1" ;;
+    esac
+    shift
+  done
+  pr="${pr#\#}" # accept either 123 or #123
+
+  local mainWorktree worktreeName worktreeDir
+  mainWorktree=$(main_worktree)
+
+  if [ -n "$pr" ]; then
+    local branch
+    branch=$(gh pr view "$pr" --json headRefName -q .headRefName)
+    worktreeName=$(review_name "$(basename "$mainWorktree")" "$branch")
+    worktreeDir="$(dirname "$mainWorktree")/$worktreeName"
+  else
+    # No pr given: close the review we are standing in. Reading the worktree off
+    # the cwd rather than asking gh means this still works for a PR that has
+    # since been merged, closed, or renamed.
+    worktreeDir=$(git rev-parse --show-toplevel)
+    if [ "$worktreeDir" = "$mainWorktree" ]; then
+      echo "ghpr close: this is the main worktree; pass a pr number, or run from a review worktree" >&2
+      return 1
+    fi
+    worktreeName=$(basename "$worktreeDir")
+  fi
+
+  # Step out of the worktree and drive git from the main one, so nothing we do
+  # depends on a directory that is about to be deleted.
+  cd "$mainWorktree"
+
+  if [ -d "$worktreeDir" ]; then
+    if $force; then
+      git worktree remove --force "$worktreeDir"
+    elif ! git worktree remove "$worktreeDir"; then
+      echo "ghpr close: worktree still has changes; commit them, or re-run with -f to discard" >&2
+      return 1
+    fi
+    printf '\033[97mremoved worktree \033[1m%s\033[0m\n' "$worktreeName"
+  else
+    # Nothing on disk, but git may still be tracking it.
+    git worktree prune
+    printf '\033[97mno worktree at \033[1m%s\033[0m\n' "$worktreeDir"
+  fi
+
+  # '=' anchors the name: without it tmux prefix-matches, and review sessions for
+  # branches sharing a prefix would be ambiguous.
+  if tmux has-session -t "=$worktreeName" 2>/dev/null; then
+    printf '\033[97mkilling tmux session \033[1m%s\033[0m\n' "$worktreeName"
+    # Killing the session this script runs in kills the script, so leave it for
+    # last and move any attached client somewhere else first.
+    if [ -n "${TMUX:-}" ] && [ "$(tmux display-message -p '#S')" = "$worktreeName" ]; then
+      local other
+      other=$(tmux list-sessions -F '#{session_name}' | grep -vFx "$worktreeName" | head -n 1 || true)
+      if [ -n "$other" ]; then
+        tmux switch-client -t "=$other" || true
+      fi
+    fi
+    tmux kill-session -t "=$worktreeName"
+  else
+    printf '\033[97mno tmux session named \033[1m%s\033[0m\n' "$worktreeName"
+  fi
+}
+
+case "${1:-}" in
+  close)
+    shift
+    close_review "$@"
+    ;;
+  open)
+    shift
+    open_review "$@"
+    ;;
+  -h | --help)
+    usage
+    ;;
+  "")
+    usage >&2
+    exit 1
+    ;;
+  *)
+    open_review "$@"
+    ;;
+esac
