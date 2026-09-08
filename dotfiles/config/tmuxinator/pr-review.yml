@@ -2,9 +2,9 @@
 #
 # Review a pull request in a session rooted in its own worktree.
 #   mux start pr-review <worktree-dir> [pr-number]
-# `ghpr` creates the worktree and calls this; the pr number is only used to
-# label the review window's commands, so a bare `gh pr view` (which resolves
-# the PR from the checked out branch) is a fine fallback.
+# `ghpr` creates the worktree and calls this. The pr number is only used by the
+# `gh` panes, and they resolve the PR from the checked out branch when it is
+# missing, so a bare `mux start pr-review <dir>` still works.
 <% if @args[0] %>
 <% WDIR=@args[0] %>
 <% else %>
@@ -20,11 +20,11 @@ windows:
   - main:
       layout: 3fed,319x80,0,0{180x80,0,0,2,138x80,181,0[138x50,181,0,4,138x29,181,51,5]}
       panes:
-        - editor: vim
+        - review: nvim -c 'Octo review'
         - agent: claude_bedrock
         - shell: zsh
-  - review:
+  - pr:
       layout: even-horizontal
       panes:
         - overview: gh pr view <%= PR %>
-        - diff: gh pr diff <%= PR %>
+        - checks: gh pr checks <%= PR %>
