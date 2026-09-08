@@ -18,7 +18,7 @@ root: <%= WDIR %>
 # Get layout with: tmux list-windows -t <session-name> -F "#{window_index}: #{window_layout}"
 windows:
   - main:
-      layout: 3fed,319x80,0,0{180x80,0,0,2,138x80,181,0[138x50,181,0,4,138x29,181,51,5]}
+      layout: 76aa,252x67,0,0{186x67,0,0,34,65x67,187,0[65x43,187,0,36,65x23,187,44,37]}
       panes:
         - review: nvim -c 'Octo review'
         - agent: claude_bedrock

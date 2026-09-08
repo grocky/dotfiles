@@ -1,27 +1,39 @@
 -- Review pull requests, issues and discussions from inside nvim.
 --
--- Octo shells out to `gh`, so it picks up the host from the repo's git remote
--- and works against GitHub Enterprise without extra configuration -- there is a
--- `github_hostname` option, but setting it would pin every repo to one host.
---
--- `bins/ghpr` opens this on a PR: see the editor pane in
+-- `bins/ghpr` opens this on a PR: see the review pane in
 -- dotfiles/config/tmuxinator/pr-review.yml.
+
+-- Order to try remotes in, shared by `default_remote` and the host sniffing
+-- below so both agree on which remote the PR lives on.
+local REMOTES = { "origin", "upstream" }
+
+local function github_hostname()
+    for _, remote in ipairs(REMOTES) do
+        local url = vim.fn.system({ "git", "remote", "get-url", remote })
+        if vim.v.shell_error == 0 then
+            local host = url:gsub("^%a[%w+.-]*://", "") -- scheme, if any
+            host = host:gsub("^[^@/]*@", "")            -- user@, for scp-style urls
+            host = host:match "^([^/:%s]+)"             -- up to the port, path or newline
+            if host then
+                return host ~= "github.com" and host or ""
+            end
+        end
+    end
+    return ""
+end
+
 return {
     "pwntester/octo.nvim",
     cmd = "Octo",
-    opts = {
-        picker = "telescope",
-        -- bare `:Octo` opens a picker of commands
-        enable_builtin = true,
-        -- Octo ships { "upstream", "origin" }, which suits the fork workflow
-        -- where the PR lives on the canonical repo rather than your fork. Ours
-        -- is the other way round: this repo keeps the enterprise remote on
-        -- `origin` and a github.com mirror on `upstream`, and gh is only
-        -- authenticated to the enterprise host, so trying `upstream` first sends
-        -- every query to github.com and fails. Preferring `origin` also matches
-        -- `bins/ghpr`, which fetches the PR from `origin` by default.
-        default_remote = { "origin", "upstream" },
-    },
+    opts = function()
+        return {
+            picker = "telescope",
+            -- bare `:Octo` opens a picker of commands
+            enable_builtin = true,
+            github_hostname = github_hostname(),
+            default_remote = REMOTES,
+        }
+    end,
     keys = {
         {
             "<leader>oi",
