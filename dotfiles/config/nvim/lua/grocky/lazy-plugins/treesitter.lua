@@ -20,6 +20,7 @@ return {
             "markdown_inline",
             "make",
             "php",
+            "swift",
             "templ",
             "typescript",
             "vim",

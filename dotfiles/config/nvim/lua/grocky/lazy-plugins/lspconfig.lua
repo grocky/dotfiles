@@ -44,6 +44,15 @@ vim.lsp.config('intelephense', {
     }
 })
 
+-- sourcekit-lsp ships with Xcode, so it's enabled here rather than installed via mason.
+-- Xcode projects need a buildServer.json: run `xcode-build-server config -scheme <Scheme> -project <App>.xcodeproj`
+-- (or `-workspace <App>.xcworkspace`) in the project root, then build once in Xcode.
+vim.lsp.config('sourcekit', {
+    cmd = { 'xcrun', 'sourcekit-lsp' },
+    filetypes = { 'swift', 'objc', 'objcpp' },
+})
+vim.lsp.enable('sourcekit')
+
 return {
     "nvim/nvim-lspconfig",
     dependencies = {
