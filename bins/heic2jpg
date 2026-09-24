@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+# Convert HEIC images to JPEG.
+#
+# Uses sips, which ships with macOS, so there is nothing to install. Each
+# photo.HEIC becomes photo.jpg next to it; the original is kept unless -r is
+# given. Existing .jpg files are never overwritten.
+
+set -euo pipefail
+
+usage() {
+  cat <<USAGE
+usage: heic2jpg [-q quality] [-r] [file-or-dir ...]
+
+Convert every .heic/.HEIC file given (or found in the given directories)
+to a .jpg alongside it. With no arguments, converts the current directory.
+
+  -q quality  JPEG quality 1-100 (default 90)
+  -r          remove the original .heic after a successful conversion
+  -h          show this help
+USAGE
+}
+
+quality=90
+remove=false
+
+while getopts 'q:rh' flag; do
+  case $flag in
+    q) quality=$OPTARG ;;
+    r) remove=true ;;
+    h) usage; exit 0 ;;
+    *) usage >&2; exit 2 ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+if ! [[ $quality =~ ^[0-9]+$ ]] || (( quality < 1 || quality > 100 )); then
+  echo "heic2jpg: quality must be 1-100, got '$quality'" >&2
+  exit 2
+fi
+
+# Collect the files to convert: directories are searched one level deep,
+# case-insensitively, so both photo.HEIC and photo.heic are picked up.
+files=()
+for target in "${@:-.}"; do
+  if [[ -d $target ]]; then
+    while IFS= read -r -d '' f; do files+=("$f"); done \
+      < <(find "$target" -maxdepth 1 -type f -iname '*.heic' -print0 | sort -z)
+  elif [[ -f $target ]]; then
+    files+=("$target")
+  else
+    echo "heic2jpg: no such file or directory: $target" >&2
+    exit 1
+  fi
+done
+
+if (( ${#files[@]} == 0 )); then
+  echo "heic2jpg: no .heic files found" >&2
+  exit 1
+fi
+
+converted=0
+skipped=0
+for src in "${files[@]}"; do
+  dst="${src%.*}.jpg"
+  if [[ -e $dst ]]; then
+    echo "skip   $src (${dst##*/} exists)"
+    (( skipped++ )) || true
+    continue
+  fi
+  if sips -s format jpeg -s formatOptions "$quality" "$src" --out "$dst" >/dev/null; then
+    echo "wrote  $dst"
+    (( converted++ )) || true
+    if $remove; then rm -- "$src"; fi
+  else
+    echo "heic2jpg: failed to convert $src" >&2
+    rm -f -- "$dst"
+  fi
+done
+
+echo "converted $converted, skipped $skipped"
