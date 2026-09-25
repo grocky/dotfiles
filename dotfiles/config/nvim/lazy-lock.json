@@ -22,6 +22,7 @@
   "nvim-jdtls": { "branch": "master", "commit": "6e9d953f0b82bccdb834cfde0e893f3119c22592" },
   "nvim-lspconfig": { "branch": "master", "commit": "d592c1e6ad9a0a01b3d5ed3f0345d68407167181" },
   "nvim-tmux-navigation": { "branch": "main", "commit": "4898c98702954439233fdaf764c39636681e2861" },
+  "nvim-tree.lua": { "branch": "master", "commit": "478c69c0fe253caea88de9c5e138bfa77395a59a" },
   "nvim-treesitter": { "branch": "main", "commit": "8b3a191c015dd66a92d51a112ed96af0aac13b63" },
   "nvim-web-devicons": { "branch": "master", "commit": "2ae6958df7ced50baac5035cec0c15799eedfbf7" },
   "octo.nvim": { "branch": "master", "commit": "af2411604b51cb4a0f3e2de50b1b7cacc2581c48" },
