@@ -1,0 +1,116 @@
+#!/usr/bin/env bash
+# Turn a sprite sheet (a grid of frames) into a looping animated GIF.
+#
+# Frames are found by locating the light gutters between them, so sheets with
+# uneven frame sizes work without measuring anything. Each frame is inset a
+# couple of pixels to drop anti-aliased gutter edges, and all frames are
+# cropped to the same size. Sheets without gutters need an explicit -g grid.
+
+set -euo pipefail
+
+usage() {
+  cat <<USAGE
+usage: sheet2gif [-g COLSxROWS] [-d delay] [-H hold] [-o out.gif] sheet.png
+
+Split a sprite sheet into frames (read left to right, top to bottom) and
+write them as a looping GIF. Output defaults to sheet.gif next to the input.
+
+  -g COLSxROWS  split evenly into this grid instead of detecting gutters
+  -d delay      delay per frame in 1/100s (default 30)
+  -H hold       delay on the last frame in 1/100s (default 120)
+  -o out.gif    output path
+  -h            show this help
+USAGE
+}
+
+grid=""
+delay=30
+hold=120
+out=""
+inset=2       # pixels trimmed from each frame edge
+threshold=245 # mean gray (0-255) above which a line counts as gutter
+min_frame=8   # ignore non-gutter runs narrower than this
+
+while getopts 'g:d:H:o:h' flag; do
+  case $flag in
+    g) grid=$OPTARG ;;
+    d) delay=$OPTARG ;;
+    H) hold=$OPTARG ;;
+    o) out=$OPTARG ;;
+    h) usage; exit 0 ;;
+    *) usage >&2; exit 2 ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+if (( $# != 1 )); then usage >&2; exit 2; fi
+src=$1
+if [[ ! -f $src ]]; then
+  echo "sheet2gif: no such file: $src" >&2
+  exit 1
+fi
+out=${out:-${src%.*}.gif}
+
+read -r width height < <(magick identify -format '%w %h\n' "$src[0]")
+
+# Print "start length" for each frame span along one axis. With a count, the
+# axis is split evenly; otherwise spans are the runs between light gutters.
+spans() { # axis(x|y) size [count]
+  local axis=$1 size=$2 count=${3:-}
+  if [[ -n $count ]]; then
+    local step=$((size / count)) i
+    for ((i = 0; i < count; i++)); do echo "$((i * step)) $step"; done
+    return
+  fi
+  local geom
+  if [[ $axis == x ]]; then geom="${size}x1!"; else geom="1x${size}!"; fi
+  magick "$src[0]" -colorspace gray -scale "$geom" -depth 8 txt:- |
+    awk -F'[()]' -v t="$threshold" -v m="$min_frame" -v i="$inset" '
+      NR > 1 {
+        light = ($2 + 0 > t)
+        if (!light && start < 0) start = n
+        if (light && start >= 0) { emit(start, n - 1); start = -1 }
+        n++
+      }
+      BEGIN { start = -1 }
+      END { if (start >= 0) emit(start, n - 1) }
+      function emit(s, e) { if (e - s + 1 >= m) print s + i, e - s + 1 - 2 * i }
+    '
+}
+
+cols="" rows=""
+if [[ -n $grid ]]; then
+  if ! [[ $grid =~ ^([0-9]+)x([0-9]+)$ ]]; then
+    echo "sheet2gif: grid must be COLSxROWS, got '$grid'" >&2
+    exit 2
+  fi
+  cols=${BASH_REMATCH[1]} rows=${BASH_REMATCH[2]}
+fi
+
+xs=() ys=()
+while read -r s l; do xs+=("$s $l"); done < <(spans x "$width" "$cols")
+while read -r s l; do ys+=("$s $l"); done < <(spans y "$height" "$rows")
+
+# Crop every frame to the smallest span so the GIF has a single frame size.
+fw=$(printf '%s\n' "${xs[@]}" | awk 'NR == 1 || $2 < m { m = $2 } END { print m }')
+fh=$(printf '%s\n' "${ys[@]}" | awk 'NR == 1 || $2 < m { m = $2 } END { print m }')
+
+work=$(mktemp -d)
+trap 'rm -rf "$work"' EXIT
+
+frames=()
+for y in "${ys[@]}"; do
+  for x in "${xs[@]}"; do
+    f=$(printf '%s/frame_%03d.png' "$work" ${#frames[@]})
+    magick "$src[0]" -crop "${fw}x${fh}+${x%% *}+${y%% *}" +repage "$f"
+    frames+=("$f")
+  done
+done
+
+last=$((${#frames[@]} - 1))
+args=(-delay "$delay")
+(( last > 0 )) && args+=("${frames[@]:0:last}")
+args+=(-delay "$hold" "${frames[last]}")
+magick "${args[@]}" -loop 0 -layers optimize "$out"
+
+echo "wrote $out (${#xs[@]}x${#ys[@]} grid, ${#frames[@]} frames, ${fw}x${fh})"
