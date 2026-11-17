@@ -1,9 +1,9 @@
 
-.PHONY: dotfiles bins brew help
+.PHONY: dotfiles bins brew agents test help
 
 default: help
 
-init: macos brew bins dotfiles ## Initialize a new machine
+init: macos brew bins dotfiles agents ## Initialize a new machine
 
 macos: ## Initialize macos settings
 	./initialize_macos.sh
@@ -16,6 +16,12 @@ bins: ## Install bins
 
 brew: ## Install brew bundle
 	brew bundle
+
+agents: ## Install shared AI agent instructions (AGENTS.md, CLAUDE.md, language rules)
+	./install_agents.sh
+
+test: ## Run install script tests
+	./tests/install_agents_test.sh
 
 GREEN  := $(shell tput -Txterm setaf 2)
 RESET  := $(shell tput -Txterm sgr0)

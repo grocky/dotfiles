@@ -35,7 +35,7 @@ These extend `~/AGENTS.md` (TDD, commits, naming all still apply). A project's o
 - Every function that does I/O, blocks, or may be slow takes `ctx context.Context` as its **first** parameter,
   and passes it down to every call that accepts one.
 - Use the `...Context` variants (`QueryContext`, `http.NewRequestWithContext`, `exec.CommandContext`).
-- Honour cancellation in loops and goroutines (`select` on `ctx.Done()`); return `ctx.Err()` when cancelled.
+- Honor cancellation in loops and goroutines (`select` on `ctx.Done()`); return `ctx.Err()` when cancelled.
 - Never store a context in a struct. Never pass `nil`; use `context.TODO()` only as a temporary marker.
 - Create the root context once in `main` with `signal.NotifyContext` for graceful shutdown.
 - `context.Background()` belongs only in `main` and test setup. In tests use `t.Context()`.
