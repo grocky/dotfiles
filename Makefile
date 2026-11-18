@@ -20,8 +20,9 @@ brew: ## Install brew bundle
 agents: ## Install shared AI agent instructions (AGENTS.md, CLAUDE.md, language rules)
 	./install_agents.sh
 
-test: ## Run install script tests
+test: ## Run dotfiles script tests
 	./tests/install_agents_test.sh
+	./tests/tmux_powerline_location_test.sh
 
 GREEN  := $(shell tput -Txterm setaf 2)
 RESET  := $(shell tput -Txterm sgr0)
